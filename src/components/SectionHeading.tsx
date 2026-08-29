@@ -1,5 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import { reveal, revealInitial, revealViewport } from '../lib/motion';
 
 interface SectionHeadingProps {
   badge?: string;
@@ -20,10 +21,10 @@ export const SectionHeading: React.FC<SectionHeadingProps> = ({
     <div className={`${centered ? 'text-center max-w-4xl mx-auto' : 'max-w-4xl'} space-y-2 ${className}`}>
       {badge && (
         <motion.span 
-          initial={{ opacity: 0, y: 8 }}
+          initial={revealInitial}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.4, ease: 'easeOut' }}
+          viewport={revealViewport}
+          transition={reveal()}
           className="inline-block text-xs font-semibold uppercase tracking-wider text-[#6E6E73]"
         >
           {badge}
@@ -31,10 +32,10 @@ export const SectionHeading: React.FC<SectionHeadingProps> = ({
       )}
 
       <motion.h2 
-        initial={{ opacity: 0, y: 10 }}
+        initial={revealInitial}
         whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.4, ease: 'easeOut', delay: 0.05 }}
+        viewport={revealViewport}
+        transition={reveal(0, 0.05)}
         className="text-3xl sm:text-4xl lg:text-5xl tracking-tight leading-[1.12]"
       >
         <span className="font-bold text-[#1D1D1F]">{title}</span>{' '}

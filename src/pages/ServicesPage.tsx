@@ -5,6 +5,7 @@ import { CheckCircle2 } from 'lucide-react';
 import { SEOHead } from '../components/SEOHead';
 import { Button } from '../components/Button';
 import { websiteServices } from '../data/services';
+import { reveal, revealInitial, revealViewport } from '../lib/motion';
 
 export const ServicesPage: React.FC = () => {
   const location = useLocation();
@@ -67,10 +68,10 @@ export const ServicesPage: React.FC = () => {
           <motion.div
             key={service.id}
             id={service.id}
-            initial={{ opacity: 0, y: 20 }}
+            initial={revealInitial}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: '-50px' }}
-            transition={{ duration: 0.4, ease: 'easeOut', delay: index * 0.08 }}
+            viewport={revealViewport}
+            transition={reveal(index)}
             className="apple-card p-8 sm:p-12 space-y-8 shadow-xl"
           >
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">

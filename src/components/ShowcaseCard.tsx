@@ -2,6 +2,7 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { ArrowUpRight } from 'lucide-react';
 import type { ShowcaseItem } from '../data/showcase';
+import { reveal, revealInitial, revealViewport } from '../lib/motion';
 
 interface ShowcaseCardProps {
   item: ShowcaseItem;
@@ -12,10 +13,10 @@ interface ShowcaseCardProps {
 export const ShowcaseCard: React.FC<ShowcaseCardProps> = ({ item, index, onClick }) => {
   return (
     <motion.div
-      initial={{ opacity: 0, y: 20 }}
+      initial={revealInitial}
       whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: '-40px' }}
-      transition={{ duration: 0.4, ease: 'easeOut', delay: index * 0.1 }}
+      viewport={revealViewport}
+      transition={reveal(index)}
       onClick={onClick}
       className="group apple-card p-6 sm:p-8 cursor-pointer space-y-5"
     >

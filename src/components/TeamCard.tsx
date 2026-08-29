@@ -1,6 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import type { TeamMember } from '../data/team';
+import { reveal, revealInitial, revealViewport } from '../lib/motion';
 
 interface TeamCardProps {
   member: TeamMember;
@@ -10,10 +11,10 @@ interface TeamCardProps {
 export const TeamCard: React.FC<TeamCardProps> = ({ member, index }) => {
   return (
     <motion.div
-      initial={{ opacity: 0, y: 15 }}
+      initial={revealInitial}
       whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-      transition={{ duration: 0.4, ease: 'easeOut', delay: index * 0.1 }}
+      viewport={revealViewport}
+      transition={reveal(index)}
       className="apple-card p-6 space-y-4"
     >
       {/* Photo Placeholder Area */}

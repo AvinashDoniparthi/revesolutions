@@ -1,6 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { ArrowUpRight } from 'lucide-react';
+import { reveal, revealInitial, revealViewport } from '../lib/motion';
 
 interface ServiceCardProps {
   title: string;
@@ -20,10 +21,10 @@ export const ServiceCard: React.FC<ServiceCardProps> = ({
 }) => {
   return (
     <motion.div
-      initial={{ opacity: 0, y: 15 }}
+      initial={revealInitial}
       whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: '-40px' }}
-      transition={{ duration: 0.4, ease: 'easeOut', delay: index * 0.08 }}
+      viewport={revealViewport}
+      transition={reveal(index)}
       onClick={onClick}
       className="group apple-card p-7 sm:p-8 cursor-pointer space-y-4 flex flex-col justify-between"
     >

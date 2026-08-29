@@ -1,5 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import { reveal, revealInitial, revealViewport } from '../lib/motion';
 
 interface ProcessStepCardProps {
   step: string;
@@ -16,10 +17,10 @@ export const ProcessStepCard: React.FC<ProcessStepCardProps> = ({
 }) => {
   return (
     <motion.div
-      initial={{ opacity: 0, y: 15 }}
+      initial={revealInitial}
       whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-      transition={{ duration: 0.4, ease: 'easeOut', delay: index * 0.1 }}
+      viewport={revealViewport}
+      transition={reveal(index)}
       className="apple-card p-7 sm:p-8 space-y-3.5"
     >
       <span className="text-[11px] font-semibold text-[#1D1D1F] bg-[#F5F5F7] px-3 py-1 rounded-full inline-block">
