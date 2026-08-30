@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Mail, Phone, MapPin, Clock, ShieldCheck } from 'lucide-react';
+import { Mail, Phone, ShieldCheck } from 'lucide-react';
 import { SEOHead } from '../components/SEOHead';
 import { ContactForm } from '../components/ContactForm';
 import { companyInfo } from '../data/companyInfo';
@@ -8,7 +8,10 @@ import { LinkedInIcon, InstagramIcon, GitHubIcon } from '../components/SocialIco
 
 export const ContactPage: React.FC = () => {
   return (
-    <div className="min-h-screen pb-20 pt-24 sm:pt-28">
+    <div className="min-h-screen pb-20 pt-24 sm:pt-28 relative">
+      {/* Cohesive Ambient Blue Atmosphere */}
+      <div className="absolute top-10 left-1/2 -translate-x-1/2 w-[900px] h-[420px] bg-gradient-to-b from-[#0066D6]/10 via-[#0066D6]/3 to-transparent rounded-full blur-[140px] pointer-events-none -z-10" />
+
       <SEOHead 
         title="Contact a Specialist" 
         description="Contact Rêve Solutions. Let's talk about website development, website management, or ongoing website care for your business."
@@ -24,17 +27,17 @@ export const ContactPage: React.FC = () => {
           className="space-y-3 max-w-3xl"
         >
           <div>
-            <span className="text-xs font-semibold uppercase tracking-wider text-[#86868B]">
+            <span className="text-xs font-bold uppercase tracking-wider text-[#0066D6] bg-[#E5F1FF] border border-[#BFDBFE] px-3.5 py-1 rounded-full inline-block shadow-2xs">
               SPECIALIST ASSISTANCE
             </span>
           </div>
 
           <h1 className="text-3xl sm:text-5xl lg:text-[52px] tracking-tight leading-[1.08]">
-            <span className="font-bold text-[#1D1D1F]">Contact a Specialist.</span>{' '}
-            <span className="font-semibold text-[#6E6E73]">Let’s build something great together.</span>
+            <span className="font-bold text-[#0C172B]">Contact a Specialist.</span>{' '}
+            <span className="font-semibold text-[#475569]">Let’s build something great together.</span>
           </h1>
 
-          <p className="text-base sm:text-lg text-[#6E6E73] max-w-2xl leading-relaxed font-normal">
+          <p className="text-base sm:text-lg text-[#475569] max-w-2xl leading-relaxed font-normal">
             {companyInfo.contactSubtext}
           </p>
         </motion.div>
@@ -52,70 +55,50 @@ export const ContactPage: React.FC = () => {
             {/* Direct Information Card */}
             <div className="apple-card p-8 sm:p-10 space-y-6 shadow-xl">
               
-              <div className="space-y-1">
-                <span className="text-[11px] font-semibold uppercase tracking-wider text-[#0071E3]">
+              <div className="space-y-1.5">
+                <span className="text-[11px] font-bold uppercase tracking-wider text-[#0066D6] bg-[#E5F1FF] border border-[#BFDBFE] px-3.5 py-1 rounded-full inline-block shadow-2xs">
                   DIRECT CONTACTS
                 </span>
-                <h3 className="text-2xl font-bold text-[#1D1D1F] tracking-tight">Studio Channels</h3>
-                <p className="text-xs sm:text-sm text-[#6E6E73] font-normal leading-relaxed">
+                <h3 className="text-2xl font-bold text-[#0C172B] tracking-tight pt-1">Studio Channels</h3>
+                <p className="text-xs sm:text-sm text-[#475569] font-normal leading-relaxed">
                   Reach out directly to discuss building a new site, transferring an existing website, or monthly care.
                 </p>
               </div>
 
               {/* Information Rows */}
-              <div className="space-y-0 pt-2 border-t border-black/5">
+              <div className="space-y-0 pt-2 border-t border-[#D5E4F5]">
                 
                 {/* Email */}
-                <div className="py-4 border-b border-black/5 flex items-start gap-4 group">
-                  <div className="w-10 h-10 rounded-2xl bg-[#F5F5F7] border border-black/5 text-[#0071E3] flex items-center justify-center shrink-0">
-                    <Mail className="w-4 h-4" />
+                <a 
+                  href={`mailto:${companyInfo.contactPlaceholders.email}`}
+                  className="py-4 border-b border-[#D5E4F5] flex items-start gap-4 group transition-colors block"
+                >
+                  <div className="w-10 h-10 rounded-2xl bg-[#E5F1FF] group-hover:bg-[#0066D6] group-hover:text-white border border-[#BFDBFE] text-[#0066D6] flex items-center justify-center shrink-0 transition-all shadow-2xs">
+                    <Mail className="w-4.5 h-4.5" />
                   </div>
                   <div>
-                    <span className="text-[11px] font-semibold uppercase tracking-wider text-[#86868B] block mb-0.5">EMAIL</span>
-                    <span className="text-sm sm:text-base font-medium text-[#1D1D1F] group-hover:text-[#0071E3] transition-colors">
+                    <span className="text-[11px] font-semibold uppercase tracking-wider text-[#798CA6] block mb-0.5">EMAIL</span>
+                    <span className="text-sm sm:text-base font-medium text-[#0C172B] group-hover:text-[#0066D6] transition-colors break-all">
                       {companyInfo.contactPlaceholders.email}
                     </span>
                   </div>
-                </div>
+                </a>
 
                 {/* Phone */}
-                <div className="py-4 border-b border-black/5 flex items-start gap-4 group">
-                  <div className="w-10 h-10 rounded-2xl bg-[#F5F5F7] border border-black/5 text-[#0071E3] flex items-center justify-center shrink-0">
-                    <Phone className="w-4 h-4" />
+                <a 
+                  href={`tel:${companyInfo.contactPlaceholders.phone.replace(/\s+/g, '')}`}
+                  className="pt-4 flex items-start gap-4 group transition-colors block"
+                >
+                  <div className="w-10 h-10 rounded-2xl bg-[#E5F1FF] group-hover:bg-[#0066D6] group-hover:text-white border border-[#BFDBFE] text-[#0066D6] flex items-center justify-center shrink-0 transition-all shadow-2xs">
+                    <Phone className="w-4.5 h-4.5" />
                   </div>
                   <div>
-                    <span className="text-[11px] font-semibold uppercase tracking-wider text-[#86868B] block mb-0.5">PHONE</span>
-                    <span className="text-sm sm:text-base font-medium text-[#1D1D1F] group-hover:text-[#0071E3] transition-colors">
+                    <span className="text-[11px] font-semibold uppercase tracking-wider text-[#798CA6] block mb-0.5">PHONE</span>
+                    <span className="text-sm sm:text-base font-medium text-[#0C172B] group-hover:text-[#0066D6] transition-colors">
                       {companyInfo.contactPlaceholders.phone}
                     </span>
                   </div>
-                </div>
-
-                {/* Location */}
-                <div className="py-4 border-b border-black/5 flex items-start gap-4 group">
-                  <div className="w-10 h-10 rounded-2xl bg-[#F5F5F7] border border-black/5 text-[#0071E3] flex items-center justify-center shrink-0">
-                    <MapPin className="w-4 h-4" />
-                  </div>
-                  <div>
-                    <span className="text-[11px] font-semibold uppercase tracking-wider text-[#86868B] block mb-0.5">LOCATION</span>
-                    <span className="text-sm sm:text-base font-medium text-[#1D1D1F] group-hover:text-[#0071E3] transition-colors">
-                      {companyInfo.contactPlaceholders.location}
-                    </span>
-                  </div>
-                </div>
-
-                {/* Business Hours */}
-                <div className="pt-4 flex items-start gap-4 group">
-                  <div className="w-10 h-10 rounded-2xl bg-[#F5F5F7] border border-black/5 text-[#0071E3] flex items-center justify-center shrink-0">
-                    <Clock className="w-4 h-4" />
-                  </div>
-                  <div>
-                    <span className="text-[11px] font-semibold uppercase tracking-wider text-[#86868B] block mb-0.5">BUSINESS HOURS</span>
-                    <span className="text-sm sm:text-base font-medium text-[#1D1D1F] group-hover:text-[#0071E3] transition-colors">
-                      {companyInfo.contactPlaceholders.hours}
-                    </span>
-                  </div>
-                </div>
+                </a>
 
               </div>
 
@@ -123,7 +106,7 @@ export const ContactPage: React.FC = () => {
 
             {/* Social Connect Panel */}
             <div className="apple-card p-6 space-y-3 shadow-md">
-              <span className="text-[11px] font-semibold uppercase tracking-wider text-[#86868B] block">
+              <span className="text-[11px] font-semibold uppercase tracking-wider text-[#798CA6] block">
                 SOCIAL CONNECT
               </span>
               <div className="grid grid-cols-3 gap-3">
@@ -131,7 +114,7 @@ export const ContactPage: React.FC = () => {
                   href={companyInfo.socialLinks.linkedin}
                   target="_blank"
                   rel="noreferrer"
-                  className="apple-pill-btn flex items-center justify-center gap-1.5 p-2.5 bg-[#F5F5F7] hover:bg-gray-200 text-[#1D1D1F] text-xs font-medium"
+                  className="apple-pill-btn flex items-center justify-center gap-1.5 p-2.5 bg-[#EAF3FD] hover:bg-[#D5E7FC] text-[#0C172B] hover:text-[#0066D6] text-xs font-semibold border border-[#BFDBFE] transition-colors"
                 >
                   <LinkedInIcon className="w-3.5 h-3.5" />
                   <span>LinkedIn</span>
@@ -140,7 +123,7 @@ export const ContactPage: React.FC = () => {
                   href={companyInfo.socialLinks.instagram}
                   target="_blank"
                   rel="noreferrer"
-                  className="apple-pill-btn flex items-center justify-center gap-1.5 p-2.5 bg-[#F5F5F7] hover:bg-gray-200 text-[#1D1D1F] text-xs font-medium"
+                  className="apple-pill-btn flex items-center justify-center gap-1.5 p-2.5 bg-[#EAF3FD] hover:bg-[#D5E7FC] text-[#0C172B] hover:text-[#0066D6] text-xs font-semibold border border-[#BFDBFE] transition-colors"
                 >
                   <InstagramIcon className="w-3.5 h-3.5" />
                   <span>Instagram</span>
@@ -149,7 +132,7 @@ export const ContactPage: React.FC = () => {
                   href={companyInfo.socialLinks.github}
                   target="_blank"
                   rel="noreferrer"
-                  className="apple-pill-btn flex items-center justify-center gap-1.5 p-2.5 bg-[#F5F5F7] hover:bg-gray-200 text-[#1D1D1F] text-xs font-medium"
+                  className="apple-pill-btn flex items-center justify-center gap-1.5 p-2.5 bg-[#EAF3FD] hover:bg-[#D5E7FC] text-[#0C172B] hover:text-[#0066D6] text-xs font-semibold border border-[#BFDBFE] transition-colors"
                 >
                   <GitHubIcon className="w-3.5 h-3.5" />
                   <span>GitHub</span>
@@ -158,8 +141,8 @@ export const ContactPage: React.FC = () => {
             </div>
 
             {/* Trust Callout */}
-            <div className="apple-card p-4 flex items-center gap-3 text-xs text-[#6E6E73] font-normal shadow-xs">
-              <ShieldCheck className="w-5 h-5 text-[#0071E3] shrink-0" />
+            <div className="apple-card p-4 flex items-center gap-3 text-xs text-[#475569] font-medium shadow-xs bg-[#EAF3FD] border border-[#BFDBFE]">
+              <ShieldCheck className="w-5 h-5 text-[#0066D6] shrink-0" />
               <span>Direct response from a real specialist within 24 hours. No sales spam.</span>
             </div>
 
@@ -181,3 +164,4 @@ export const ContactPage: React.FC = () => {
     </div>
   );
 };
+export default ContactPage;

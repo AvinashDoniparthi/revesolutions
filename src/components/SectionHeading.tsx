@@ -25,7 +25,7 @@ export const SectionHeading: React.FC<SectionHeadingProps> = ({
           whileInView={{ opacity: 1, y: 0 }}
           viewport={revealViewport}
           transition={reveal()}
-          className="inline-block text-xs font-semibold uppercase tracking-wider text-[#6E6E73]"
+          className="inline-block text-xs font-bold uppercase tracking-wider text-[#0066D6] bg-[#E5F1FF] border border-[#BFDBFE] px-3.5 py-1 rounded-full shadow-2xs"
         >
           {badge}
         </motion.span>
@@ -38,9 +38,10 @@ export const SectionHeading: React.FC<SectionHeadingProps> = ({
         transition={reveal(0, 0.05)}
         className="text-3xl sm:text-4xl lg:text-5xl tracking-tight leading-[1.12]"
       >
-        <span className="font-bold text-[#1D1D1F]">{title}</span>{' '}
-        {subtitle && <span className="font-medium text-[#6E6E73]">{subtitle}</span>}
+        <span className="font-bold text-[#0C172B]">{title}</span>{' '}
+        {subtitle && <span className="font-medium text-[#475569]">{subtitle}</span>}
       </motion.h2>
     </div>
   );
 };
+export default SectionHeading;

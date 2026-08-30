@@ -13,7 +13,10 @@ export const AboutPage: React.FC = () => {
   const navigate = useNavigate();
 
   return (
-    <div className="space-y-16 sm:space-y-24 pb-20 pt-24 sm:pt-28">
+    <div className="space-y-16 sm:space-y-24 pb-20 pt-24 sm:pt-28 relative">
+      {/* Cohesive Ambient Blue Atmosphere */}
+      <div className="absolute top-10 left-1/2 -translate-x-1/2 w-[900px] h-[420px] bg-gradient-to-b from-[#0066D6]/10 via-[#0066D6]/3 to-transparent rounded-full blur-[140px] pointer-events-none -z-10" />
+
       <SEOHead 
         title="About Us" 
         description="Four people. One dedicated design studio. Learn how Rêve Solutions helps businesses build and maintain professional websites."
@@ -26,8 +29,8 @@ export const AboutPage: React.FC = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.4, ease: 'easeOut' }}
         >
-          <span className="text-xs font-semibold uppercase tracking-wider text-[#86868B]">
-            OUR STORY & STUDIO
+          <span className="text-xs font-bold uppercase tracking-wider text-[#0066D6] bg-[#E5F1FF] border border-[#BFDBFE] px-3.5 py-1 rounded-full inline-block shadow-2xs">
+            OUR STORY &amp; STUDIO
           </span>
         </motion.div>
 
@@ -35,17 +38,17 @@ export const AboutPage: React.FC = () => {
           initial={{ opacity: 0, y: 12 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.45, ease: 'easeOut', delay: 0.05 }}
-          className="text-3xl sm:text-5xl lg:text-[52px] tracking-tight max-w-4xl leading-[1.08]"
+          className="text-3xl sm:text-5xl lg:text-[56px] tracking-tight max-w-4xl leading-[1.08]"
         >
-          <span className="font-bold text-[#1D1D1F]">About Rêve.</span>{' '}
-          <span className="font-semibold text-[#6E6E73]">{companyInfo.aboutHeadline}</span>
+          <span className="font-bold text-[#0C172B]">About Rêve Solutions.</span>{' '}
+          <span className="font-semibold text-[#475569]">{companyInfo.aboutHeadline}</span>
         </motion.h1>
 
         <motion.p 
           initial={{ opacity: 0, y: 12 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.45, ease: 'easeOut', delay: 0.1 }}
-          className="text-base sm:text-lg text-[#6E6E73] max-w-3xl leading-relaxed font-normal"
+          className="text-base sm:text-lg text-[#475569] max-w-3xl leading-relaxed font-normal"
         >
           {companyInfo.aboutSubtext}
         </motion.p>
@@ -56,37 +59,37 @@ export const AboutPage: React.FC = () => {
         <div className="apple-card p-8 sm:p-12 lg:p-16 grid grid-cols-1 lg:grid-cols-12 gap-10 items-center shadow-xl">
           
           <div className="lg:col-span-7 space-y-5">
-            <span className="text-[11px] font-semibold text-[#0071E3] uppercase tracking-wider bg-[#F5F5F7] px-3 py-1 rounded-full inline-block">
+            <span className="text-[11px] font-bold text-[#0066D6] uppercase tracking-wider bg-[#E5F1FF] border border-[#BFDBFE] px-3.5 py-1 rounded-full inline-block shadow-2xs">
               WHY WE FOCUS EXCLUSIVELY ON WEBSITES
             </span>
-            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-[#1D1D1F] leading-tight tracking-tight">
+            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-[#0C172B] leading-tight tracking-tight">
               We started Rêve Solutions to solve the ongoing website management problem.
             </h2>
-            <p className="text-[#6E6E73] text-sm sm:text-base leading-relaxed font-normal">
+            <p className="text-[#475569] text-sm sm:text-base leading-relaxed font-normal">
               Most web designers build a site, hand over the login credentials, and disappear. Over time, business owners find themselves stuck dealing with broken links, outdated copy, formatting errors, and technical fixes they don't have time to manage.
             </p>
-            <p className="text-[#6E6E73] text-sm sm:text-base leading-relaxed font-normal">
+            <p className="text-[#475569] text-sm sm:text-base leading-relaxed font-normal">
               Rêve Solutions is a dedicated website company built to solve this exact issue. We build your website, deploy it, and then manage it for you every month. You can hand over your website to us and focus entirely on running your business.
             </p>
           </div>
 
-          <div className="lg:col-span-5 p-6 sm:p-8 rounded-2xl bg-[#F5F5F7] space-y-4">
-            <h3 className="text-base font-bold text-[#1D1D1F]">Our Commitment to Clients:</h3>
-            <ul className="space-y-3.5 text-xs sm:text-sm text-[#1D1D1F]">
+          <div className="lg:col-span-5 p-6 sm:p-8 rounded-2xl bg-[#EAF3FD] border border-[#BFDBFE] space-y-4">
+            <h3 className="text-base font-bold text-[#0C172B]">Our Commitment to Clients:</h3>
+            <ul className="space-y-3.5 text-xs sm:text-sm text-[#0C172B]">
               <li className="flex items-start gap-2.5">
-                <CheckCircle2 className="w-4 h-4 text-[#0071E3] shrink-0 mt-0.5" />
+                <CheckCircle2 className="w-4.5 h-4.5 text-[#0066D6] shrink-0 mt-0.5" />
                 <span>One predictable monthly service for complete website care.</span>
               </li>
               <li className="flex items-start gap-2.5">
-                <CheckCircle2 className="w-4 h-4 text-[#0071E3] shrink-0 mt-0.5" />
+                <CheckCircle2 className="w-4.5 h-4.5 text-[#0066D6] shrink-0 mt-0.5" />
                 <span>Fast response times for text changes, images, and updates.</span>
               </li>
               <li className="flex items-start gap-2.5">
-                <CheckCircle2 className="w-4 h-4 text-[#0071E3] shrink-0 mt-0.5" />
+                <CheckCircle2 className="w-4.5 h-4.5 text-[#0066D6] shrink-0 mt-0.5" />
                 <span>Routine technical maintenance, bug fixes, and speed checks.</span>
               </li>
               <li className="flex items-start gap-2.5">
-                <CheckCircle2 className="w-4 h-4 text-[#0071E3] shrink-0 mt-0.5" />
+                <CheckCircle2 className="w-4.5 h-4.5 text-[#0066D6] shrink-0 mt-0.5" />
                 <span>Long-term team relationship — we stay with your website after launch.</span>
               </li>
             </ul>
@@ -109,20 +112,23 @@ export const AboutPage: React.FC = () => {
         </div>
       </section>
 
-      {/* CTA Footer */}
+      {/* CTA Footer — Midnight Sapphire Luxury */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="apple-card p-8 sm:p-12 lg:p-14 bg-white text-center space-y-5 shadow-xl">
-          <span className="text-xs font-semibold uppercase tracking-wider text-[#86868B] block">
+        <div className="p-8 sm:p-12 lg:p-14 rounded-3xl bg-gradient-to-br from-[#061226] via-[#0B1E40] to-[#040C1A] text-white text-center space-y-5 shadow-2xl border border-[#1A4B8C] relative overflow-hidden">
+          <div className="absolute top-0 right-0 w-80 h-80 bg-[#0066D6]/30 rounded-full blur-[90px] pointer-events-none" />
+          <div className="absolute bottom-0 left-0 w-80 h-80 bg-[#004EA8]/30 rounded-full blur-[90px] pointer-events-none" />
+
+          <span className="text-xs font-bold uppercase tracking-wider text-white bg-[#0066D6] px-4 py-1.5 rounded-full inline-block shadow-md shadow-[#0066D6]/35 relative z-10">
             WORK WITH US
           </span>
-          <h3 className="text-2xl sm:text-3xl lg:text-4xl font-bold tracking-tight text-[#1D1D1F]">
+          <h3 className="text-2xl sm:text-3xl lg:text-4xl font-bold tracking-tight text-white relative z-10">
             Ready to hand over your website care?
           </h3>
-          <p className="text-sm sm:text-base text-[#6E6E73] max-w-lg mx-auto font-normal leading-relaxed">
+          <p className="text-sm sm:text-base text-[#D0E2FF] max-w-lg mx-auto font-normal leading-relaxed relative z-10">
             Talk with our specialist team to discuss building a new site or managing your current website setup.
           </p>
-          <div className="pt-2">
-            <Button variant="primary" size="lg" showArrow onClick={() => navigate('/contact')}>
+          <div className="pt-2 relative z-10">
+            <Button variant="white" size="lg" showArrow onClick={() => navigate('/contact')}>
               Let's Talk
             </Button>
           </div>
@@ -131,3 +137,4 @@ export const AboutPage: React.FC = () => {
     </div>
   );
 };
+export default AboutPage;

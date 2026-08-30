@@ -78,11 +78,6 @@ export const ContactForm: React.FC = () => {
     setIsSubmitting(true);
 
     try {
-      /**
-       * Backend / Email Integration Point:
-       * Replace simulated network delay with actual API endpoint call:
-       * await fetch('/api/contact', { method: 'POST', body: JSON.stringify(formData) });
-       */
       await new Promise((resolve) => setTimeout(resolve, 1000));
 
       setSubmitted(true);
@@ -107,13 +102,13 @@ export const ContactForm: React.FC = () => {
       <motion.div
         initial={{ opacity: 0, scale: 0.96 }}
         animate={{ opacity: 1, scale: 1 }}
-        className="apple-card p-8 sm:p-12 text-center space-y-4 shadow-xl"
+        className="apple-card p-8 sm:p-12 text-center space-y-4 shadow-xl border border-[#BFDBFE]"
       >
-        <div className="w-14 h-14 rounded-full bg-emerald-50 text-emerald-600 border border-emerald-100 mx-auto flex items-center justify-center">
+        <div className="w-14 h-14 rounded-full bg-[#E5F1FF] text-[#0066D6] border border-[#BFDBFE] mx-auto flex items-center justify-center">
           <CheckCircle2 className="w-8 h-8" />
         </div>
-        <h3 className="text-2xl font-bold text-[#1D1D1F]">Enquiry Received</h3>
-        <p className="text-sm text-[#6E6E73] max-w-md mx-auto leading-relaxed font-normal">
+        <h3 className="text-2xl font-bold text-[#0C172B]">Enquiry Received</h3>
+        <p className="text-sm text-[#475569] max-w-md mx-auto leading-relaxed font-normal">
           Thank you for reaching out to Rêve Solutions. A specialist will review your website requirements and get back to you within 24 hours.
         </p>
         <div className="pt-3">
@@ -130,12 +125,12 @@ export const ContactForm: React.FC = () => {
   }
 
   return (
-    <form onSubmit={handleSubmit} noValidate className="apple-card p-6 sm:p-8 md:p-10 space-y-6 shadow-xl">
+    <form onSubmit={handleSubmit} noValidate className="apple-card p-6 sm:p-8 md:p-10 space-y-6 shadow-xl border border-[#D8E6F7]">
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
         {/* Name */}
         <div>
-          <label htmlFor="name" className="block text-xs font-semibold text-[#1D1D1F] mb-1.5">
-            Full Name <span className="text-[#0071E3]">*</span>
+          <label htmlFor="name" className="block text-xs font-semibold text-[#0C172B] mb-1.5">
+            Full Name <span className="text-[#0066D6]">*</span>
           </label>
           <input
             type="text"
@@ -144,8 +139,8 @@ export const ContactForm: React.FC = () => {
             value={formData.name}
             onChange={handleChange}
             placeholder="Jane Smith"
-            className={`w-full px-4 py-3 rounded-xl bg-[#F5F5F7] border text-sm text-[#1D1D1F] placeholder-[#86868B] focus:outline-none focus:border-[#0071E3] focus:bg-white transition-all duration-200 ${
-              errors.name ? 'border-red-500' : 'border-transparent'
+            className={`w-full px-4 py-3 rounded-xl bg-[#F0F5FA] border text-sm text-[#0C172B] placeholder-[#798CA6] focus:outline-none focus:border-[#0066D6] focus:bg-white transition-all duration-200 ${
+              errors.name ? 'border-red-500' : 'border-[#D6E4F5]'
             }`}
           />
           {errors.name && (
@@ -157,8 +152,8 @@ export const ContactForm: React.FC = () => {
 
         {/* Business Name */}
         <div>
-          <label htmlFor="businessName" className="block text-xs font-semibold text-[#1D1D1F] mb-1.5">
-            Business Name <span className="text-[#86868B] text-[11px] font-normal">(optional)</span>
+          <label htmlFor="businessName" className="block text-xs font-semibold text-[#0C172B] mb-1.5">
+            Business Name <span className="text-[#798CA6] text-[11px] font-normal">(optional)</span>
           </label>
           <input
             type="text"
@@ -167,7 +162,7 @@ export const ContactForm: React.FC = () => {
             value={formData.businessName}
             onChange={handleChange}
             placeholder="Acme Studio"
-            className="w-full px-4 py-3 rounded-xl bg-[#F5F5F7] border border-transparent focus:border-[#0071E3] focus:bg-white text-sm text-[#1D1D1F] placeholder-[#86868B] transition-all duration-200 focus:outline-none"
+            className="w-full px-4 py-3 rounded-xl bg-[#F0F5FA] border border-[#D6E4F5] focus:border-[#0066D6] focus:bg-white text-sm text-[#0C172B] placeholder-[#798CA6] transition-all duration-200 focus:outline-none"
           />
         </div>
       </div>
@@ -175,8 +170,8 @@ export const ContactForm: React.FC = () => {
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
         {/* Email */}
         <div>
-          <label htmlFor="email" className="block text-xs font-semibold text-[#1D1D1F] mb-1.5">
-            Email Address <span className="text-[#0071E3]">*</span>
+          <label htmlFor="email" className="block text-xs font-semibold text-[#0C172B] mb-1.5">
+            Email Address <span className="text-[#0066D6]">*</span>
           </label>
           <input
             type="email"
@@ -185,8 +180,8 @@ export const ContactForm: React.FC = () => {
             value={formData.email}
             onChange={handleChange}
             placeholder="jane@company.com"
-            className={`w-full px-4 py-3 rounded-xl bg-[#F5F5F7] border text-sm text-[#1D1D1F] placeholder-[#86868B] focus:outline-none focus:border-[#0071E3] focus:bg-white transition-all duration-200 ${
-              errors.email ? 'border-red-500' : 'border-transparent'
+            className={`w-full px-4 py-3 rounded-xl bg-[#F0F5FA] border text-sm text-[#0C172B] placeholder-[#798CA6] focus:outline-none focus:border-[#0066D6] focus:bg-white transition-all duration-200 ${
+              errors.email ? 'border-red-500' : 'border-[#D6E4F5]'
             }`}
           />
           {errors.email && (
@@ -198,8 +193,8 @@ export const ContactForm: React.FC = () => {
 
         {/* Phone */}
         <div>
-          <label htmlFor="phone" className="block text-xs font-semibold text-[#1D1D1F] mb-1.5">
-            Phone Number <span className="text-[#86868B] text-[11px] font-normal">(optional)</span>
+          <label htmlFor="phone" className="block text-xs font-semibold text-[#0C172B] mb-1.5">
+            Phone Number <span className="text-[#798CA6] text-[11px] font-normal">(optional)</span>
           </label>
           <input
             type="tel"
@@ -208,15 +203,15 @@ export const ContactForm: React.FC = () => {
             value={formData.phone}
             onChange={handleChange}
             placeholder="+1 (555) 012-3456"
-            className="w-full px-4 py-3 rounded-xl bg-[#F5F5F7] border border-transparent focus:border-[#0071E3] focus:bg-white text-sm text-[#1D1D1F] placeholder-[#86868B] transition-all duration-200 focus:outline-none"
+            className="w-full px-4 py-3 rounded-xl bg-[#F0F5FA] border border-[#D6E4F5] focus:border-[#0066D6] focus:bg-white text-sm text-[#0C172B] placeholder-[#798CA6] transition-all duration-200 focus:outline-none"
           />
         </div>
       </div>
 
       {/* Current Website */}
       <div>
-        <label htmlFor="currentWebsite" className="block text-xs font-semibold text-[#1D1D1F] mb-1.5">
-          Current Website <span className="text-[#86868B] text-[11px] font-normal">(optional, if you have one)</span>
+        <label htmlFor="currentWebsite" className="block text-xs font-semibold text-[#0C172B] mb-1.5">
+          Current Website <span className="text-[#798CA6] text-[11px] font-normal">(optional, if you have one)</span>
         </label>
         <input
           type="text"
@@ -225,21 +220,21 @@ export const ContactForm: React.FC = () => {
           value={formData.currentWebsite}
           onChange={handleChange}
           placeholder="https://example.com"
-          className="w-full px-4 py-3 rounded-xl bg-[#F5F5F7] border border-transparent focus:border-[#0071E3] focus:bg-white text-sm text-[#1D1D1F] placeholder-[#86868B] transition-all duration-200 focus:outline-none"
+          className="w-full px-4 py-3 rounded-xl bg-[#F0F5FA] border border-[#D6E4F5] focus:border-[#0066D6] focus:bg-white text-sm text-[#0C172B] placeholder-[#798CA6] transition-all duration-200 focus:outline-none"
         />
       </div>
 
       {/* Service Required */}
       <div>
-        <label htmlFor="service" className="block text-xs font-semibold text-[#1D1D1F] mb-1.5">
-          Service Required <span className="text-[#0071E3]">*</span>
+        <label htmlFor="service" className="block text-xs font-semibold text-[#0C172B] mb-1.5">
+          Service Required <span className="text-[#0066D6]">*</span>
         </label>
         <select
           id="service"
           name="service"
           value={formData.service}
           onChange={handleChange}
-          className="w-full px-4 py-3 rounded-xl bg-[#F5F5F7] border border-transparent focus:border-[#0071E3] focus:bg-white text-sm text-[#1D1D1F] transition-all duration-200 cursor-pointer font-medium focus:outline-none"
+          className="w-full px-4 py-3 rounded-xl bg-[#F0F5FA] border border-[#D6E4F5] focus:border-[#0066D6] focus:bg-white text-sm text-[#0C172B] transition-all duration-200 cursor-pointer font-medium focus:outline-none"
         >
           <option value="Website Development">Website Development (New Site)</option>
           <option value="Website Management">Website Management (Monthly Updates)</option>
@@ -251,8 +246,8 @@ export const ContactForm: React.FC = () => {
 
       {/* Message */}
       <div>
-        <label htmlFor="message" className="block text-xs font-semibold text-[#1D1D1F] mb-1.5">
-          How can we help with your website? <span className="text-[#0071E3]">*</span>
+        <label htmlFor="message" className="block text-xs font-semibold text-[#0C172B] mb-1.5">
+          How can we help with your website? <span className="text-[#0066D6]">*</span>
         </label>
         <textarea
           id="message"
@@ -261,8 +256,8 @@ export const ContactForm: React.FC = () => {
           value={formData.message}
           onChange={handleChange}
           placeholder="Tell us about your business, website goals, or what you'd like us to manage..."
-          className={`w-full px-4 py-3 rounded-xl bg-[#F5F5F7] border text-sm text-[#1D1D1F] placeholder-[#86868B] focus:outline-none focus:border-[#0071E3] focus:bg-white transition-all duration-200 resize-y ${
-            errors.message ? 'border-red-500' : 'border-transparent'
+          className={`w-full px-4 py-3 rounded-xl bg-[#F0F5FA] border text-sm text-[#0C172B] placeholder-[#798CA6] focus:outline-none focus:border-[#0066D6] focus:bg-white transition-all duration-200 resize-y ${
+            errors.message ? 'border-red-500' : 'border-[#D6E4F5]'
           }`}
         />
         {errors.message && (
@@ -278,7 +273,7 @@ export const ContactForm: React.FC = () => {
           type="submit"
           variant="primary"
           size="lg"
-          className="w-full"
+          className="w-full shadow-lg shadow-[#0066D6]/20 font-bold"
           disabled={isSubmitting}
         >
           {isSubmitting ? (
@@ -295,9 +290,10 @@ export const ContactForm: React.FC = () => {
         </Button>
       </div>
 
-      <p className="text-[11px] text-[#86868B] text-center font-normal">
+      <p className="text-[11px] text-[#798CA6] text-center font-normal">
         We respect your privacy. Direct assistance from a real web specialist within 24 hours.
       </p>
     </form>
   );
 };
+export default ContactForm;

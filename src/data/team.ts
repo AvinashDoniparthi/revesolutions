@@ -1,52 +1,57 @@
 export interface TeamMember {
   id: string;
   placeholderId: string;
+  initials: string;
   name: string;
   role: string;
   bio: string;
   imagePlaceholder: string;
-  linkedinUrl: string;
+  linkedinUrl?: string;
 }
 
 /**
  * Team Members Data Structure
- * EDIT THIS FILE to add real team member photos, names, roles, bios, and links.
  */
 export const teamMembers: TeamMember[] = [
   {
-    id: "member-1",
+    id: "darshan-sureshkumar",
     placeholderId: "01",
-    name: "TEAM MEMBER 01",
-    role: "[ROLE]",
-    bio: "[SHORT BIO — Edit this biography in src/data/team.ts]",
-    imagePlaceholder: "[PHOTO]",
+    initials: "DS",
+    name: "Darshan Sureshkumar",
+    role: "Client Success & Platform Manager",
+    bio: "Leads client relationships, onboarding, and platform management to ensure seamless website delivery and continuous monthly support.",
+    imagePlaceholder: "Darshan Sureshkumar",
     linkedinUrl: "https://linkedin.com"
   },
   {
-    id: "member-2",
+    id: "avinash-d",
     placeholderId: "02",
-    name: "TEAM MEMBER 02",
-    role: "[ROLE]",
-    bio: "[SHORT BIO — Edit this biography in src/data/team.ts]",
-    imagePlaceholder: "[PHOTO]",
+    initials: "AD",
+    name: "Avinash D",
+    role: "Lead Web Developer & Site Architect",
+    bio: "Spearheads web architecture, full-stack implementation, and performance engineering to build robust, high-speed digital solutions.",
+    imagePlaceholder: "Avinash D",
     linkedinUrl: "https://linkedin.com"
   },
   {
-    id: "member-3",
+    id: "kishan-senthil",
     placeholderId: "03",
-    name: "TEAM MEMBER 03",
-    role: "[ROLE]",
-    bio: "[SHORT BIO — Edit this biography in src/data/team.ts]",
-    imagePlaceholder: "[PHOTO]",
+    initials: "KS",
+    name: "Kishan Senthil",
+    role: "Lead Web Developer & Product Engineer",
+    bio: "Specializes in modern product engineering, interactive user interfaces, and clean, responsive code tailored for client business growth.",
+    imagePlaceholder: "Kishan Senthil",
     linkedinUrl: "https://linkedin.com"
   },
   {
-    id: "member-4",
+    id: "akshith-saravanakumar",
     placeholderId: "04",
-    name: "TEAM MEMBER 04",
-    role: "[ROLE]",
-    bio: "[SHORT BIO — Edit this biography in src/data/team.ts]",
-    imagePlaceholder: "[PHOTO]",
+    initials: "AS",
+    name: "Akshith Saravanakumar",
+    role: "Head of Strategy & Business Development",
+    bio: "Drives business development, growth strategy, and client partnerships, aligning custom web solutions with long-term commercial goals.",
+    imagePlaceholder: "Akshith Saravanakumar",
     linkedinUrl: "https://linkedin.com"
   }
 ];
+

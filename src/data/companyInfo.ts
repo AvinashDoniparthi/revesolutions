@@ -12,8 +12,6 @@ export interface CompanyInfo {
   contactPlaceholders: {
     email: string;
     phone: string;
-    location: string;
-    hours: string;
   };
   socialLinks: {
     linkedin: string;
@@ -35,10 +33,8 @@ export const companyInfo: CompanyInfo = {
   contactSubtext: "Have a website project in mind, or need someone to manage the one you already have? Tell us what you need.",
   footerDescription: "Custom websites built, launched, and continuously managed for growing businesses.",
   contactPlaceholders: {
-    email: "[EMAIL ADDRESS]",
-    phone: "[PHONE NUMBER]",
-    location: "[LOCATION]",
-    hours: "[BUSINESS HOURS]"
+    email: "reve.solutions4@gmail.com",
+    phone: "+91 9092845715"
   },
   socialLinks: {
     linkedin: "https://linkedin.com",
