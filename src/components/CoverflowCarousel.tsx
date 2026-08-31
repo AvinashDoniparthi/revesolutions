@@ -61,30 +61,40 @@ export type CoverflowProps = {
 // Constants
 // -----------------------------------------------------------------------------
 
-const PLACEHOLDER_URLS = [
-    "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=1000&q=80",
-    "https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=1000&q=80",
-    "https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?auto=format&fit=crop&w=1000&q=80",
-    "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1000&q=80",
-    "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=1000&q=80",
-    "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=1000&q=80",
-    "https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?auto=format&fit=crop&w=1000&q=80",
-    "https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=1000&q=80",
+const DEFAULT_IMAGES: CoverflowImage[] = [
+    {
+        srcUrl: "/showcase/kts-properties.png",
+        alt: "KTS Properties — Handcrafted Real Estate Website by Rêve Solutions",
+    },
+    {
+        srcUrl: "",
+        alt: "Upcoming Showcase 02",
+    },
+    {
+        srcUrl: "",
+        alt: "Upcoming Showcase 03",
+    },
+    {
+        srcUrl: "",
+        alt: "Upcoming Showcase 04",
+    },
+    {
+        srcUrl: "",
+        alt: "Upcoming Showcase 05",
+    },
+    {
+        srcUrl: "",
+        alt: "Upcoming Showcase 06",
+    },
 ]
 
-const DEFAULT_IMAGES: CoverflowImage[] = PLACEHOLDER_URLS.map((url, i) => ({
-    srcUrl: url,
-    alt: `Coverflow card ${i + 1}`,
-}))
-
 const GRADIENT_FALLBACKS = [
-    "linear-gradient(160deg, #ff6b6b, #ffd93d)",
-    "linear-gradient(160deg, #4facfe, #00f2fe)",
-    "linear-gradient(160deg, #43e97b, #38f9d7)",
-    "linear-gradient(160deg, #fa709a, #fee140)",
-    "linear-gradient(160deg, #a18cd1, #fbc2eb)",
-    "linear-gradient(160deg, #f093fb, #f5576c)",
-    "linear-gradient(160deg, #5ee7df, #b490ca)",
+    "linear-gradient(150deg, #FFFFFF 0%, #F1F7FE 100%)",
+    "linear-gradient(150deg, #FFFFFF 0%, #EEF5FD 100%)",
+    "linear-gradient(150deg, #FFFFFF 0%, #F4F8FE 100%)",
+    "linear-gradient(150deg, #FFFFFF 0%, #EFF6FD 100%)",
+    "linear-gradient(150deg, #FFFFFF 0%, #F2F8FE 100%)",
+    "linear-gradient(150deg, #FFFFFF 0%, #EDF4FC 100%)",
 ]
 
 const RENDER_RANGE = 6 // max slats each side
@@ -230,21 +240,69 @@ function Card({
                 }}
             >
                 {src ? (
-                    <img
-                        src={src}
-                        srcSet={srcSet}
-                        alt={item?.alt || ""}
-                        draggable={false}
+                    <div style={{ position: "relative", width: "100%", height: "100%" }}>
+                        <img
+                            src={src}
+                            srcSet={srcSet}
+                            alt={item?.alt || ""}
+                            draggable={false}
+                            style={{
+                                width: "100%",
+                                height: "100%",
+                                objectFit: "cover",
+                                objectPosition: "top left",
+                                display: "block",
+                                pointerEvents: "none",
+                                userSelect: "none",
+                            }}
+                        />
+                    </div>
+                ) : (
+                    <div
                         style={{
                             width: "100%",
                             height: "100%",
-                            objectFit: "cover",
-                            display: "block",
-                            pointerEvents: "none",
-                            userSelect: "none",
+                            display: "flex",
+                            flexDirection: "column",
+                            alignItems: "center",
+                            justifyContent: "center",
+                            gap: "8px",
+                            padding: "16px",
+                            textAlign: "center",
+                            background: "linear-gradient(150deg, #FFFFFF 0%, #F3F8FE 100%)",
+                            border: "1.5px dashed #CBDFF8",
+                            borderRadius: "inherit",
+                            boxSizing: "border-box",
                         }}
-                    />
-                ) : null}
+                    >
+                        <div
+                            style={{
+                                width: "38px",
+                                height: "38px",
+                                borderRadius: "12px",
+                                background: "#E5F1FF",
+                                border: "1px solid #BFDBFE",
+                                display: "flex",
+                                alignItems: "center",
+                                justifyContent: "center",
+                                color: "#0066D6",
+                                boxShadow: "0 2px 6px rgba(0, 102, 214, 0.08)",
+                            }}
+                        >
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                                <rect width="18" height="18" x="3" y="3" rx="2" ry="2"/>
+                                <line x1="3" x2="21" y1="9" y2="9"/>
+                                <line x1="9" x2="9" y1="21" y2="9"/>
+                            </svg>
+                        </div>
+                        <span style={{ fontSize: "11px", fontWeight: 700, color: "#0C172B", letterSpacing: "-0.01em" }}>
+                            Upcoming Showcase
+                        </span>
+                        <span style={{ fontSize: "9px", fontFamily: "monospace", color: "#0066D6", background: "#E5F1FF", padding: "2px 8px", borderRadius: "9999px", border: "1px solid #BFDBFE", fontWeight: 600 }}>
+                            Slot Reserved
+                        </span>
+                    </div>
+                )}
             </motion.div>
         </motion.div>
     )

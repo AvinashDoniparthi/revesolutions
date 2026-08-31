@@ -146,3 +146,59 @@
 ::-webkit-scrollbar-thumb:hover {
   background: rgba(0, 102, 214, 0.4);
 }
+
+/* =========================================================================
+   Uiverse Process Corner Expanding Animation
+   ========================================================================= */
+.uiverse-process-card {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+  background: #FFFFFF;
+  border: 1px solid #D5E4F5;
+  border-radius: 24px;
+  min-height: 230px;
+  cursor: pointer;
+  box-shadow: 0 4px 20px rgba(12, 38, 80, 0.04), 0 1px 3px rgba(12, 38, 80, 0.02);
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.35s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.35s ease;
+}
+
+.uiverse-process-card:hover {
+  transform: translateY(-4px) scale(1.01);
+  border-color: #0066D6;
+  box-shadow: 0 20px 45px rgba(0, 102, 214, 0.22), 0 4px 12px rgba(0, 102, 214, 0.1);
+}
+
+/* Corner expansion shapes: completely hidden (0 size & 0 opacity) by default */
+.uiverse-process-card::before,
+.uiverse-process-card::after {
+  content: "";
+  position: absolute;
+  width: 0%;
+  height: 0%;
+  opacity: 0;
+  background: linear-gradient(135deg, #0058BF 0%, #0077F6 100%);
+  z-index: 1;
+  transition: all 0.55s cubic-bezier(0.22, 1, 0.36, 1);
+  pointer-events: none;
+}
+
+.uiverse-process-card::before {
+  top: 0;
+  right: 0;
+  border-radius: 0 24px 0 100%;
+}
+
+.uiverse-process-card::after {
+  bottom: 0;
+  left: 0;
+  border-radius: 0 100% 0 24px;
+}
+
+.uiverse-process-card:hover::before,
+.uiverse-process-card:hover::after {
+  width: 100%;
+  height: 100%;
+  opacity: 1;
+  border-radius: 24px;
+}

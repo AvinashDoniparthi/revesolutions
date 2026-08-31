@@ -1,11 +1,11 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { useNavigate, Link } from 'react-router-dom';
-import { 
-  CheckCircle2, 
-  Paintbrush, 
-  Users, 
-  Clock 
+import {
+  CheckCircle2,
+  Paintbrush,
+  Users,
+  Clock
 } from 'lucide-react';
 import { SEOHead } from '../components/SEOHead';
 import { Button } from '../components/Button';
@@ -25,8 +25,8 @@ export const HomePage: React.FC = () => {
       {/* Cohesive Ambient Blue Atmosphere Orbs */}
       <div className="absolute top-10 left-1/2 -translate-x-1/2 w-[900px] h-[420px] bg-gradient-to-b from-[#0066D6]/10 via-[#0066D6]/3 to-transparent rounded-full blur-[140px] pointer-events-none -z-10" />
 
-      <SEOHead 
-        title="Home" 
+      <SEOHead
+        title="Home"
         description="Rêve Solutions — Your website. Fully built and managed by real people."
       />
 
@@ -71,7 +71,7 @@ export const HomePage: React.FC = () => {
         />
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch">
-          
+
           {/* Card 1: Full-width / 7-col Interactive Studio Mockup Card */}
           <div className="lg:col-span-7 apple-card p-8 sm:p-10 space-y-6 flex flex-col justify-between hover:border-[#A9CEF7] transition-all">
             <div className="space-y-2.5">
@@ -94,7 +94,7 @@ export const HomePage: React.FC = () => {
 
           {/* Right Column: 2 Stacked Apple Widget Cards (5-col) */}
           <div className="lg:col-span-5 flex flex-col gap-6">
-            
+
             {/* Card 2: Monthly Care Apple Widget */}
             <div className="apple-card p-8 space-y-4 flex-1 flex flex-col justify-between hover:border-[#A9CEF7] transition-all">
               <div className="space-y-2.5">
@@ -154,7 +154,7 @@ export const HomePage: React.FC = () => {
         />
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-          
+
           <div className="apple-card p-7 space-y-3 hover:border-[#A9CEF7] transition-all">
             <div className="w-11 h-11 rounded-2xl bg-[#E5F1FF] border border-[#BFDBFE] flex items-center justify-center text-[#0066D6] shadow-xs">
               <Paintbrush className="w-5 h-5 text-[#0066D6]" />
@@ -221,6 +221,8 @@ export const HomePage: React.FC = () => {
         </div>
       </section>
 
+
+
       {/* =========================================================================
           5. WEBSITE SHOWCASE (3D COVERFLOW GALLERY)
           ========================================================================= */}
@@ -272,52 +274,7 @@ export const HomePage: React.FC = () => {
         </div>
       </section>
 
-      {/* =========================================================================
-          7. TRANSPARENT PRICING / PLAN WIDGET
-          ========================================================================= */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="apple-card p-8 sm:p-12 space-y-8 shadow-xl bg-gradient-to-br from-white via-[#F7FAFD] to-[#E9F3FE] border border-[#BFDBFE] hover:border-[#8FC2FB] transition-all">
-          
-          <div className="max-w-2xl space-y-2.5">
-            <span className="text-[11px] font-bold uppercase tracking-wider text-[#0066D6] bg-[#E5F1FF] border border-[#BFDBFE] px-3.5 py-1 rounded-full inline-block shadow-2xs">
-              ALL-IN-ONE PLAN
-            </span>
-            <h2 className="text-3xl sm:text-4xl font-bold text-[#0C172B] tracking-tight">
-              One simple monthly fee. Complete website peace of mind.
-            </h2>
-            <p className="text-base text-[#475569] leading-relaxed font-normal">
-              No expensive upfront build costs, no surprise maintenance bills, and no hidden technical fees.
-            </p>
-          </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 pt-4 border-t border-[#D5E4F5]">
-            <div className="flex items-center gap-3 p-4 rounded-2xl bg-[#EBF4FD] border border-[#BFDBFE] hover:border-[#8FC2FB] transition-all">
-              <CheckCircle2 className="w-5 h-5 text-[#0066D6] shrink-0" />
-              <span className="text-sm font-semibold text-[#0C172B]">Custom Web Design</span>
-            </div>
-            <div className="flex items-center gap-3 p-4 rounded-2xl bg-[#EBF4FD] border border-[#BFDBFE] hover:border-[#8FC2FB] transition-all">
-              <CheckCircle2 className="w-5 h-5 text-[#0066D6] shrink-0" />
-              <span className="text-sm font-semibold text-[#0C172B]">Unlimited Edits</span>
-            </div>
-            <div className="flex items-center gap-3 p-4 rounded-2xl bg-[#EBF4FD] border border-[#BFDBFE] hover:border-[#8FC2FB] transition-all">
-              <CheckCircle2 className="w-5 h-5 text-[#0066D6] shrink-0" />
-              <span className="text-sm font-semibold text-[#0C172B]">Hosting &amp; Security</span>
-            </div>
-            <div className="flex items-center gap-3 p-4 rounded-2xl bg-[#EBF4FD] border border-[#BFDBFE] hover:border-[#8FC2FB] transition-all">
-              <CheckCircle2 className="w-5 h-5 text-[#0066D6] shrink-0" />
-              <span className="text-sm font-semibold text-[#0C172B]">Dedicated Specialist</span>
-            </div>
-          </div>
-
-          <div className="pt-2 flex flex-col sm:flex-row items-center justify-between gap-4">
-            <span className="text-sm text-[#475569] font-normal">Ready to get started or discuss custom requirements?</span>
-            <Button variant="primary" size="md" showArrow onClick={() => navigate('/contact')}>
-              Inquire About Pricing &amp; Plans
-            </Button>
-          </div>
-
-        </div>
-      </section>
 
       {/* =========================================================================
           8. CALL TO ACTION (Apple Specialist Banner — Midnight Sapphire Luxury)
@@ -340,9 +297,9 @@ export const HomePage: React.FC = () => {
             </p>
           </div>
 
-          <Button 
-            variant="white" 
-            size="lg" 
+          <Button
+            variant="white"
+            size="lg"
             showArrow
             onClick={() => navigate('/contact')}
             className="shrink-0 relative z-10"

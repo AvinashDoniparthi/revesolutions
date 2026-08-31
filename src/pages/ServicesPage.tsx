@@ -5,7 +5,6 @@ import { CheckCircle2 } from 'lucide-react';
 import { SEOHead } from '../components/SEOHead';
 import { Button } from '../components/Button';
 import { websiteServices } from '../data/services';
-import { reveal, revealInitial, revealViewport } from '../lib/motion';
 
 export const ServicesPage: React.FC = () => {
   const location = useLocation();
@@ -66,17 +65,25 @@ export const ServicesPage: React.FC = () => {
       </section>
 
       {/* Services List Breakdown */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
-        {websiteServices.map((service, index) => (
-          <motion.div
-            key={service.id}
-            id={service.id}
-            initial={revealInitial}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={revealViewport}
-            transition={reveal(index)}
-            className="apple-card p-8 sm:p-12 space-y-8 shadow-xl hover:border-[#A9CEF7] transition-all"
-          >
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8 overflow-hidden">
+        {websiteServices.map((service, index) => {
+          // Alternating entry: Right (0), Left (1), Right (2), Left (3)
+          const isFromRight = index % 2 === 0;
+          const initialX = isFromRight ? 80 : -80;
+
+          return (
+            <motion.div
+              key={service.id}
+              id={service.id}
+              initial={{ opacity: 0, x: initialX }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true, amount: 0.15 }}
+              transition={{
+                duration: 0.7,
+                ease: [0.16, 1, 0.3, 1],
+              }}
+              className="apple-card p-8 sm:p-12 space-y-8 shadow-xl hover:border-[#A9CEF7] transition-all"
+            >
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
               
               {/* Left Column: Title & Description */}
@@ -137,7 +144,8 @@ export const ServicesPage: React.FC = () => {
 
             </div>
           </motion.div>
-        ))}
+        );
+      })}
       </section>
 
       {/* Footer Banner — Midnight Sapphire Luxury */}
