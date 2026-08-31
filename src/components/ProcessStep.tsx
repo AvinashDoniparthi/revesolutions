@@ -42,7 +42,11 @@ export const ProcessStepCard: React.FC<ProcessStepCardProps> = ({
       {/* =========================================================================
           1. Default State (Visible Before Hover)
           ========================================================================= */}
+<<<<<<< HEAD
       <div className="absolute inset-0 p-6 sm:p-7 flex flex-col justify-between z-[2] transition-all duration-400 ease-out group-hover:opacity-0 group-hover:scale-95 group-hover:pointer-events-none">
+=======
+      <div className="absolute inset-0 p-6 sm:p-7 flex flex-col justify-between z-2 transition-all duration-400 ease-out group-hover:opacity-0 group-hover:scale-95 group-hover:pointer-events-none">
+>>>>>>> db580f972c483f6255d365d1294f6f8b6325173d
         
         {/* Top Header */}
         <div className="flex items-center justify-between">
@@ -72,7 +76,11 @@ export const ProcessStepCard: React.FC<ProcessStepCardProps> = ({
       {/* =========================================================================
           2. Hover State (Revealed as Royal Blue expands over the card)
           ========================================================================= */}
+<<<<<<< HEAD
       <div className="absolute inset-0 p-6 sm:p-7 flex flex-col justify-between z-[3] opacity-0 translate-y-3 scale-95 pointer-events-none transition-all duration-450 ease-out delay-75 group-hover:opacity-100 group-hover:translate-y-0 group-hover:scale-100 group-hover:pointer-events-auto text-white">
+=======
+      <div className="absolute inset-0 p-6 sm:p-7 flex flex-col justify-between z-3 opacity-0 translate-y-3 scale-95 pointer-events-none transition-all duration-450 ease-out delay-75 group-hover:opacity-100 group-hover:translate-y-0 group-hover:scale-100 group-hover:pointer-events-auto text-white">
+>>>>>>> db580f972c483f6255d365d1294f6f8b6325173d
         
         {/* Top Header */}
         <div className="flex items-center justify-between">
@@ -100,6 +108,12 @@ export const ProcessStepCard: React.FC<ProcessStepCardProps> = ({
           <span className="text-[11px] font-mono text-[#D0E6FF] font-medium">
             {tag}
           </span>
+<<<<<<< HEAD
+=======
+          <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-white text-[#0066D6]">
+            Active
+          </span>
+>>>>>>> db580f972c483f6255d365d1294f6f8b6325173d
         </div>
 
       </div>

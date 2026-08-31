@@ -37,8 +37,13 @@ export const companyInfo: CompanyInfo = {
     phone: "+91 9092845715"
   },
   socialLinks: {
+<<<<<<< HEAD
     linkedin: "https://www.linkedin.com/company/r%C3%AAve-solutions",
     instagram: "https://www.instagram.com/revesolutions.in?igsi=MTdzMDdneWwzN3F4cQ==",
+=======
+    linkedin: "https://linkedin.com",
+    instagram: "https://instagram.com",
+>>>>>>> db580f972c483f6255d365d1294f6f8b6325173d
     github: "https://github.com"
   },
   copyrightYear: 2026

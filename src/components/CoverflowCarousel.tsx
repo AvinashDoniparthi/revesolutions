@@ -64,6 +64,7 @@ export type CoverflowProps = {
 const DEFAULT_IMAGES: CoverflowImage[] = [
     {
         srcUrl: "/showcase/kts-properties.png",
+<<<<<<< HEAD
         alt: "KTS Properties — Handcrafted Real Estate Platform",
     },
     {
@@ -89,6 +90,29 @@ const DEFAULT_IMAGES: CoverflowImage[] = [
     {
         srcUrl: "/showcase/aevum-trends.png",
         alt: "Aevum Clinical — Biometric Timeline & Diagnostic Trends Platform",
+=======
+        alt: "KTS Properties — Handcrafted Real Estate Website by Rêve Solutions",
+    },
+    {
+        srcUrl: "",
+        alt: "Upcoming Showcase 02",
+    },
+    {
+        srcUrl: "",
+        alt: "Upcoming Showcase 03",
+    },
+    {
+        srcUrl: "",
+        alt: "Upcoming Showcase 04",
+    },
+    {
+        srcUrl: "",
+        alt: "Upcoming Showcase 05",
+    },
+    {
+        srcUrl: "",
+        alt: "Upcoming Showcase 06",
+>>>>>>> db580f972c483f6255d365d1294f6f8b6325173d
     },
 ]
 

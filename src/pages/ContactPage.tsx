@@ -4,7 +4,11 @@ import { Mail, Phone, ShieldCheck } from 'lucide-react';
 import { SEOHead } from '../components/SEOHead';
 import { ContactForm } from '../components/ContactForm';
 import { companyInfo } from '../data/companyInfo';
+<<<<<<< HEAD
 import { LinkedInIcon, InstagramIcon } from '../components/SocialIcons';
+=======
+import { LinkedInIcon, InstagramIcon, GitHubIcon } from '../components/SocialIcons';
+>>>>>>> db580f972c483f6255d365d1294f6f8b6325173d
 
 export const ContactPage: React.FC = () => {
   return (
@@ -26,6 +30,15 @@ export const ContactPage: React.FC = () => {
           transition={{ duration: 0.45, ease: 'easeOut' }}
           className="space-y-3 max-w-3xl"
         >
+<<<<<<< HEAD
+=======
+          <div>
+            <span className="text-xs font-bold uppercase tracking-wider text-[#0066D6] bg-[#E5F1FF] border border-[#BFDBFE] px-3.5 py-1 rounded-full inline-block shadow-2xs">
+              SPECIALIST ASSISTANCE
+            </span>
+          </div>
+
+>>>>>>> db580f972c483f6255d365d1294f6f8b6325173d
           <h1 className="text-3xl sm:text-5xl lg:text-[52px] tracking-tight leading-[1.08]">
             <span className="font-bold text-[#0C172B]">Contact a Specialist.</span>{' '}
             <span className="font-semibold text-[#475569]">Let’s build something great together.</span>
@@ -98,6 +111,7 @@ export const ContactPage: React.FC = () => {
 
             </div>
 
+<<<<<<< HEAD
             {/* Social Connect Glass Cards */}
             <div className="space-y-2 pt-1">
               <span className="text-[11px] font-semibold uppercase tracking-wider text-[#798CA6] block text-center sm:text-left pl-1">
@@ -114,10 +128,27 @@ export const ContactPage: React.FC = () => {
                   aria-label="Connect with Rêve Solutions on LinkedIn"
                 >
                   <LinkedInIcon className="w-11 h-11 text-[#0066D6]" />
+=======
+            {/* Social Connect Panel */}
+            <div className="apple-card p-6 space-y-3 shadow-md">
+              <span className="text-[11px] font-semibold uppercase tracking-wider text-[#798CA6] block">
+                SOCIAL CONNECT
+              </span>
+              <div className="grid grid-cols-3 gap-3">
+                <a
+                  href={companyInfo.socialLinks.linkedin}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="apple-pill-btn flex items-center justify-center gap-1.5 p-2.5 bg-[#EAF3FD] hover:bg-[#D5E7FC] text-[#0C172B] hover:text-[#0066D6] text-xs font-semibold border border-[#BFDBFE] transition-colors"
+                >
+                  <LinkedInIcon className="w-3.5 h-3.5" />
+                  <span>LinkedIn</span>
+>>>>>>> db580f972c483f6255d365d1294f6f8b6325173d
                 </a>
                 <a
                   href={companyInfo.socialLinks.instagram}
                   target="_blank"
+<<<<<<< HEAD
                   rel="noopener noreferrer"
                   data-text="Instagram"
                   className="glass"
@@ -125,6 +156,22 @@ export const ContactPage: React.FC = () => {
                   aria-label="Follow Rêve Solutions on Instagram"
                 >
                   <InstagramIcon className="w-11 h-11 text-[#0066D6]" />
+=======
+                  rel="noreferrer"
+                  className="apple-pill-btn flex items-center justify-center gap-1.5 p-2.5 bg-[#EAF3FD] hover:bg-[#D5E7FC] text-[#0C172B] hover:text-[#0066D6] text-xs font-semibold border border-[#BFDBFE] transition-colors"
+                >
+                  <InstagramIcon className="w-3.5 h-3.5" />
+                  <span>Instagram</span>
+                </a>
+                <a
+                  href={companyInfo.socialLinks.github}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="apple-pill-btn flex items-center justify-center gap-1.5 p-2.5 bg-[#EAF3FD] hover:bg-[#D5E7FC] text-[#0C172B] hover:text-[#0066D6] text-xs font-semibold border border-[#BFDBFE] transition-colors"
+                >
+                  <GitHubIcon className="w-3.5 h-3.5" />
+                  <span>GitHub</span>
+>>>>>>> db580f972c483f6255d365d1294f6f8b6325173d
                 </a>
               </div>
             </div>

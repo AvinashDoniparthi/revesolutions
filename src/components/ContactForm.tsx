@@ -1,6 +1,10 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
+<<<<<<< HEAD
 import { CheckCircle2, AlertCircle, Loader2 } from 'lucide-react';
+=======
+import { ArrowRight, CheckCircle2, AlertCircle, Loader2 } from 'lucide-react';
+>>>>>>> db580f972c483f6255d365d1294f6f8b6325173d
 import { Button } from './Button';
 
 interface FormData {
@@ -16,7 +20,10 @@ interface FormData {
 interface FormErrors {
   name?: string;
   email?: string;
+<<<<<<< HEAD
   phone?: string;
+=======
+>>>>>>> db580f972c483f6255d365d1294f6f8b6325173d
   service?: string;
   message?: string;
 }
@@ -49,6 +56,7 @@ export const ContactForm: React.FC = () => {
       newErrors.email = 'Please enter a valid email address';
     }
 
+<<<<<<< HEAD
     if (formData.phone.trim()) {
       const digitsOnly = formData.phone.replace(/\D/g, '');
       if (digitsOnly.length < 10) {
@@ -56,6 +64,8 @@ export const ContactForm: React.FC = () => {
       }
     }
 
+=======
+>>>>>>> db580f972c483f6255d365d1294f6f8b6325173d
     if (!formData.service) {
       newErrors.service = 'Please select a service';
     }
@@ -204,6 +214,7 @@ export const ContactForm: React.FC = () => {
           <label htmlFor="phone" className="block text-xs font-semibold text-[#0C172B] mb-1.5">
             Phone Number <span className="text-[#798CA6] text-[11px] font-normal">(optional)</span>
           </label>
+<<<<<<< HEAD
           <div
             key={formData.phone.length > 0 && !/^[0-9\s-]*$/.test(formData.phone) ? `invalid-${formData.phone}` : 'valid'}
             className={`phone-container flex items-center rounded-xl bg-[#F0F5FA] border transition-all duration-200 focus-within:border-[#0066D6] focus-within:bg-white ${
@@ -239,6 +250,17 @@ export const ContactForm: React.FC = () => {
                 : errors.phone}
             </p>
           )}
+=======
+          <input
+            type="tel"
+            id="phone"
+            name="phone"
+            value={formData.phone}
+            onChange={handleChange}
+            placeholder="+1 (555) 012-3456"
+            className="w-full px-4 py-3 rounded-xl bg-[#F0F5FA] border border-[#D6E4F5] focus:border-[#0066D6] focus:bg-white text-sm text-[#0C172B] placeholder-[#798CA6] transition-all duration-200 focus:outline-none"
+          />
+>>>>>>> db580f972c483f6255d365d1294f6f8b6325173d
         </div>
       </div>
 
@@ -303,6 +325,7 @@ export const ContactForm: React.FC = () => {
 
       {/* Submit Button */}
       <div className="pt-2">
+<<<<<<< HEAD
         <button
           type="submit"
           disabled={isSubmitting}
@@ -326,6 +349,27 @@ export const ContactForm: React.FC = () => {
             </>
           )}
         </button>
+=======
+        <Button
+          type="submit"
+          variant="primary"
+          size="lg"
+          className="w-full shadow-lg shadow-[#0066D6]/20 font-bold"
+          disabled={isSubmitting}
+        >
+          {isSubmitting ? (
+            <span className="flex items-center gap-2">
+              <Loader2 className="w-4 h-4 animate-spin" />
+              Connecting with specialist...
+            </span>
+          ) : (
+            <span className="flex items-center justify-center gap-2 group">
+              <span>Send Inquiry to Specialist</span>
+              <ArrowRight className="w-4 h-4 transition-transform duration-200 group-hover:translate-x-1" />
+            </span>
+          )}
+        </Button>
+>>>>>>> db580f972c483f6255d365d1294f6f8b6325173d
       </div>
 
       <p className="text-[11px] text-[#798CA6] text-center font-normal">
