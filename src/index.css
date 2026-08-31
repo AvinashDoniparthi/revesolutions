@@ -1,0 +1,426 @@
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    --apple-bg: #EEF3F9;
+    --apple-card: #FFFFFF;
+    --apple-text-primary: #0C172B;
+    --apple-text-secondary: #475569;
+    --apple-text-muted: #798CA6;
+    --apple-blue: #0066D6;
+    --apple-blue-hover: #0054B3;
+    --apple-blue-subtle: #E1EFFF;
+    --apple-blue-border: #CBE1FB;
+  }
+
+  body {
+    background-color: var(--apple-bg);
+    color: var(--apple-text-primary);
+    font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'SF Pro Text', 'Plus Jakarta Sans', 'Inter', system-ui, sans-serif;
+    overflow-x: hidden;
+    letter-spacing: -0.015em;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    letter-spacing: -0.03em;
+    color: var(--apple-text-primary);
+  }
+}
+
+/* Glass Navigation Bar with Refined Ice-Blue Frosted Tone */
+.glass-nav-apple {
+  background-color: rgba(238, 243, 249, 0.85);
+  backdrop-filter: saturate(190%) blur(20px);
+  -webkit-backdrop-filter: saturate(190%) blur(20px);
+  border-bottom: 1px solid #D5E4F5;
+}
+
+/* Apple Store Widget Card with Premium Ice-Blue Gradient Surface */
+.apple-card {
+  background: linear-gradient(180deg, #FFFFFF 0%, #F5F9FF 100%);
+  border-radius: 24px;
+  border: 1px solid #D8E6F7;
+  box-shadow: 0 4px 20px rgba(12, 38, 80, 0.04), 0 1px 3px rgba(12, 38, 80, 0.02);
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.3s ease;
+}
+
+.apple-card:hover {
+  transform: scale(1.008);
+  border-color: #A9CEF7;
+  box-shadow: 0 16px 36px rgba(0, 102, 214, 0.10), 0 2px 8px rgba(0, 102, 214, 0.04);
+}
+
+/* Deep Midnight Sapphire Widget Card */
+.apple-card-dark {
+  background: linear-gradient(150deg, #071328 0%, #0B1C3B 60%, #050E1F 100%);
+  color: #F0F6FF;
+  border-radius: 24px;
+  border: 1px solid #1E447B;
+  box-shadow: 0 12px 35px rgba(4, 14, 34, 0.4);
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.apple-card-dark:hover {
+  transform: scale(1.008);
+  box-shadow: 0 18px 45px rgba(0, 102, 214, 0.22);
+}
+
+/* Pill Action Button */
+.apple-pill-btn {
+  border-radius: 9999px;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.apple-pill-btn:hover {
+  transform: scale(1.02);
+}
+
+.apple-pill-btn:active {
+  transform: scale(0.98);
+}
+
+/* Animated Uiverse Talk Pill Button with Royal Blue Expanding Ripple */
+.uiverse-talk-btn {
+  position: relative;
+  z-index: 10;
+  overflow: hidden;
+  isolation: isolate;
+  background-color: #FFFFFF;
+  color: #0C172B;
+  border: 1px solid #C4DAF5;
+  border-radius: 9999px;
+  box-shadow: 0 2px 6px rgba(0, 102, 214, 0.08);
+  transition: color 0.4s cubic-bezier(0.16, 1, 0.3, 1), transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.uiverse-talk-btn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  aspect-ratio: 1 / 1;
+  border-radius: 9999px;
+  background-color: var(--apple-blue);
+  z-index: -10;
+  transition: all 1.1s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.uiverse-talk-btn:hover::before {
+  left: 0;
+  transform: scale(1.6);
+}
+
+.uiverse-talk-btn:hover {
+  color: #FFFFFF;
+  border-color: transparent;
+  transform: scale(1.02);
+}
+
+.uiverse-talk-btn:active {
+  transform: scale(0.98);
+}
+
+/* Refined Blue-Tinted Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(0, 102, 214, 0.22);
+  border-radius: 9999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(0, 102, 214, 0.4);
+}
+
+/* =========================================================================
+   Uiverse Process Corner Expanding Animation
+   ========================================================================= */
+.uiverse-process-card {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+  background: #FFFFFF;
+  border: 1px solid #D5E4F5;
+  border-radius: 24px;
+  min-height: 230px;
+  cursor: pointer;
+  box-shadow: 0 4px 20px rgba(12, 38, 80, 0.04), 0 1px 3px rgba(12, 38, 80, 0.02);
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.35s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.35s ease;
+}
+
+.uiverse-process-card:hover {
+  transform: translateY(-4px) scale(1.01);
+  border-color: #0066D6;
+  box-shadow: 0 20px 45px rgba(0, 102, 214, 0.22), 0 4px 12px rgba(0, 102, 214, 0.1);
+}
+
+/* Corner expansion shapes: completely hidden (0 size & 0 opacity) by default */
+.uiverse-process-card::before,
+.uiverse-process-card::after {
+  content: "";
+  position: absolute;
+  width: 0%;
+  height: 0%;
+  opacity: 0;
+  background: linear-gradient(135deg, #0058BF 0%, #0077F6 100%);
+  z-index: 1;
+  transition: all 0.55s cubic-bezier(0.22, 1, 0.36, 1);
+  pointer-events: none;
+}
+
+.uiverse-process-card::before {
+  top: 0;
+  right: 0;
+  border-radius: 0 24px 0 100%;
+}
+
+.uiverse-process-card::after {
+  bottom: 0;
+  left: 0;
+  border-radius: 0 100% 0 24px;
+}
+
+.uiverse-process-card:hover::before,
+.uiverse-process-card:hover::after {
+  width: 100%;
+  height: 100%;
+  opacity: 1;
+  border-radius: 24px;
+}
+
+/* =========================================================================
+   Uiverse Animated Button by ryota1231 (Themed for Rêve Solutions)
+   ========================================================================= */
+.animated-button {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 16px 36px;
+  border: 1px solid #BFDBFE;
+  font-size: 15px;
+  background-color: #EBF4FE;
+  border-radius: 100px;
+  font-weight: 700;
+  color: #0066D6;
+  box-shadow: 0 4px 16px rgba(0, 102, 214, 0.10), 0 0 0 2px #FFFFFF;
+  cursor: pointer;
+  overflow: hidden;
+  transition: all 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+  user-select: none;
+}
+
+.animated-button svg {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  fill: #0066D6;
+  z-index: 9;
+  transition: all 0.8s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.animated-button .arr-1 {
+  right: 24px;
+}
+
+.animated-button .arr-2 {
+  left: -25%;
+}
+
+.animated-button .circle {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 20px;
+  height: 20px;
+  background: linear-gradient(135deg, #0066D6 0%, #004EA8 100%);
+  border-radius: 50%;
+  opacity: 0;
+  transition: all 0.8s cubic-bezier(0.23, 1, 0.32, 1);
+  pointer-events: none;
+}
+
+.animated-button .text {
+  position: relative;
+  z-index: 2;
+  transform: translateX(-12px);
+  transition: all 0.8s cubic-bezier(0.23, 1, 0.32, 1);
+  letter-spacing: -0.01em;
+}
+
+.animated-button:hover {
+  box-shadow: 0 12px 30px rgba(0, 102, 214, 0.28), 0 0 0 2px #FFFFFF;
+  color: #FFFFFF;
+  border-radius: 16px;
+  border-color: #0066D6;
+}
+
+.animated-button:hover .arr-1 {
+  right: -25%;
+}
+
+.animated-button:hover .arr-2 {
+  left: 24px;
+  fill: #FFFFFF;
+}
+
+.animated-button:hover .text {
+  transform: translateX(12px);
+  color: #FFFFFF;
+}
+
+.animated-button:hover svg {
+  fill: #FFFFFF;
+}
+
+.animated-button:active {
+  transform: scale(0.98);
+  box-shadow: 0 0 0 4px rgba(0, 102, 214, 0.25);
+}
+
+.animated-button:hover .circle {
+  width: 900px;
+  height: 900px;
+  opacity: 1;
+}
+
+.animated-button:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* =========================================================================
+   Uiverse Glass Social Cards by codebykay101 (Themed for Rêve Solutions)
+   ========================================================================= */
+.uiverse-social-container {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 24px 0 12px;
+  min-height: 180px;
+}
+
+.uiverse-social-container .glass {
+  position: relative;
+  width: 135px;
+  height: 155px;
+  background: linear-gradient(150deg, rgba(255, 255, 255, 0.95) 0%, rgba(229, 241, 255, 0.75) 100%);
+  border: 1.5px solid #BFDBFE;
+  box-shadow: 0 20px 30px rgba(0, 102, 214, 0.12), 0 4px 12px rgba(12, 23, 43, 0.04);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding-bottom: 36px;
+  transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+  border-radius: 20px;
+  margin: 0 -22px;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  transform: rotate(calc(var(--r) * 1deg));
+  text-decoration: none;
+  cursor: pointer;
+  z-index: 1;
+}
+
+.uiverse-social-container .glass:hover {
+  transform: rotate(0deg) translateY(-8px) scale(1.06);
+  margin: 0 16px;
+  border-color: #0066D6;
+  box-shadow: 0 24px 45px rgba(0, 102, 214, 0.25), 0 0 0 2px #0066D6;
+  z-index: 10;
+}
+
+.uiverse-social-container:hover .glass:not(:hover) {
+  transform: rotate(calc(var(--r) * 0.6deg)) scale(0.96);
+  opacity: 0.85;
+}
+
+.uiverse-social-container .glass::before {
+  content: attr(data-text);
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 38px;
+  background: #E5F1FF;
+  border-top: 1px solid #BFDBFE;
+  border-radius: 0 0 18px 18px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #0C172B;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.uiverse-social-container .glass:hover::before {
+  background: #0066D6;
+  color: #FFFFFF;
+}
+
+.uiverse-social-container .glass svg {
+  width: 42px;
+  height: 42px;
+  color: #0066D6;
+  transition: transform 0.4s ease;
+}
+
+.uiverse-social-container .glass:hover svg {
+  transform: scale(1.15);
+}
+
+/* =========================================================================
+   Uiverse Phone Input Shake by Galahhad
+   ========================================================================= */
+.phone-input {
+  color: #0C172B;
+  transition: color 0.15s ease;
+}
+
+.phone-input:not(:placeholder-shown):invalid,
+.phone-input.is-invalid {
+  animation: justshake 0.3s forwards;
+  color: #EF4444 !important;
+}
+
+.phone-container:has(.phone-input:not(:placeholder-shown):invalid),
+.phone-container.is-invalid {
+  animation: justshake 0.3s forwards;
+  border-color: #EF4444 !important;
+}
+
+@keyframes justshake {
+  25% {
+    transform: translateX(5px);
+  }
+  50% {
+    transform: translateX(-5px);
+  }
+  75% {
+    transform: translateX(5px);
+  }
+  100% {
+    transform: translateX(-5px);
+  }
+}
