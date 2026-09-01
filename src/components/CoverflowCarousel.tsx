@@ -53,6 +53,10 @@ export type CoverflowProps = {
     arrowPosition?: number
     autoplay?: boolean
     autoplayDirection?: "leftToRight" | "rightToLeft"
+    pauseOnHover?: boolean
+    paused?: boolean
+    onActiveIndexChange?: (index: number) => void
+    onImageClick?: (index: number) => void
     transition?: any
     style?: React.CSSProperties
 }
@@ -254,7 +258,7 @@ function Card({
                                 width: "100%",
                                 height: "100%",
                                 objectFit: "cover",
-                                objectPosition: "top left",
+                                objectPosition: "center",
                                 display: "block",
                                 pointerEvents: "none",
                                 userSelect: "none",
@@ -404,6 +408,10 @@ const COMPONENT_DEFAULTS = {
     arrowPosition: 95,
     autoplay: false,
     autoplayDirection: "rightToLeft" as const,
+    pauseOnHover: false,
+    paused: false,
+    onActiveIndexChange: undefined as ((index: number) => void) | undefined,
+    onImageClick: undefined as ((index: number) => void) | undefined,
     transition: {
         type: "tween",
         duration: 0.3,
@@ -433,6 +441,10 @@ export function CoverflowCarousel(props: CoverflowProps) {
         arrowPosition,
         autoplay,
         autoplayDirection,
+        pauseOnHover,
+        paused,
+        onActiveIndexChange,
+        onImageClick,
         transition: transitionProp,
         style,
     } = mergedProps
@@ -467,6 +479,8 @@ export function CoverflowCarousel(props: CoverflowProps) {
             : 1.2
 
     const R = Math.max(1, Math.min(RENDER_RANGE, Math.floor(count / 2) - 1))
+
+    const isHoveredRef = useRef(false)
 
     const pos = useMotionValue(0)
     const targetRef = useRef(0)
@@ -552,6 +566,22 @@ export function CoverflowCarousel(props: CoverflowProps) {
         }
     }, [])
 
+    // Report which card is centred. Derived from `pos` rather than tracked as
+    // state so the animation loop stays allocation-free; the caller only hears
+    // about whole-index changes.
+    const lastIdxRef = useRef(-1)
+    useEffect(() => {
+        if (!onActiveIndexChange) return
+        const report = (p: number) => {
+            const idx = ((Math.round(p) % count) + count) % count
+            if (idx === lastIdxRef.current) return
+            lastIdxRef.current = idx
+            onActiveIndexChange(idx)
+        }
+        report(pos.get())
+        return pos.on("change", report)
+    }, [pos, count, onActiveIndexChange])
+
     useEffect(() => {
         const on = !isStatic && autoplay && count > 1
         autoplayingRef.current = on
@@ -565,7 +595,36 @@ export function CoverflowCarousel(props: CoverflowProps) {
         }
     }, [isStatic, autoplay, autoplayDirection, count, ensureRunning])
 
-    const isHoveredRef = useRef(false)
+    const canPause = !isStatic && autoplay && count > 1
+
+    const suspendAutoplay = useCallback(() => {
+        if (!canPause) return
+        autoplayingRef.current = false
+    }, [canPause])
+
+    const resumeAutoplay = useCallback(() => {
+        if (!canPause) return
+        autoplayingRef.current = true
+        dwellAccRef.current = 0
+        ensureRunning()
+    }, [canPause, ensureRunning])
+
+    // Hover/focus pause is opt-in; `paused` is driven by the caller (e.g. while
+    // a lightbox is open) and always applies.
+    const onHoverBoundary = useCallback(
+        (entering: boolean) => {
+            isHoveredRef.current = entering
+            if (!pauseOnHover || paused) return
+            if (entering) suspendAutoplay()
+            else resumeAutoplay()
+        },
+        [pauseOnHover, paused, suspendAutoplay, resumeAutoplay]
+    )
+
+    useEffect(() => {
+        if (paused) suspendAutoplay()
+        else if (!(pauseOnHover && isHoveredRef.current)) resumeAutoplay()
+    }, [paused, pauseOnHover, suspendAutoplay, resumeAutoplay])
     useEffect(() => {
         if (isStatic || autoplay) return
         const onKey = (e: KeyboardEvent) => {
@@ -595,7 +654,16 @@ export function CoverflowCarousel(props: CoverflowProps) {
         outline: "none",
     }
 
-    const selectable = !isStatic && !autoplay
+    const handleCardSelect = useCallback(
+        (index: number) => {
+            if (Math.abs(relOf(index, pos.get(), count)) < 0.5) {
+                onImageClick?.(index)
+                return
+            }
+            goTo(index)
+        },
+        [pos, count, onImageClick, goTo]
+    )
     const cards = images.map((img, i) => (
         <Card
             key={i}
@@ -608,7 +676,7 @@ export function CoverflowCarousel(props: CoverflowProps) {
             gap={gap}
             radius={radius}
             gradient={GRADIENT_FALLBACKS[i % GRADIENT_FALLBACKS.length]}
-            onSelect={selectable ? goTo : undefined}
+            onSelect={isStatic ? undefined : handleCardSelect}
         />
     ))
 
@@ -636,18 +704,10 @@ export function CoverflowCarousel(props: CoverflowProps) {
     return (
         <div
             tabIndex={0}
-            onMouseEnter={() => {
-                isHoveredRef.current = true
-            }}
-            onMouseLeave={() => {
-                isHoveredRef.current = false
-            }}
-            onFocus={() => {
-                isHoveredRef.current = true
-            }}
-            onBlur={() => {
-                isHoveredRef.current = false
-            }}
+            onMouseEnter={() => onHoverBoundary(true)}
+            onMouseLeave={() => onHoverBoundary(false)}
+            onFocus={() => onHoverBoundary(true)}
+            onBlur={() => onHoverBoundary(false)}
             style={containerStyle}
         >
             <div

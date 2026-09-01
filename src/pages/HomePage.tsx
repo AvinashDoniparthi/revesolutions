@@ -1,11 +1,13 @@
-import React from 'react';
-import { motion } from 'framer-motion';
+import React, { useCallback, useEffect, useState } from 'react';
+import { AnimatePresence, motion } from 'framer-motion';
+import { createPortal } from 'react-dom';
 import { useNavigate, Link } from 'react-router-dom';
 import {
   CheckCircle2,
   Paintbrush,
   Users,
-  Clock
+  Clock,
+  X
 } from 'lucide-react';
 import { SEOHead } from '../components/SEOHead';
 import { Button } from '../components/Button';
@@ -16,9 +18,66 @@ import { RoundCarousel } from '../components/RoundCarousel';
 import { CoverflowCarousel } from '../components/CoverflowCarousel';
 import { ProcessStepCard } from '../components/ProcessStep';
 import { websiteServices } from '../data/services';
+import { showcaseSlides } from '../data/showcase';
+
+// The carousel takes pixel card sizes, so they are chosen per breakpoint. Every
+// pair is ~16:9 to match the showcase screenshots, and the cut points mirror
+// Tailwind's `sm:` / `lg:` so they stay in step with the stage height classes.
+const SHOWCASE_SIZES = {
+  mobile: { activeWidth: 300, activeHeight: 169, restWidth: 96, restHeight: 54, gap: 14 },
+  tablet: { activeWidth: 460, activeHeight: 259, restWidth: 170, restHeight: 96, gap: 22 },
+  desktop: { activeWidth: 620, activeHeight: 349, restWidth: 250, restHeight: 141, gap: 30 },
+};
+
+const showcaseSizeFor = (width: number) =>
+  width >= 1024 ? SHOWCASE_SIZES.desktop : width >= 640 ? SHOWCASE_SIZES.tablet : SHOWCASE_SIZES.mobile;
+
+const useShowcaseSizing = () => {
+  const [sizing, setSizing] = useState(() => showcaseSizeFor(window.innerWidth));
+
+  useEffect(() => {
+    const onResize = () => setSizing(showcaseSizeFor(window.innerWidth));
+    window.addEventListener('resize', onResize);
+    return () => window.removeEventListener('resize', onResize);
+  }, []);
+
+  return sizing;
+};
 
 export const HomePage: React.FC = () => {
   const navigate = useNavigate();
+
+  // Which showcase screenshot is centred, so the caption below the carousel can
+  // describe it. The handler must stay referentially stable — CoverflowCarousel
+  // resubscribes to its position value whenever it changes.
+  const [activeSlide, setActiveSlide] = useState(0);
+  const handleActiveSlide = useCallback((index: number) => setActiveSlide(index), []);
+  const slide = showcaseSlides[activeSlide] ?? showcaseSlides[0];
+
+  const showcaseSizing = useShowcaseSizing();
+
+  // Clicking the centred screenshot opens it full-screen.
+  const [lightbox, setLightbox] = useState<number | null>(null);
+  const openLightbox = useCallback((index: number) => setLightbox(index), []);
+  const closeLightbox = useCallback(() => setLightbox(null), []);
+  const lightboxSlide = lightbox === null ? null : showcaseSlides[lightbox];
+
+  useEffect(() => {
+    if (lightbox === null) return;
+
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') closeLightbox();
+    };
+    const previousOverflow = document.body.style.overflow;
+
+    window.addEventListener('keydown', onKey);
+    document.body.style.overflow = 'hidden';
+
+    return () => {
+      window.removeEventListener('keydown', onKey);
+      document.body.style.overflow = previousOverflow;
+    };
+  }, [lightbox, closeLightbox]);
 
   return (
     <div className="space-y-16 sm:space-y-24 pb-20 pt-24 sm:pt-28 relative">
@@ -232,15 +291,100 @@ export const HomePage: React.FC = () => {
           subtitle="A gallery of websites handcrafted and managed by our studio."
         />
 
-        <div className="w-full h-[360px] sm:h-[430px] lg:h-[470px] relative rounded-3xl overflow-hidden border border-[#C5DFFD] shadow-sm bg-gradient-to-b from-white to-[#F2F7FD]">
-          <CoverflowCarousel
-            autoplay={true}
-            showArrows={true}
-            arrowColor="#0C172B"
-            arrowBackground="rgba(255, 255, 255, 0.95)"
-            arrowSize={46}
-          />
+        <div className="w-full rounded-3xl overflow-hidden border border-[#C5DFFD] shadow-sm bg-gradient-to-b from-white to-[#F2F7FD] flex flex-col">
+          <div className="relative h-[240px] sm:h-[340px] lg:h-[420px]">
+            <CoverflowCarousel
+              images={showcaseSlides}
+              {...showcaseSizing}
+              autoplay={true}
+              pauseOnHover={true}
+              paused={lightbox !== null}
+              onActiveIndexChange={handleActiveSlide}
+              onImageClick={openLightbox}
+              transition={{ type: 'tween', duration: 0.6, delay: 2.4, ease: 'easeInOut' }}
+              showArrows={true}
+              arrowColor="#0C172B"
+              arrowBackground="rgba(255, 255, 255, 0.95)"
+              arrowSize={46}
+            />
+          </div>
+
+          <div className="border-t border-[#DCEAFB] bg-white/70 px-5 sm:px-8 py-5 text-center min-h-[132px] sm:min-h-[120px]">
+            <motion.div
+              key={activeSlide}
+              initial={{ opacity: 0, y: 8 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.4, ease: 'easeOut' }}
+              className="max-w-2xl mx-auto space-y-2"
+            >
+              <span className="inline-block text-xs font-bold uppercase tracking-wider text-[#0066D6] bg-[#E5F1FF] border border-[#BFDBFE] px-3.5 py-1 rounded-full shadow-2xs">
+                {slide.project} &middot; {slide.category}
+              </span>
+              <h3 className="text-lg sm:text-xl font-bold text-[#0C172B] tracking-tight">
+                {slide.title}
+              </h3>
+              <p className="text-sm sm:text-base text-[#475569] leading-relaxed">
+                {slide.description}
+              </p>
+            </motion.div>
+          </div>
         </div>
+
+        {createPortal(
+          <AnimatePresence>
+            {lightboxSlide && (
+              <motion.div
+                key="showcase-lightbox"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.2, ease: 'easeOut' }}
+                onClick={closeLightbox}
+                role="dialog"
+                aria-modal="true"
+                aria-label={`${lightboxSlide.project} — ${lightboxSlide.title}`}
+                className="fixed inset-0 z-[100] flex items-center justify-center p-4 sm:p-8 bg-[#0C172B]/85 backdrop-blur-sm cursor-zoom-out"
+              >
+                <button
+                  type="button"
+                  onClick={closeLightbox}
+                  aria-label="Close"
+                  className="absolute top-4 right-4 sm:top-6 sm:right-6 w-11 h-11 rounded-full bg-white/10 border border-white/20 text-white flex items-center justify-center hover:bg-white/20 transition-colors"
+                >
+                  <X className="w-5 h-5" />
+                </button>
+
+                <motion.div
+                  initial={{ opacity: 0, scale: 0.94 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  exit={{ opacity: 0, scale: 0.96 }}
+                  transition={{ duration: 0.25, ease: 'easeOut' }}
+                  onClick={(e) => e.stopPropagation()}
+                  className="w-full max-w-6xl cursor-default"
+                >
+                  <img
+                    src={lightboxSlide.srcUrl}
+                    alt={lightboxSlide.alt}
+                    className="w-full max-h-[72vh] object-contain rounded-2xl bg-white shadow-2xl"
+                  />
+
+                  <div className="mt-5 text-center space-y-2">
+                    <span className="inline-block text-xs font-bold uppercase tracking-wider text-[#BFDBFE] bg-white/10 border border-white/20 px-3.5 py-1 rounded-full">
+                      {lightboxSlide.project} &middot; {lightboxSlide.category}
+                    </span>
+                    <h3 className="text-lg sm:text-xl font-bold text-white tracking-tight">
+                      {lightboxSlide.title}
+                    </h3>
+                    <p className="max-w-2xl mx-auto text-sm sm:text-base text-[#CBD9EC] leading-relaxed">
+                      {lightboxSlide.description}
+                    </p>
+                  </div>
+                </motion.div>
+              </motion.div>
+            )}
+          </AnimatePresence>,
+          document.body
+        )}
       </section>
 
       {/* =========================================================================
