@@ -326,10 +326,6 @@ export const ContactForm: React.FC = () => {
           )}
         </button>
       </div>
-
-      <p className="text-[11px] text-[#798CA6] text-center font-normal">
-        We respect your privacy. Direct assistance from a real web specialist within 24 hours.
-      </p>
     </form>
   );
 };
