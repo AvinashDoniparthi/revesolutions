@@ -39,9 +39,12 @@ export const Navbar: React.FC = () => {
         
         {/* Left: Brand Logo & Subtitle */}
         <Link to="/" className="flex items-center gap-3 group focus:outline-none">
-          <div className="w-8.5 h-8.5 sm:w-9.5 sm:h-9.5 rounded-xl bg-gradient-to-br from-[#0B172C] to-[#040C1A] border border-[#1E447B]/40 flex items-center justify-center text-white font-bold text-sm sm:text-base shadow-sm transition-transform group-hover:scale-105 shrink-0 group-hover:border-[#0066D6]/60">
-            <span className="text-white">R</span>
-            <span className="text-[#0066D6] -ml-0.5">.</span>
+          <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-xl overflow-hidden bg-black border border-[#1E447B]/40 flex items-center justify-center shadow-sm transition-transform group-hover:scale-105 shrink-0 group-hover:border-[#0066D6]/60">
+            <img 
+              src="/images/reve-logo.jpg" 
+              alt="Rêve Solutions" 
+              className="w-full h-full object-cover"
+            />
           </div>
 
           <div className="flex flex-col">
