@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowUp } from 'lucide-react';
 import { companyInfo } from '../data/companyInfo';
-import { LinkedInIcon, InstagramIcon, GitHubIcon } from './SocialIcons';
+import { LinkedInIcon, InstagramIcon, GitHubIcon, WhatsAppIcon } from './SocialIcons';
 
 export const Footer: React.FC = () => {
   const scrollToTop = () => {
@@ -119,6 +119,15 @@ export const Footer: React.FC = () => {
               Connect
             </h4>
             <div className="flex items-center gap-2">
+              <a
+                href={companyInfo.socialLinks.whatsapp}
+                target="_blank"
+                rel="noreferrer"
+                aria-label="WhatsApp"
+                className="w-8 h-8 rounded-full bg-white shadow-xs border border-[#BFDBFE] flex items-center justify-center text-[#16A34A] hover:bg-[#25D366] hover:text-white transition-all"
+              >
+                <WhatsAppIcon className="w-4 h-4" />
+              </a>
               <a
                 href={companyInfo.socialLinks.linkedin}
                 target="_blank"

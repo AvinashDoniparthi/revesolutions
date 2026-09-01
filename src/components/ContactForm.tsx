@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { CheckCircle2, AlertCircle, Loader2 } from 'lucide-react';
+import emailjs from '@emailjs/browser';
 import { Button } from './Button';
+import { EMAILJS_CONFIG } from '../lib/emailConfig';
 
 interface FormData {
   name: string;
@@ -35,6 +37,7 @@ export const ContactForm: React.FC = () => {
   const [errors, setErrors] = useState<FormErrors>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
+  const [submitError, setSubmitError] = useState<string | null>(null);
 
   const validate = (): boolean => {
     const newErrors: FormErrors = {};
@@ -75,6 +78,9 @@ export const ContactForm: React.FC = () => {
     if (errors[name as keyof FormErrors]) {
       setErrors((prev) => ({ ...prev, [name]: undefined }));
     }
+    if (submitError) {
+      setSubmitError(null);
+    }
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -83,9 +89,93 @@ export const ContactForm: React.FC = () => {
     if (!validate()) return;
 
     setIsSubmitting(true);
+    setSubmitError(null);
 
     try {
-      await new Promise((resolve) => setTimeout(resolve, 1000));
+      let isSent = false;
+
+      // 1. If EmailJS is configured, send dual automated emails (Studio + Client Confirmation)
+      if (
+        EMAILJS_CONFIG.PUBLIC_KEY &&
+        EMAILJS_CONFIG.SERVICE_ID &&
+        EMAILJS_CONFIG.TEMPLATE_ID_STUDIO
+      ) {
+        // Send full inquiry to studio (reve.solutions4@gmail.com)
+        await emailjs.send(
+          EMAILJS_CONFIG.SERVICE_ID,
+          EMAILJS_CONFIG.TEMPLATE_ID_STUDIO,
+          {
+            name: formData.name,
+            client_name: formData.name,
+            from_name: formData.name,
+            email: formData.email,
+            client_email: formData.email,
+            reply_to: formData.email,
+            phone: formData.phone ? `+91 ${formData.phone}` : 'Not specified',
+            client_phone: formData.phone ? `+91 ${formData.phone}` : 'Not specified',
+            business_name: formData.businessName || 'Not specified',
+            current_website: formData.currentWebsite || 'None / Not specified',
+            service: formData.service,
+            service_required: formData.service,
+            title: `${formData.service} Inquiry`,
+            message: formData.message,
+            to_email: 'reve.solutions4@gmail.com',
+          },
+          EMAILJS_CONFIG.PUBLIC_KEY
+        );
+
+        // Send automated confirmation receipt directly to the client's inbox
+        if (EMAILJS_CONFIG.TEMPLATE_ID_CLIENT) {
+          await emailjs.send(
+            EMAILJS_CONFIG.SERVICE_ID,
+            EMAILJS_CONFIG.TEMPLATE_ID_CLIENT,
+            {
+              name: formData.name,
+              to_name: formData.name,
+              email: formData.email,
+              to_email: formData.email,
+              reply_to: 'reve.solutions4@gmail.com',
+              service: formData.service,
+              service_requested: formData.service,
+              title: formData.service,
+              message: formData.message,
+              message_copy: formData.message,
+            },
+            EMAILJS_CONFIG.PUBLIC_KEY
+          ).catch((e) => console.warn('Client autoresponder send notice:', e));
+        }
+
+        isSent = true;
+      }
+
+      // 2. Fallback: Web3Forms submission to reve.solutions4@gmail.com
+      if (!isSent) {
+        const response = await fetch('https://api.web3forms.com/submit', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            Accept: 'application/json',
+          },
+          body: JSON.stringify({
+            access_key: '7ed2caf2-26ab-43c0-b7b4-89671e3a93f9',
+            from_name: 'Rêve Solutions Contact Form',
+            subject: `New Website Inquiry: ${formData.name} (${formData.service})`,
+            name: formData.name,
+            email: formData.email,
+            phone: formData.phone ? `+91 ${formData.phone}` : 'Not specified',
+            business_name: formData.businessName || 'Not specified',
+            current_website: formData.currentWebsite || 'None / Not specified',
+            service_requested: formData.service,
+            message: formData.message,
+            replyto: formData.email,
+          }),
+        });
+
+        const data = await response.json().catch(() => ({}));
+        if (!response.ok || !data.success) {
+          throw new Error(data.message || 'Error dispatching message.');
+        }
+      }
 
       setSubmitted(true);
       setFormData({
@@ -98,7 +188,8 @@ export const ContactForm: React.FC = () => {
         message: '',
       });
     } catch (err) {
-      console.error('Contact form error:', err);
+      console.error('Contact form submission error:', err);
+      setSubmitError('Unable to send inquiry automatically. Please email us directly at reve.solutions4@gmail.com');
     } finally {
       setIsSubmitting(false);
     }
@@ -114,9 +205,9 @@ export const ContactForm: React.FC = () => {
         <div className="w-14 h-14 rounded-full bg-[#E5F1FF] text-[#0066D6] border border-[#BFDBFE] mx-auto flex items-center justify-center">
           <CheckCircle2 className="w-8 h-8" />
         </div>
-        <h3 className="text-2xl font-bold text-[#0C172B]">Enquiry Received</h3>
+        <h3 className="text-2xl font-bold text-[#0C172B]">Inquiry Received</h3>
         <p className="text-sm text-[#475569] max-w-md mx-auto leading-relaxed font-normal">
-          Thank you for reaching out to Rêve Solutions. A specialist will review your website requirements and get back to you within 24 hours.
+          Thank you for reaching out to Rêve Solutions! A confirmation receipt has been sent to your email inbox, and a dedicated specialist will review your details and get back to you within 24 hours.
         </p>
         <div className="pt-3">
           <Button 
@@ -299,6 +390,21 @@ export const ContactForm: React.FC = () => {
           </p>
         )}
       </div>
+
+      {submitError && (
+        <div className="p-3 rounded-xl bg-red-50 border border-red-200 text-xs text-red-600 flex items-center justify-between gap-2">
+          <div className="flex items-center gap-2">
+            <AlertCircle className="w-4 h-4 text-red-500 shrink-0" />
+            <span>{submitError}</span>
+          </div>
+          <a
+            href="mailto:reve.solutions4@gmail.com"
+            className="underline font-semibold hover:text-red-700 shrink-0"
+          >
+            Email Directly
+          </a>
+        </div>
+      )}
 
       {/* Submit Button */}
       <div className="pt-2">

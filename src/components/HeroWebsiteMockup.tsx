@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { 
   ArrowUpRight, 
-  Lock, 
   Sparkles, 
   Zap, 
   ShieldCheck, 
@@ -112,13 +111,10 @@ export const HeroWebsiteMockup: React.FC = () => {
             </div>
           </div>
 
-          {/* Right: Live Production Pill */}
+          {/* Right: Studio Concept Pill */}
           <div className="inline-flex items-center gap-2 self-start sm:self-center px-3 py-1.5 rounded-full bg-white/90 border border-[#CDE1F8] shadow-2xs text-xs font-semibold text-[#0C172B]">
-            <span className="relative flex h-2 w-2">
-              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
-              <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500" />
-            </span>
-            <span>Live in Production</span>
+            <Sparkles className="w-3.5 h-3.5 text-[#0066D6]" />
+            <span>Studio Concept Showcase</span>
           </div>
         </div>
 
@@ -175,16 +171,14 @@ export const HeroWebsiteMockup: React.FC = () => {
               <span className="w-2.5 h-2.5 rounded-full bg-[#27C93F] border border-[#1AAB29]" />
             </div>
 
-            {/* Smart URL Bar */}
-            <div className="flex-1 max-w-sm mx-auto flex items-center justify-center gap-1.5 px-3 py-1 rounded-full bg-white/90 border border-[#D0E2F6] text-[11px] text-[#475569] font-mono shadow-2xs">
-              <Lock className="w-3 h-3 text-emerald-600 shrink-0" />
-              <span className="text-[#0C172B] font-medium truncate">https://{activeProject.domain}</span>
-              <span className="hidden xs:inline-block text-[9px] font-sans font-bold px-1.5 py-0.2 rounded bg-emerald-50 text-emerald-700 border border-emerald-200">
-                SSL 256-bit
-              </span>
+            {/* Studio Concept Bar */}
+            <div className="flex-1 max-w-sm mx-auto flex items-center justify-center gap-1.5 px-3 py-1 rounded-full bg-white/90 border border-[#D0E2F6] text-[11px] text-[#475569] shadow-2xs">
+              <Sparkles className="w-3 h-3 text-[#0066D6] shrink-0" />
+              <span className="text-[#0C172B] font-semibold">Studio Concept Preview</span>
+              <span className="hidden xs:inline-block text-[10px] text-[#798CA6] font-medium">• {activeProject.category}</span>
             </div>
 
-            {/* Device / Live Tag */}
+            {/* Device / Fluid Tag */}
             <div className="flex items-center gap-1.5 text-[11px] font-semibold text-[#0066D6] shrink-0">
               <span className="hidden sm:inline">100% Fluid</span>
               <Smartphone className="w-3.5 h-3.5 hidden sm:inline" />

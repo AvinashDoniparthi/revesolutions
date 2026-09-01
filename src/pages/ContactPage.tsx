@@ -4,7 +4,7 @@ import { Mail, Phone, ShieldCheck } from 'lucide-react';
 import { SEOHead } from '../components/SEOHead';
 import { ContactForm } from '../components/ContactForm';
 import { companyInfo } from '../data/companyInfo';
-import { LinkedInIcon, InstagramIcon } from '../components/SocialIcons';
+import { LinkedInIcon, InstagramIcon, WhatsAppIcon } from '../components/SocialIcons';
 
 export const ContactPage: React.FC = () => {
   return (
@@ -87,7 +87,7 @@ export const ContactPage: React.FC = () => {
                 {/* Phone */}
                 <a 
                   href={`tel:${companyInfo.contactPlaceholders.phone.replace(/\s+/g, '')}`}
-                  className="pt-4 flex items-start gap-4 group transition-colors block"
+                  className="py-4 border-b border-[#D5E4F5] flex items-start gap-4 group transition-colors block"
                 >
                   <div className="w-10 h-10 rounded-2xl bg-[#E5F1FF] group-hover:bg-[#0066D6] group-hover:text-white border border-[#BFDBFE] text-[#0066D6] flex items-center justify-center shrink-0 transition-all shadow-2xs">
                     <Phone className="w-4.5 h-4.5" />
@@ -95,6 +95,27 @@ export const ContactPage: React.FC = () => {
                   <div>
                     <span className="text-[11px] font-semibold uppercase tracking-wider text-[#798CA6] block mb-0.5">PHONE</span>
                     <span className="text-sm sm:text-base font-medium text-[#0C172B] group-hover:text-[#0066D6] transition-colors">
+                      {companyInfo.contactPlaceholders.phone}
+                    </span>
+                  </div>
+                </a>
+
+                {/* WhatsApp */}
+                <a 
+                  href={companyInfo.contactPlaceholders.whatsapp}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="pt-4 flex items-start gap-4 group transition-colors block"
+                >
+                  <div className="w-10 h-10 rounded-2xl bg-[#E6F9EE] group-hover:bg-[#25D366] group-hover:text-white border border-[#A7F3D0] text-[#16A34A] flex items-center justify-center shrink-0 transition-all shadow-2xs">
+                    <WhatsAppIcon className="w-5 h-5" />
+                  </div>
+                  <div className="flex-1">
+                    <div className="flex items-center justify-between">
+                      <span className="text-[11px] font-semibold uppercase tracking-wider text-[#798CA6] block mb-0.5">WHATSAPP</span>
+                      <span className="text-[10px] font-bold text-[#16A34A] bg-[#E6F9EE] border border-[#A7F3D0] px-2 py-0.5 rounded-full">Chat on WhatsApp</span>
+                    </div>
+                    <span className="text-sm sm:text-base font-medium text-[#0C172B] group-hover:text-[#16A34A] transition-colors">
                       {companyInfo.contactPlaceholders.phone}
                     </span>
                   </div>
@@ -120,6 +141,17 @@ export const ContactPage: React.FC = () => {
                   aria-label="Connect with Rêve Solutions on LinkedIn"
                 >
                   <LinkedInIcon className="w-11 h-11 text-[#0066D6]" />
+                </a>
+                <a
+                  href={companyInfo.socialLinks.whatsapp}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  data-text="WhatsApp"
+                  className="glass"
+                  style={{ '--r': 0 } as React.CSSProperties}
+                  aria-label="Chat with Rêve Solutions on WhatsApp"
+                >
+                  <WhatsAppIcon className="w-11 h-11 text-[#16A34A]" />
                 </a>
                 <a
                   href={companyInfo.socialLinks.instagram}

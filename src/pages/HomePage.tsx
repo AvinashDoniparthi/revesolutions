@@ -13,7 +13,7 @@ import { SEOHead } from '../components/SEOHead';
 import { Button } from '../components/Button';
 import { SectionHeading } from '../components/SectionHeading';
 import { ServiceCard } from '../components/ServiceCard';
-import { HeroWebsiteMockup } from '../components/HeroWebsiteMockup';
+import { WebsiteConfigurator } from '../components/WebsiteConfigurator';
 import { RoundCarousel } from '../components/RoundCarousel';
 import { CoverflowCarousel } from '../components/CoverflowCarousel';
 import { ProcessStepCard } from '../components/ProcessStep';
@@ -113,7 +113,7 @@ export const HomePage: React.FC = () => {
             cardWidth={285}
             cardHeight={165}
             gap={34}
-            speed={0.7}
+            speed={1.3}
             direction="right"
             cornerRadius={24}
           />
@@ -147,7 +147,7 @@ export const HomePage: React.FC = () => {
             </div>
 
             <div className="pt-2">
-              <HeroWebsiteMockup />
+              <WebsiteConfigurator />
             </div>
           </div>
 

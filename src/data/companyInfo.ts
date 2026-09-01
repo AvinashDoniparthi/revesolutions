@@ -12,11 +12,13 @@ export interface CompanyInfo {
   contactPlaceholders: {
     email: string;
     phone: string;
+    whatsapp: string;
   };
   socialLinks: {
     linkedin: string;
     instagram: string;
     github: string;
+    whatsapp: string;
   };
   copyrightYear: number;
 }
@@ -34,12 +36,14 @@ export const companyInfo: CompanyInfo = {
   footerDescription: "Custom websites built, launched, and continuously managed for growing businesses.",
   contactPlaceholders: {
     email: "reve.solutions4@gmail.com",
-    phone: "+91 9092845715"
+    phone: "+91 9092845715",
+    whatsapp: "https://wa.me/919092845715?text=Hi%20R%C3%AAve%20Solutions%2C%20I%20would%20like%20to%20inquire%20about%20your%20website%20services."
   },
   socialLinks: {
     linkedin: "https://www.linkedin.com/company/r%C3%AAve-solutions",
     instagram: "https://www.instagram.com/revesolutions.in?igsi=MTdzMDdneWwzN3F4cQ==",
-    github: "https://github.com"
+    github: "https://github.com",
+    whatsapp: "https://wa.me/919092845715?text=Hi%20R%C3%AAve%20Solutions%2C%20I%20would%20like%20to%20inquire%20about%20your%20website%20services."
   },
   copyrightYear: 2026
 };
