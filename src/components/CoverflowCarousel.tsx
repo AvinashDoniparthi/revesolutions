@@ -646,8 +646,11 @@ export function CoverflowCarousel(props: CoverflowProps) {
         position: "relative",
         width: "100%",
         height: "100%",
-        minWidth: 320,
-        minHeight: 240,
+        // no min-width: the stage is already 100% of its parent, so a floor here
+        // could only push the element wider than the column it sits in and clip
+        // the active screenshot on a narrow phone. the min-height matches the
+        // shortest stage the caller renders (h-[240px] on mobile).
+        minHeight: 180,
         overflow: "hidden",
         userSelect: "none",
         touchAction: isStatic ? undefined : "pan-y",

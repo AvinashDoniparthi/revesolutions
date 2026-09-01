@@ -1,7 +1,7 @@
 // Rectangular 3D Conveyor Carousel
 // Smooth, slow, neat rectangular loop with flat-facing cards, wide gaps & cohesive Ice-Blue styling
 
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import {
   Laptop,
   HeartHandshake,
@@ -52,13 +52,35 @@ export function RoundCarousel({
 
   const containerRef = useRef<HTMLDivElement>(null);
   const cardRefs = useRef<(HTMLDivElement | null)[]>([]);
+  const [containerWidth, setContainerWidth] = useState(0);
   const posRef = useRef(0);
   const lastTimeRef = useRef(0);
   const rafRef = useRef<number | null>(null);
 
+  // the belt lives inside an overflow-hidden frame, so how far it may swing is
+  // a property of the room on screen, not of the cards. measured on mount and
+  // on resize, matching the plain resize listener the page uses for its own
+  // responsive sizing.
+  useEffect(() => {
+    const measure = () => setContainerWidth(containerRef.current?.offsetWidth ?? 0);
+    measure();
+    window.addEventListener("resize", measure);
+    return () => window.removeEventListener("resize", measure);
+  }, []);
+
   const cardPitch = cardWidth + gap;
   const totalLength = count * cardPitch;
-  const halfSpan = (count * cardPitch) / 3.4;
+
+  // the sweep the card geometry asks for. on a wide stage it is what the belt
+  // has always used; on a phone it throws the outer cards clean out of the clip
+  // box, so it is only ever the ceiling.
+  const desiredHalfSpan = (count * cardPitch) / 3.4;
+  // the outermost card sits at 60% of the frame width from centre — a little
+  // past the edge, the way the belt already reads on desktop, but near enough
+  // that a phone still shows it travelling rather than blinking in and out. the
+  // floor keeps the belt from collapsing onto itself if the frame is tiny.
+  const roomHalfSpan = containerWidth > 0 ? containerWidth * 0.6 : desiredHalfSpan;
+  const halfSpan = Math.max(cardWidth * 0.35, Math.min(desiredHalfSpan, roomHalfSpan));
   const depthZ = 130;
   const pixelsPerSec = speed * 42 * (direction === "left" ? -1 : 1);
 

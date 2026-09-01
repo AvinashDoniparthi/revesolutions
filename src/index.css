@@ -1,5 +1,12 @@
 @import "tailwindcss";
 
+/* Sub-`sm` breakpoint for the 320-430px phone range, which Tailwind's default
+   scale does not tier. Registering it here is what makes the `xs:` variant real;
+   it must stay in step with `tierFor` in src/lib/useViewportTier.ts. */
+@theme {
+  --breakpoint-xs: 25rem;
+}
+
 @layer base {
   :root {
     --apple-bg: #EEF3F9;
@@ -17,6 +24,9 @@
     background-color: var(--apple-bg);
     color: var(--apple-text-primary);
     font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'SF Pro Text', 'Plus Jakarta Sans', 'Inter', system-ui, sans-serif;
+    /* Load-bearing: the ambient blur orbs on each page are far wider than a
+       phone viewport. They are sized responsively so they no longer depend on
+       this, but it stays as a safety net for any future oversized decoration. */
     overflow-x: hidden;
     letter-spacing: -0.015em;
     -webkit-font-smoothing: antialiased;
@@ -422,5 +432,43 @@
   }
   100% {
     transform: translateX(-5px);
+  }
+}
+
+/* The social cards are laid out with fixed px sizes and overlapping negative
+   margins, so on the narrowest phones they sit flush against the viewport
+   edges. Scale them down below the `xs` breakpoint to restore the gutters. */
+@media (max-width: 25rem) {
+  .uiverse-social-container {
+    padding: 18px 0 10px;
+    min-height: 150px;
+  }
+
+  .uiverse-social-container .glass {
+    width: 112px;
+    height: 132px;
+    margin: 0 -18px;
+    padding-bottom: 30px;
+    border-radius: 17px;
+  }
+}
+
+/* The submit button's label sits in a flex row that cannot shrink, so at the
+   narrowest widths `overflow: hidden` was clipping the end of the text rather
+   than the button growing. Tighten the horizontal padding and pull the arrow
+   in to match, so the full label fits. */
+@media (max-width: 25rem) {
+  .animated-button {
+    padding: 14px 22px;
+    font-size: 14px;
+    gap: 4px;
+  }
+
+  .animated-button .arr-1 {
+    right: 14px;
+  }
+
+  .animated-button .text {
+    min-width: 0;
   }
 }

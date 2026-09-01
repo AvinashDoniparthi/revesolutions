@@ -19,29 +19,35 @@ import { CoverflowCarousel } from '../components/CoverflowCarousel';
 import { ProcessStepCard } from '../components/ProcessStep';
 import { websiteServices } from '../data/services';
 import { showcaseSlides } from '../data/showcase';
+import { useViewportTier, type ViewportTier } from '../lib/useViewportTier';
 
-// The carousel takes pixel card sizes, so they are chosen per breakpoint. Every
-// pair is ~16:9 to match the showcase screenshots, and the cut points mirror
-// Tailwind's `sm:` / `lg:` so they stay in step with the stage height classes.
-const SHOWCASE_SIZES = {
+type ShowcaseSizing = {
+  activeWidth: number;
+  activeHeight: number;
+  restWidth: number;
+  restHeight: number;
+  gap: number;
+};
+
+// Both carousels take pixel card sizes, so they are chosen per breakpoint. Every
+// showcase pair is ~16:9 to match the screenshots, and the tiers come from
+// `useViewportTier` so they stay in step with the stage height classes below.
+// The `xs` tier exists because a 320px phone only leaves 288px inside the
+// section's `px-4` — anything wider than that gets clipped at the edges.
+const SHOWCASE_SIZES: Record<ViewportTier, ShowcaseSizing> = {
+  xs: { activeWidth: 232, activeHeight: 131, restWidth: 72, restHeight: 41, gap: 10 },
   mobile: { activeWidth: 300, activeHeight: 169, restWidth: 96, restHeight: 54, gap: 14 },
   tablet: { activeWidth: 460, activeHeight: 259, restWidth: 170, restHeight: 96, gap: 22 },
   desktop: { activeWidth: 620, activeHeight: 349, restWidth: 250, restHeight: 141, gap: 30 },
 };
 
-const showcaseSizeFor = (width: number) =>
-  width >= 1024 ? SHOWCASE_SIZES.desktop : width >= 640 ? SHOWCASE_SIZES.tablet : SHOWCASE_SIZES.mobile;
-
-const useShowcaseSizing = () => {
-  const [sizing, setSizing] = useState(() => showcaseSizeFor(window.innerWidth));
-
-  useEffect(() => {
-    const onResize = () => setSizing(showcaseSizeFor(window.innerWidth));
-    window.addEventListener('resize', onResize);
-    return () => window.removeEventListener('resize', onResize);
-  }, []);
-
-  return sizing;
+// The services conveyor keeps the same ~1.73:1 card ratio at every tier so the
+// belt reads the same shape on a phone as it does on a desktop.
+const CONVEYOR_SIZES: Record<ViewportTier, { cardWidth: number; cardHeight: number; gap: number }> = {
+  xs: { cardWidth: 168, cardHeight: 97, gap: 18 },
+  mobile: { cardWidth: 210, cardHeight: 122, gap: 22 },
+  tablet: { cardWidth: 250, cardHeight: 145, gap: 28 },
+  desktop: { cardWidth: 285, cardHeight: 165, gap: 34 },
 };
 
 export const HomePage: React.FC = () => {
@@ -54,7 +60,9 @@ export const HomePage: React.FC = () => {
   const handleActiveSlide = useCallback((index: number) => setActiveSlide(index), []);
   const slide = showcaseSlides[activeSlide] ?? showcaseSlides[0];
 
-  const showcaseSizing = useShowcaseSizing();
+  const tier = useViewportTier();
+  const showcaseSizing = SHOWCASE_SIZES[tier];
+  const conveyorSizing = CONVEYOR_SIZES[tier];
 
   // Clicking the centred screenshot opens it full-screen.
   const [lightbox, setLightbox] = useState<number | null>(null);
@@ -82,7 +90,7 @@ export const HomePage: React.FC = () => {
   return (
     <div className="space-y-16 sm:space-y-24 pb-20 pt-24 sm:pt-28 relative">
       {/* Cohesive Ambient Blue Atmosphere Orbs */}
-      <div className="absolute top-10 left-1/2 -translate-x-1/2 w-[900px] h-[420px] bg-gradient-to-b from-[#0066D6]/10 via-[#0066D6]/3 to-transparent rounded-full blur-[140px] pointer-events-none -z-10" />
+      <div className="absolute top-10 left-1/2 -translate-x-1/2 w-[300px] h-[140px] xs:w-[380px] xs:h-[180px] sm:w-[600px] sm:h-[280px] md:w-[700px] md:h-[330px] lg:w-[900px] lg:h-[420px] bg-gradient-to-b from-[#0066D6]/10 via-[#0066D6]/3 to-transparent rounded-full blur-[80px] sm:blur-[120px] lg:blur-[140px] pointer-events-none -z-10" />
 
       <SEOHead
         title="Home"
@@ -110,9 +118,7 @@ export const HomePage: React.FC = () => {
         {/* Rectangular 3D Conveyor Services Animation */}
         <div className="pt-6 pb-2 w-full h-[260px] sm:h-[300px] lg:h-[320px] relative overflow-hidden">
           <RoundCarousel
-            cardWidth={285}
-            cardHeight={165}
-            gap={34}
+            {...conveyorSizing}
             speed={1.3}
             direction="right"
             cornerRadius={24}
@@ -132,7 +138,7 @@ export const HomePage: React.FC = () => {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch">
 
           {/* Card 1: Full-width / 7-col Interactive Studio Mockup Card */}
-          <div className="lg:col-span-7 apple-card p-8 sm:p-10 space-y-6 flex flex-col justify-between hover:border-[#A9CEF7] transition-all">
+          <div className="lg:col-span-7 apple-card p-6 xs:p-8 sm:p-10 space-y-6 flex flex-col justify-between hover:border-[#A9CEF7] transition-all">
             <div className="space-y-2.5">
               <span className="text-[11px] font-bold uppercase tracking-wider text-[#0066D6] bg-[#E5F1FF] border border-[#BFDBFE] px-3.5 py-1 rounded-full inline-block shadow-2xs">
                 CUSTOM WEB STUDIO
@@ -155,7 +161,7 @@ export const HomePage: React.FC = () => {
           <div className="lg:col-span-5 flex flex-col gap-6">
 
             {/* Card 2: Monthly Care Apple Widget */}
-            <div className="apple-card p-8 space-y-4 flex-1 flex flex-col justify-between hover:border-[#A9CEF7] transition-all">
+            <div className="apple-card p-6 xs:p-8 space-y-4 flex-1 flex flex-col justify-between hover:border-[#A9CEF7] transition-all">
               <div className="space-y-2.5">
                 <span className="text-[11px] font-bold uppercase tracking-wider text-[#0066D6] bg-[#E5F1FF] border border-[#BFDBFE] px-3.5 py-1 rounded-full inline-block shadow-2xs">
                   DEDICATED CARE
@@ -177,7 +183,7 @@ export const HomePage: React.FC = () => {
             </div>
 
             {/* Card 3: Performance & SEO Widget */}
-            <div className="apple-card p-8 space-y-4 flex-1 flex flex-col justify-between hover:border-[#A9CEF7] transition-all">
+            <div className="apple-card p-6 xs:p-8 space-y-4 flex-1 flex flex-col justify-between hover:border-[#A9CEF7] transition-all">
               <div className="space-y-2.5">
                 <span className="text-[11px] font-bold uppercase tracking-wider text-[#0066D6] bg-[#E5F1FF] border border-[#BFDBFE] px-3.5 py-1 rounded-full inline-block shadow-2xs">
                   SPEED &amp; SECURITY
@@ -214,7 +220,7 @@ export const HomePage: React.FC = () => {
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
 
-          <div className="apple-card p-7 space-y-3 hover:border-[#A9CEF7] transition-all">
+          <div className="apple-card p-6 xs:p-7 space-y-3 hover:border-[#A9CEF7] transition-all">
             <div className="w-11 h-11 rounded-2xl bg-[#E5F1FF] border border-[#BFDBFE] flex items-center justify-center text-[#0066D6] shadow-xs">
               <Paintbrush className="w-5 h-5 text-[#0066D6]" />
             </div>
@@ -224,7 +230,7 @@ export const HomePage: React.FC = () => {
             </p>
           </div>
 
-          <div className="apple-card p-7 space-y-3 hover:border-[#A9CEF7] transition-all">
+          <div className="apple-card p-6 xs:p-7 space-y-3 hover:border-[#A9CEF7] transition-all">
             <div className="w-11 h-11 rounded-2xl bg-[#E5F1FF] border border-[#BFDBFE] flex items-center justify-center text-[#0066D6] shadow-xs">
               <Users className="w-5 h-5 text-[#0066D6]" />
             </div>
@@ -234,7 +240,7 @@ export const HomePage: React.FC = () => {
             </p>
           </div>
 
-          <div className="apple-card p-7 space-y-3 hover:border-[#A9CEF7] transition-all">
+          <div className="apple-card p-6 xs:p-7 space-y-3 hover:border-[#A9CEF7] transition-all">
             <div className="w-11 h-11 rounded-2xl bg-[#E5F1FF] border border-[#BFDBFE] flex items-center justify-center text-[#0066D6] shadow-xs">
               <CheckCircle2 className="w-5 h-5 text-[#0066D6]" />
             </div>
@@ -244,7 +250,7 @@ export const HomePage: React.FC = () => {
             </p>
           </div>
 
-          <div className="apple-card p-7 space-y-3 hover:border-[#A9CEF7] transition-all">
+          <div className="apple-card p-6 xs:p-7 space-y-3 hover:border-[#A9CEF7] transition-all">
             <div className="w-11 h-11 rounded-2xl bg-[#E5F1FF] border border-[#BFDBFE] flex items-center justify-center text-[#0066D6] shadow-xs">
               <Clock className="w-5 h-5 text-[#0066D6]" />
             </div>
@@ -424,7 +430,7 @@ export const HomePage: React.FC = () => {
           8. CALL TO ACTION (Apple Specialist Banner — Midnight Sapphire Luxury)
           ========================================================================= */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="p-8 sm:p-12 lg:p-14 rounded-3xl bg-gradient-to-br from-[#061226] via-[#0B1E40] to-[#040C1A] text-white flex flex-col md:flex-row items-center justify-between gap-8 shadow-2xl border border-[#1A4B8C] relative overflow-hidden group">
+        <div className="p-6 xs:p-8 sm:p-12 lg:p-14 rounded-3xl bg-gradient-to-br from-[#061226] via-[#0B1E40] to-[#040C1A] text-white flex flex-col md:flex-row items-center justify-between gap-8 shadow-2xl border border-[#1A4B8C] relative overflow-hidden group">
           {/* Luminous Sapphire Ambient Lighting */}
           <div className="absolute -top-24 -right-24 w-80 h-80 bg-[#0066D6]/30 rounded-full blur-[90px] pointer-events-none" />
           <div className="absolute -bottom-20 -left-20 w-72 h-72 bg-[#004EA8]/30 rounded-full blur-[80px] pointer-events-none" />

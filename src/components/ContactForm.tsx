@@ -200,7 +200,7 @@ export const ContactForm: React.FC = () => {
       <motion.div
         initial={{ opacity: 0, scale: 0.96 }}
         animate={{ opacity: 1, scale: 1 }}
-        className="apple-card p-8 sm:p-12 text-center space-y-4 shadow-xl border border-[#BFDBFE]"
+        className="apple-card p-6 xs:p-8 sm:p-12 text-center space-y-4 shadow-xl border border-[#BFDBFE]"
       >
         <div className="w-14 h-14 rounded-full bg-[#E5F1FF] text-[#0066D6] border border-[#BFDBFE] mx-auto flex items-center justify-center">
           <CheckCircle2 className="w-8 h-8" />
@@ -314,7 +314,7 @@ export const ContactForm: React.FC = () => {
               placeholder="98765 43210"
               pattern="^[0-9\s-]{1,15}$"
               maxLength={14}
-              className={`w-full px-3.5 py-3 bg-transparent text-sm placeholder-[#798CA6] transition-all duration-200 focus:outline-none rounded-r-xl phone-input ${
+              className={`w-full min-w-0 px-3.5 py-3 bg-transparent text-sm placeholder-[#798CA6] transition-all duration-200 focus:outline-none rounded-r-xl phone-input ${
                 (formData.phone.length > 0 && !/^[0-9\s-]*$/.test(formData.phone)) || errors.phone
                   ? 'is-invalid !text-red-500'
                   : 'text-[#0C172B]'

@@ -174,8 +174,11 @@ export const HeroWebsiteMockup: React.FC = () => {
             {/* Studio Concept Bar */}
             <div className="flex-1 max-w-sm mx-auto flex items-center justify-center gap-1.5 px-3 py-1 rounded-full bg-white/90 border border-[#D0E2F6] text-[11px] text-[#475569] shadow-2xs">
               <Sparkles className="w-3 h-3 text-[#0066D6] shrink-0" />
-              <span className="text-[#0C172B] font-semibold">Studio Concept Preview</span>
-              <span className="hidden xs:inline-block text-[10px] text-[#798CA6] font-medium">• {activeProject.category}</span>
+              <span className="text-[#0C172B] font-semibold truncate">Studio Concept Preview</span>
+              {/* `sm:`, not `xs:` — the bar is nested three levels deep, so at
+                  400px the pill has ~150px of content width and the label alone
+                  already fills it. */}
+              <span className="hidden sm:inline-block shrink-0 whitespace-nowrap text-[10px] text-[#798CA6] font-medium">• {activeProject.category}</span>
             </div>
 
             {/* Device / Fluid Tag */}

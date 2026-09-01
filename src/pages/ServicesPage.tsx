@@ -25,7 +25,7 @@ export const ServicesPage: React.FC = () => {
   return (
     <div className="space-y-16 sm:space-y-24 pb-20 pt-24 sm:pt-28 relative">
       {/* Cohesive Ambient Blue Atmosphere */}
-      <div className="absolute top-10 left-1/2 -translate-x-1/2 w-[900px] h-[420px] bg-gradient-to-b from-[#0066D6]/10 via-[#0066D6]/3 to-transparent rounded-full blur-[140px] pointer-events-none -z-10" />
+      <div className="absolute top-10 left-1/2 -translate-x-1/2 w-[300px] h-[140px] xs:w-[380px] xs:h-[180px] sm:w-[600px] sm:h-[280px] md:w-[700px] md:h-[330px] lg:w-[900px] lg:h-[420px] bg-gradient-to-b from-[#0066D6]/10 via-[#0066D6]/3 to-transparent rounded-full blur-[80px] sm:blur-[120px] lg:blur-[140px] pointer-events-none -z-10" />
 
       <SEOHead 
         title="Services" 
@@ -82,7 +82,7 @@ export const ServicesPage: React.FC = () => {
                 duration: 0.7,
                 ease: [0.16, 1, 0.3, 1],
               }}
-              className="apple-card p-8 sm:p-12 space-y-8 shadow-xl hover:border-[#A9CEF7] transition-all"
+              className="apple-card p-6 xs:p-8 sm:p-12 space-y-8 shadow-xl hover:border-[#A9CEF7] transition-all"
             >
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
               
@@ -118,7 +118,7 @@ export const ServicesPage: React.FC = () => {
 
               {/* Right Column: Scope Included & Business Value */}
               <div className="lg:col-span-7 space-y-4 lg:pl-4">
-                <div className="p-6 rounded-2xl bg-[#EAF3FD] border border-[#BFDBFE] space-y-3">
+                <div className="p-5 xs:p-6 rounded-2xl bg-[#EAF3FD] border border-[#BFDBFE] space-y-3">
                   <h3 className="text-xs font-bold uppercase tracking-wider text-[#0C172B]">
                     Scope Included:
                   </h3>
@@ -150,7 +150,7 @@ export const ServicesPage: React.FC = () => {
 
       {/* Footer Banner — Midnight Sapphire Luxury */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="p-8 sm:p-12 lg:p-14 rounded-3xl bg-gradient-to-br from-[#061226] via-[#0B1E40] to-[#040C1A] text-white text-center space-y-5 shadow-2xl border border-[#1A4B8C] relative overflow-hidden">
+        <div className="p-6 xs:p-8 sm:p-12 lg:p-14 rounded-3xl bg-gradient-to-br from-[#061226] via-[#0B1E40] to-[#040C1A] text-white text-center space-y-5 shadow-2xl border border-[#1A4B8C] relative overflow-hidden">
           <div className="absolute top-0 right-0 w-80 h-80 bg-[#0066D6]/30 rounded-full blur-[90px] pointer-events-none" />
           <div className="absolute bottom-0 left-0 w-80 h-80 bg-[#004EA8]/30 rounded-full blur-[90px] pointer-events-none" />
 

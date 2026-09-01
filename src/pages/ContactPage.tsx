@@ -10,7 +10,7 @@ export const ContactPage: React.FC = () => {
   return (
     <div className="min-h-screen pb-20 pt-24 sm:pt-28 relative">
       {/* Cohesive Ambient Blue Atmosphere */}
-      <div className="absolute top-10 left-1/2 -translate-x-1/2 w-[900px] h-[420px] bg-gradient-to-b from-[#0066D6]/10 via-[#0066D6]/3 to-transparent rounded-full blur-[140px] pointer-events-none -z-10" />
+      <div className="absolute top-10 left-1/2 -translate-x-1/2 w-[300px] h-[140px] xs:w-[380px] xs:h-[180px] sm:w-[600px] sm:h-[280px] md:w-[700px] md:h-[330px] lg:w-[900px] lg:h-[420px] bg-gradient-to-b from-[#0066D6]/10 via-[#0066D6]/3 to-transparent rounded-full blur-[80px] sm:blur-[120px] lg:blur-[140px] pointer-events-none -z-10" />
 
       <SEOHead 
         title="Contact a Specialist" 
@@ -53,7 +53,7 @@ export const ContactPage: React.FC = () => {
             className="lg:col-span-5 space-y-6"
           >
             {/* Direct Information Card */}
-            <div className="apple-card p-8 sm:p-10 space-y-6 shadow-xl">
+            <div className="apple-card p-6 xs:p-8 sm:p-10 space-y-6 shadow-xl">
               
               <div className="space-y-1.5">
                 <span className="text-[11px] font-bold uppercase tracking-wider text-[#0066D6] bg-[#E5F1FF] border border-[#BFDBFE] px-3.5 py-1 rounded-full inline-block shadow-2xs">

@@ -43,7 +43,7 @@ export const AboutPage: React.FC = () => {
         </div>
 
         {/* Cohesive Ambient Blue Atmosphere */}
-        <div className="absolute top-10 left-1/2 -translate-x-1/2 w-[900px] h-[420px] bg-gradient-to-b from-[#0066D6]/10 via-[#0066D6]/3 to-transparent rounded-full blur-[140px] pointer-events-none -z-10" />
+        <div className="absolute top-10 left-1/2 -translate-x-1/2 w-[300px] h-[140px] xs:w-[380px] xs:h-[180px] sm:w-[600px] sm:h-[280px] md:w-[700px] md:h-[330px] lg:w-[900px] lg:h-[420px] bg-gradient-to-b from-[#0066D6]/10 via-[#0066D6]/3 to-transparent rounded-full blur-[80px] sm:blur-[120px] lg:blur-[140px] pointer-events-none -z-10" />
 
         {/* Hero Section */}
         <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-4 relative z-10">
@@ -75,7 +75,7 @@ export const AboutPage: React.FC = () => {
           transition={{ duration: 1.25, ease: [0.16, 1, 0.3, 1] }}
           className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10"
         >
-          <div className="apple-card p-8 sm:p-12 lg:p-16 grid grid-cols-1 lg:grid-cols-12 gap-10 items-center shadow-xl">
+          <div className="apple-card p-6 xs:p-8 sm:p-12 lg:p-16 grid grid-cols-1 lg:grid-cols-12 gap-10 items-center shadow-xl">
             
             <div className="lg:col-span-7 space-y-5">
               <span className="text-[11px] font-bold text-[#0066D6] uppercase tracking-wider bg-[#E5F1FF] border border-[#BFDBFE] px-3.5 py-1 rounded-full inline-block shadow-2xs">
@@ -92,7 +92,7 @@ export const AboutPage: React.FC = () => {
               </p>
             </div>
 
-            <div className="lg:col-span-5 p-6 sm:p-8 rounded-2xl bg-[#EAF3FD] border border-[#BFDBFE] space-y-4">
+            <div className="lg:col-span-5 p-5 xs:p-6 sm:p-8 rounded-2xl bg-[#EAF3FD] border border-[#BFDBFE] space-y-4">
               <h3 className="text-base font-bold text-[#0C172B]">Our Commitment to Clients:</h3>
               <ul className="space-y-3.5 text-xs sm:text-sm text-[#0C172B]">
                 <li className="flex items-start gap-2.5">
@@ -151,7 +151,7 @@ export const AboutPage: React.FC = () => {
           2. Standalone CTA Footer Box (Clean, separate section without line animation)
           ========================================================================= */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <div className="p-8 sm:p-12 lg:p-14 rounded-3xl bg-gradient-to-br from-[#061226] via-[#0B1E40] to-[#040C1A] text-white text-center space-y-5 shadow-2xl border border-[#1A4B8C] relative overflow-hidden">
+        <div className="p-6 xs:p-8 sm:p-12 lg:p-14 rounded-3xl bg-gradient-to-br from-[#061226] via-[#0B1E40] to-[#040C1A] text-white text-center space-y-5 shadow-2xl border border-[#1A4B8C] relative overflow-hidden">
           <div className="absolute top-0 right-0 w-80 h-80 bg-[#0066D6]/30 rounded-full blur-[90px] pointer-events-none" />
           <div className="absolute bottom-0 left-0 w-80 h-80 bg-[#004EA8]/30 rounded-full blur-[90px] pointer-events-none" />
 
