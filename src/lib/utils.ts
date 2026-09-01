@@ -5,7 +5,7 @@ export function cn(...inputs: (string | undefined | null | false | Record<string
       if (typeof input === 'string') return input;
       if (typeof input === 'object') {
         return Object.entries(input)
-          .filter(([_, val]) => Boolean(val))
+          .filter(([, val]) => Boolean(val))
           .map(([key]) => key)
           .join(' ');
       }

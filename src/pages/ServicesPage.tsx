@@ -34,12 +34,6 @@ export const ServicesPage: React.FC = () => {
 
       {/* Hero Section */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-4">
-<<<<<<< HEAD
-        <motion.h1 
-          initial={{ opacity: 0, y: 12 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.45, ease: 'easeOut' }}
-=======
         <motion.div 
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
@@ -54,7 +48,6 @@ export const ServicesPage: React.FC = () => {
           initial={{ opacity: 0, y: 12 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.45, ease: 'easeOut', delay: 0.05 }}
->>>>>>> db580f972c483f6255d365d1294f6f8b6325173d
           className="text-3xl sm:text-5xl lg:text-[52px] tracking-tight max-w-4xl leading-[1.08]"
         >
           <span className="font-bold text-[#0C172B]">Services.</span>{' '}

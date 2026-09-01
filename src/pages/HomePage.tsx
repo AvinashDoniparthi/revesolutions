@@ -13,11 +13,7 @@ import { SectionHeading } from '../components/SectionHeading';
 import { ServiceCard } from '../components/ServiceCard';
 import { HeroWebsiteMockup } from '../components/HeroWebsiteMockup';
 import { RoundCarousel } from '../components/RoundCarousel';
-<<<<<<< HEAD
 import { Skiper52 } from '../components/Skiper52';
-=======
-import { CoverflowCarousel } from '../components/CoverflowCarousel';
->>>>>>> db580f972c483f6255d365d1294f6f8b6325173d
 import { ProcessStepCard } from '../components/ProcessStep';
 import { websiteServices } from '../data/services';
 
@@ -228,11 +224,7 @@ export const HomePage: React.FC = () => {
 
 
       {/* =========================================================================
-<<<<<<< HEAD
           5. WEBSITE SHOWCASE (SKIPER 52 EXPANDING GALLERY PANEL)
-=======
-          5. WEBSITE SHOWCASE (3D COVERFLOW GALLERY)
->>>>>>> db580f972c483f6255d365d1294f6f8b6325173d
           ========================================================================= */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6">
         <SectionHeading
@@ -240,19 +232,8 @@ export const HomePage: React.FC = () => {
           subtitle="A gallery of websites handcrafted and managed by our studio."
         />
 
-<<<<<<< HEAD
         <div className="w-full relative rounded-3xl overflow-hidden border border-[#C5DFFD] shadow-sm bg-[#f5f4f3]">
           <Skiper52 />
-=======
-        <div className="w-full h-[360px] sm:h-[430px] lg:h-[470px] relative rounded-3xl overflow-hidden border border-[#C5DFFD] shadow-sm bg-gradient-to-b from-white to-[#F2F7FD]">
-          <CoverflowCarousel
-            autoplay={true}
-            showArrows={true}
-            arrowColor="#0C172B"
-            arrowBackground="rgba(255, 255, 255, 0.95)"
-            arrowSize={46}
-          />
->>>>>>> db580f972c483f6255d365d1294f6f8b6325173d
         </div>
       </section>
 

@@ -16,10 +16,7 @@
     "react": "^19.2.8",
     "react-dom": "^19.2.8",
     "react-router-dom": "^7.18.3",
-<<<<<<< HEAD
     "swiper": "^14.2.0",
-=======
->>>>>>> db580f972c483f6255d365d1294f6f8b6325173d
     "tailwindcss": "^4.3.3"
   },
   "devDependencies": {

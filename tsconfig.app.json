@@ -4,18 +4,12 @@
     "target": "es2023",
     "lib": ["ES2023", "DOM"],
     "module": "esnext",
-<<<<<<< HEAD
     "types": ["vite/client", "node"],
     "allowArbitraryExtensions": true,
     "skipLibCheck": true,
     "paths": {
       "@/*": ["./src/*"]
     },
-=======
-    "types": ["vite/client"],
-    "allowArbitraryExtensions": true,
-    "skipLibCheck": true,
->>>>>>> db580f972c483f6255d365d1294f6f8b6325173d
 
     /* Bundler mode */
     "moduleResolution": "bundler",
