@@ -43,6 +43,8 @@ export const Navbar: React.FC = () => {
             <img 
               src="/images/reve-logo.jpg" 
               alt="Rêve Solutions" 
+              width={40}
+              height={40}
               className="w-full h-full object-cover"
             />
           </div>

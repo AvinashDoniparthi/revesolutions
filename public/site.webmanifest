@@ -1,0 +1,13 @@
+{
+  "name": "Rêve Solutions",
+  "short_name": "Rêve",
+  "description": "Custom websites built, launched, and continuously managed for growing businesses.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#F5F5F7",
+  "theme_color": "#F5F5F7",
+  "icons": [
+    { "src": "/favicon.svg", "sizes": "any", "type": "image/svg+xml" },
+    { "src": "/images/reve-logo.jpg", "sizes": "1024x1024", "type": "image/jpeg" }
+  ]
+}

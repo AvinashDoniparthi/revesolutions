@@ -2,9 +2,9 @@ import React, { useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { CheckCircle2 } from 'lucide-react';
-import { SEOHead } from '../components/SEOHead';
 import { Button } from '../components/Button';
 import { websiteServices } from '../data/services';
+import { FaqSection } from '../components/FaqSection';
 
 export const ServicesPage: React.FC = () => {
   const location = useLocation();
@@ -27,10 +27,6 @@ export const ServicesPage: React.FC = () => {
       {/* Cohesive Ambient Blue Atmosphere */}
       <div className="absolute top-10 left-1/2 -translate-x-1/2 w-[300px] h-[140px] xs:w-[380px] xs:h-[180px] sm:w-[600px] sm:h-[280px] md:w-[700px] md:h-[330px] lg:w-[900px] lg:h-[420px] bg-gradient-to-b from-[#0066D6]/10 via-[#0066D6]/3 to-transparent rounded-full blur-[80px] sm:blur-[120px] lg:blur-[140px] pointer-events-none -z-10" />
 
-      <SEOHead 
-        title="Services" 
-        description="Website Development, Website Management, Website Maintenance, and Ongoing Support for business websites."
-      />
 
       {/* Hero Section */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-4">
@@ -147,6 +143,10 @@ export const ServicesPage: React.FC = () => {
         );
       })}
       </section>
+
+      <FaqSection />
+
+
 
       {/* Footer Banner — Midnight Sapphire Luxury */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">

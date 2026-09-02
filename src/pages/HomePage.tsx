@@ -9,7 +9,6 @@ import {
   Clock,
   X
 } from 'lucide-react';
-import { SEOHead } from '../components/SEOHead';
 import { Button } from '../components/Button';
 import { SectionHeading } from '../components/SectionHeading';
 import { ServiceCard } from '../components/ServiceCard';
@@ -18,6 +17,7 @@ import { RoundCarousel } from '../components/RoundCarousel';
 import { CoverflowCarousel } from '../components/CoverflowCarousel';
 import { ProcessStepCard } from '../components/ProcessStep';
 import { websiteServices } from '../data/services';
+import { companyInfo } from '../data/companyInfo';
 import { showcaseSlides } from '../data/showcase';
 import { useViewportTier, type ViewportTier } from '../lib/useViewportTier';
 
@@ -70,6 +70,16 @@ export const HomePage: React.FC = () => {
   const closeLightbox = useCallback(() => setLightbox(null), []);
   const lightboxSlide = lightbox === null ? null : showcaseSlides[lightbox];
 
+  /**
+   * The lightbox portals into `document.body`, which does not exist during the
+   * build-time prerender. Deferring it to a post-mount flag keeps the server
+   * and the first client render identical (both emit nothing), so hydration
+   * matches — and unlike gating on `lightboxSlide`, it leaves AnimatePresence
+   * mounted so the close animation still plays.
+   */
+  const [portalReady, setPortalReady] = useState(false);
+  useEffect(() => setPortalReady(true), []);
+
   useEffect(() => {
     if (lightbox === null) return;
 
@@ -92,10 +102,6 @@ export const HomePage: React.FC = () => {
       {/* Cohesive Ambient Blue Atmosphere Orbs */}
       <div className="absolute top-10 left-1/2 -translate-x-1/2 w-[300px] h-[140px] xs:w-[380px] xs:h-[180px] sm:w-[600px] sm:h-[280px] md:w-[700px] md:h-[330px] lg:w-[900px] lg:h-[420px] bg-gradient-to-b from-[#0066D6]/10 via-[#0066D6]/3 to-transparent rounded-full blur-[80px] sm:blur-[120px] lg:blur-[140px] pointer-events-none -z-10" />
 
-      <SEOHead
-        title="Home"
-        description="Rêve Solutions — Your website. Fully built and managed by real people."
-      />
 
       {/* =========================================================================
           1. APPLE STORE HERO & 3D ROUND SERVICES CAROUSEL
@@ -110,8 +116,17 @@ export const HomePage: React.FC = () => {
           >
             <h1 className="text-3xl sm:text-5xl lg:text-[54px] tracking-tight leading-[1.08]">
               <span className="font-bold text-[#0C172B]">Websites.</span>{' '}
-              <span className="font-semibold text-[#475569]">The best way to build and manage your site.</span>
+              <span className="font-semibold text-[#475569]">Fully built and managed by real people.</span>
             </h1>
+
+            {/*
+              The H1 alone gave crawlers no context and never named the brand.
+              This paragraph is the keyword-bearing copy for the page — it was
+              already written in companyInfo.heroSubtext but rendered nowhere.
+            */}
+            <p className="text-base sm:text-lg text-[#475569] max-w-2xl leading-relaxed font-normal pt-1">
+              {companyInfo.heroSubtext}
+            </p>
           </motion.div>
         </div>
 
@@ -336,7 +351,7 @@ export const HomePage: React.FC = () => {
           </div>
         </div>
 
-        {createPortal(
+        {portalReady && createPortal(
           <AnimatePresence>
             {lightboxSlide && (
               <motion.div

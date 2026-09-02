@@ -253,6 +253,10 @@ function Card({
                             src={src}
                             srcSet={srcSet}
                             alt={item?.alt || ""}
+                            loading="lazy"
+                            decoding="async"
+                            width={1024}
+                            height={576}
                             draggable={false}
                             style={{
                                 width: "100%",

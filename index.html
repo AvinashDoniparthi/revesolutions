@@ -2,22 +2,37 @@
 <html lang="en" class="scroll-smooth">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/jpeg" href="/images/reve-logo.jpg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="theme-color" content="#F5F5F7" />
-    <title>Rêve Solutions | Websites. Fully built and managed by real people.</title>
-    <meta name="description" content="We build, manage, and maintain custom websites for your business on a simple monthly plan—so you never have to worry about updates, bugs, or hosting again." />
-    <meta name="keywords" content="website development, website design, website maintenance, website management, website support, business website, web development company" />
-    
-    <!-- Open Graph -->
+
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="apple-touch-icon" href="/images/reve-logo.jpg" />
+    <link rel="manifest" href="/site.webmanifest" />
+
+    <!--
+      Everything between the seo markers is replaced per route at build time by
+      scripts/prerender.mjs, which renders it from src/lib/seo.ts. The values
+      below are the homepage defaults, kept so `vite dev` and the SPA fallback
+      still serve sensible tags.
+    -->
+    <!--seo-start-->
+    <title>Rêve Solutions — Websites Built and Managed for You</title>
+    <meta name="description" content="Rêve Solutions builds custom business websites and manages them for you on one simple monthly plan — content updates, bug fixes, hosting and security all handled by real people." />
+    <link rel="canonical" href="https://www.revesolutions.in/" />
     <meta property="og:type" content="website" />
-    <meta property="og:title" content="Rêve Solutions | Websites. Fully built and managed by real people." />
+    <meta property="og:site_name" content="Rêve Solutions" />
+    <meta property="og:title" content="Rêve Solutions — Websites Built and Managed for You" />
     <meta property="og:description" content="We build your website. We manage it. You focus on your business." />
-    
+    <meta property="og:url" content="https://www.revesolutions.in/" />
+    <meta property="og:image" content="https://www.revesolutions.in/images/reve-logo.jpg" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <!--seo-end-->
+
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,600;0,700;0,800;0,900;1,700&family=Cinzel:wght@600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://images.unsplash.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   </head>
   <body class="bg-[#F5F5F7] text-[#1D1D1F] antialiased selection:bg-[#0071E3]/20 selection:text-[#0071E3]">
     <div id="root"></div>

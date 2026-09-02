@@ -1,7 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Mail, Phone, ShieldCheck } from 'lucide-react';
-import { SEOHead } from '../components/SEOHead';
 import { ContactForm } from '../components/ContactForm';
 import { companyInfo } from '../data/companyInfo';
 import { LinkedInIcon, InstagramIcon, WhatsAppIcon } from '../components/SocialIcons';
@@ -12,10 +11,6 @@ export const ContactPage: React.FC = () => {
       {/* Cohesive Ambient Blue Atmosphere */}
       <div className="absolute top-10 left-1/2 -translate-x-1/2 w-[300px] h-[140px] xs:w-[380px] xs:h-[180px] sm:w-[600px] sm:h-[280px] md:w-[700px] md:h-[330px] lg:w-[900px] lg:h-[420px] bg-gradient-to-b from-[#0066D6]/10 via-[#0066D6]/3 to-transparent rounded-full blur-[80px] sm:blur-[120px] lg:blur-[140px] pointer-events-none -z-10" />
 
-      <SEOHead 
-        title="Contact a Specialist" 
-        description="Contact Rêve Solutions. Let's talk about website development, website management, or ongoing website care for your business."
-      />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
         

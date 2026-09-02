@@ -146,15 +146,17 @@ export const Footer: React.FC = () => {
               >
                 <InstagramIcon className="w-3.5 h-3.5" />
               </a>
-              <a
-                href={companyInfo.socialLinks.github}
-                target="_blank"
-                rel="noreferrer"
-                aria-label="GitHub"
-                className="w-8 h-8 rounded-full bg-white shadow-xs border border-[#BFDBFE] flex items-center justify-center text-[#0C172B] hover:bg-[#0066D6] hover:text-white transition-all"
-              >
-                <GitHubIcon className="w-3.5 h-3.5" />
-              </a>
+              {companyInfo.socialLinks.github && (
+                <a
+                  href={companyInfo.socialLinks.github}
+                  target="_blank"
+                  rel="noreferrer"
+                  aria-label="GitHub"
+                  className="w-8 h-8 rounded-full bg-white shadow-xs border border-[#BFDBFE] flex items-center justify-center text-[#0C172B] hover:bg-[#0066D6] hover:text-white transition-all"
+                >
+                  <GitHubIcon className="w-3.5 h-3.5" />
+                </a>
+              )}
             </div>
           </div>
 

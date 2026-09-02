@@ -2,7 +2,6 @@ import React, { useRef } from 'react';
 import { motion, useScroll } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
 import { CheckCircle2 } from 'lucide-react';
-import { SEOHead } from '../components/SEOHead';
 import { SectionHeading } from '../components/SectionHeading';
 import { TeamCard } from '../components/TeamCard';
 import { Button } from '../components/Button';
@@ -22,10 +21,6 @@ export const AboutPage: React.FC = () => {
 
   return (
     <div className="pb-20 pt-24 sm:pt-28 space-y-20 sm:space-y-28 relative">
-      <SEOHead 
-        title="About Us" 
-        description="Four people. One dedicated design studio. Learn how Rêve Solutions helps businesses build and maintain professional websites."
-      />
 
       {/* =========================================================================
           1. Story & Team Journey Section (Integrated with Skiper19 Scroll Line)
