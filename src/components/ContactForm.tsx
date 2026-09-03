@@ -38,6 +38,11 @@ export const ContactForm: React.FC = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
   const [submitError, setSubmitError] = useState<string | null>(null);
+  const [phoneShakeKey, setPhoneShakeKey] = useState(0);
+
+  const triggerPhoneShake = () => {
+    setPhoneShakeKey((prev) => prev + 1);
+  };
 
   const validate = (): boolean => {
     const newErrors: FormErrors = {};
@@ -72,8 +77,47 @@ export const ContactForm: React.FC = () => {
     return Object.keys(newErrors).length === 0;
   };
 
+  const handlePhoneKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    // Allow navigation and shortcut keys (Backspace, Tab, Enter, Delete, Arrows, Cmd/Ctrl shortcuts)
+    if (e.key.length > 1 || e.ctrlKey || e.metaKey || e.altKey) {
+      return;
+    }
+
+    // Block non-numeric characters and trigger shake
+    if (!/^[0-9]$/.test(e.key)) {
+      e.preventDefault();
+      triggerPhoneShake();
+      return;
+    }
+
+    // Block typing more than 10 digits
+    const target = e.target as HTMLInputElement;
+    const selectedLength = (target.selectionEnd ?? 0) - (target.selectionStart ?? 0);
+    const currentDigits = formData.phone.replace(/\D/g, '');
+    if (currentDigits.length >= 10 && selectedLength === 0) {
+      e.preventDefault();
+      triggerPhoneShake();
+    }
+  };
+
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
+
+    if (name === 'phone') {
+      const digitsOnly = value.replace(/\D/g, '').slice(0, 10);
+      if (value !== digitsOnly && value.replace(/\D/g, '') !== value) {
+        triggerPhoneShake();
+      }
+      setFormData((prev) => ({ ...prev, phone: digitsOnly }));
+      if (errors.phone) {
+        setErrors((prev) => ({ ...prev, phone: undefined }));
+      }
+      if (submitError) {
+        setSubmitError(null);
+      }
+      return;
+    }
+
     setFormData((prev) => ({ ...prev, [name]: value }));
     if (errors[name as keyof FormErrors]) {
       setErrors((prev) => ({ ...prev, [name]: undefined }));
@@ -300,38 +344,35 @@ export const ContactForm: React.FC = () => {
             Phone Number <span className="text-[#798CA6] text-[11px] font-normal">(optional)</span>
           </label>
           <div
-            key={formData.phone.length > 0 && !/^[0-9\s-]*$/.test(formData.phone) ? `invalid-${formData.phone}` : 'valid'}
+            key={phoneShakeKey}
             className={`phone-container flex items-center rounded-xl bg-[#F0F5FA] border transition-all duration-200 focus-within:border-[#0066D6] focus-within:bg-white ${
-              (formData.phone.length > 0 && !/^[0-9\s-]*$/.test(formData.phone)) || errors.phone
-                ? 'border-red-500 is-invalid'
-                : 'border-[#D6E4F5]'
+              phoneShakeKey > 0 ? 'is-invalid !border-red-500' : ''
+            } ${
+              errors.phone ? 'border-red-500' : 'border-[#D6E4F5]'
             }`}
+            onAnimationEnd={() => setPhoneShakeKey(0)}
           >
             <span className="px-3.5 py-3 bg-[#E5F1FF] text-[#0066D6] font-bold text-xs border-r border-[#D6E4F5] rounded-l-xl flex items-center shrink-0 select-none">
               +91
             </span>
             <input
-              type="text"
+              type="tel"
               id="phone"
               name="phone"
+              inputMode="numeric"
               value={formData.phone}
               onChange={handleChange}
+              onKeyDown={handlePhoneKeyDown}
               placeholder="98765 43210"
-              pattern="^[0-9\s-]{1,15}$"
-              maxLength={14}
-              className={`w-full min-w-0 px-3.5 py-3 bg-transparent text-sm placeholder-[#798CA6] transition-all duration-200 focus:outline-none rounded-r-xl phone-input ${
-                (formData.phone.length > 0 && !/^[0-9\s-]*$/.test(formData.phone)) || errors.phone
-                  ? 'is-invalid !text-red-500'
-                  : 'text-[#0C172B]'
+              maxLength={10}
+              className={`w-full min-w-0 px-3.5 py-3 bg-transparent text-sm placeholder-[#798CA6] transition-all duration-200 focus:outline-none rounded-r-xl phone-input text-[#0C172B] ${
+                phoneShakeKey > 0 ? 'is-invalid !text-red-500' : ''
               }`}
             />
           </div>
-          {(errors.phone || (formData.phone.length > 0 && !/^[0-9\s-]*$/.test(formData.phone))) && (
+          {errors.phone && (
             <p className="mt-1.5 text-xs text-red-500 flex items-center gap-1">
-              <AlertCircle className="w-3.5 h-3.5" />{' '}
-              {formData.phone.length > 0 && !/^[0-9\s-]*$/.test(formData.phone)
-                ? 'Only numbers allowed in phone field'
-                : errors.phone}
+              <AlertCircle className="w-3.5 h-3.5" /> {errors.phone}
             </p>
           )}
         </div>
