@@ -494,11 +494,16 @@ export function CoverflowCarousel(props: CoverflowProps) {
     const dirRef = useRef(1)
     const dwellAccRef = useRef(0)
     const moveDurRef = useRef(moveDur)
-    moveDurRef.current = moveDur
     const dwellRef = useRef(dwell)
-    dwellRef.current = dwell
     const reducedRef = useRef(prefersReducedMotion)
-    reducedRef.current = prefersReducedMotion
+
+    useEffect(() => {
+        moveDurRef.current = moveDur
+        dwellRef.current = dwell
+        reducedRef.current = prefersReducedMotion
+    }, [moveDur, dwell, prefersReducedMotion])
+
+    const tickRef = useRef<((t: number) => void) | null>(null)
 
     const tick = useCallback(
         (t: number) => {
@@ -520,7 +525,9 @@ export function CoverflowCarousel(props: CoverflowProps) {
                         dwellAccRef.current = 0
                         targetRef.current += dirRef.current
                     }
-                    rafRef.current = requestAnimationFrame(tick)
+                    if (tickRef.current) {
+                        rafRef.current = requestAnimationFrame(tickRef.current)
+                    }
                     return
                 }
                 rafRef.current = null
@@ -529,10 +536,16 @@ export function CoverflowCarousel(props: CoverflowProps) {
             }
 
             pos.set(cur + Math.sign(diff) * step)
-            rafRef.current = requestAnimationFrame(tick)
+            if (tickRef.current) {
+                rafRef.current = requestAnimationFrame(tickRef.current)
+            }
         },
         [pos]
     )
+
+    useEffect(() => {
+        tickRef.current = tick
+    }, [tick])
 
     const ensureRunning = useCallback(() => {
         if (rafRef.current == null) {

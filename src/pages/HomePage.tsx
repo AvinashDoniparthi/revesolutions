@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState, useSyncExternalStore } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import { createPortal } from 'react-dom';
 import { useNavigate, Link } from 'react-router-dom';
@@ -20,6 +20,10 @@ import { websiteServices } from '../data/services';
 import { companyInfo } from '../data/companyInfo';
 import { showcaseSlides } from '../data/showcase';
 import { useViewportTier, type ViewportTier } from '../lib/useViewportTier';
+
+const subscribeToClient = () => () => {};
+const getClientSnapshot = () => true;
+const getServerSnapshot = () => false;
 
 type ShowcaseSizing = {
   activeWidth: number;
@@ -77,8 +81,7 @@ export const HomePage: React.FC = () => {
    * matches — and unlike gating on `lightboxSlide`, it leaves AnimatePresence
    * mounted so the close animation still plays.
    */
-  const [portalReady, setPortalReady] = useState(false);
-  useEffect(() => setPortalReady(true), []);
+  const portalReady = useSyncExternalStore(subscribeToClient, getClientSnapshot, getServerSnapshot);
 
   useEffect(() => {
     if (lightbox === null) return;
