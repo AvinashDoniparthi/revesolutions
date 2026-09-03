@@ -5,8 +5,10 @@
  */
 
 export const EMAILJS_CONFIG = {
-  SERVICE_ID: 'service_1oijcaw',
-  TEMPLATE_ID_STUDIO: 'template_26lefar', // Email to Rêve Solutions
-  TEMPLATE_ID_CLIENT: 'template_yxwvu6n', // Auto-reply confirmation to Client
-  PUBLIC_KEY: 'nC4zbTXYJlg_nrysU',
+  SERVICE_ID: import.meta.env.VITE_EMAILJS_SERVICE_ID || 'service_1oijcaw',
+  TEMPLATE_ID_STUDIO: import.meta.env.VITE_EMAILJS_TEMPLATE_STUDIO || 'template_26lefar', // Email to Rêve Solutions
+  TEMPLATE_ID_CLIENT: import.meta.env.VITE_EMAILJS_TEMPLATE_CLIENT || 'template_yxwvu6n', // Auto-reply confirmation to Client
+  PUBLIC_KEY: import.meta.env.VITE_EMAILJS_PUBLIC_KEY || '7Id6JMD2BxSOmpZN5',
 };
+
+

@@ -100,56 +100,61 @@ export const ContactForm: React.FC = () => {
         EMAILJS_CONFIG.SERVICE_ID &&
         EMAILJS_CONFIG.TEMPLATE_ID_STUDIO
       ) {
-        // Send full inquiry to studio (reve.solutions4@gmail.com)
-        await emailjs.send(
-          EMAILJS_CONFIG.SERVICE_ID,
-          EMAILJS_CONFIG.TEMPLATE_ID_STUDIO,
-          {
-            name: formData.name,
-            client_name: formData.name,
-            from_name: formData.name,
-            email: formData.email,
-            client_email: formData.email,
-            reply_to: formData.email,
-            phone: formData.phone ? `+91 ${formData.phone}` : 'Not specified',
-            client_phone: formData.phone ? `+91 ${formData.phone}` : 'Not specified',
-            business_name: formData.businessName || 'Not specified',
-            current_website: formData.currentWebsite || 'None / Not specified',
-            service: formData.service,
-            service_required: formData.service,
-            title: `${formData.service} Inquiry`,
-            message: formData.message,
-            to_email: 'reve.solutions4@gmail.com',
-          },
-          EMAILJS_CONFIG.PUBLIC_KEY
-        );
-
-        // Send automated confirmation receipt directly to the client's inbox
-        if (EMAILJS_CONFIG.TEMPLATE_ID_CLIENT) {
+        try {
+          // Send full inquiry to studio (reve.solutions4@gmail.com)
           await emailjs.send(
             EMAILJS_CONFIG.SERVICE_ID,
-            EMAILJS_CONFIG.TEMPLATE_ID_CLIENT,
+            EMAILJS_CONFIG.TEMPLATE_ID_STUDIO,
             {
               name: formData.name,
-              to_name: formData.name,
+              client_name: formData.name,
+              from_name: formData.name,
               email: formData.email,
-              to_email: formData.email,
-              reply_to: 'reve.solutions4@gmail.com',
+              client_email: formData.email,
+              reply_to: formData.email,
+              phone: formData.phone ? `+91 ${formData.phone}` : 'Not specified',
+              client_phone: formData.phone ? `+91 ${formData.phone}` : 'Not specified',
+              business_name: formData.businessName || 'Not specified',
+              current_website: formData.currentWebsite || 'None / Not specified',
               service: formData.service,
-              service_requested: formData.service,
-              title: formData.service,
+              service_required: formData.service,
+              title: `${formData.service} Inquiry`,
               message: formData.message,
-              message_copy: formData.message,
+              to_email: 'reve.solutions4@gmail.com',
             },
             EMAILJS_CONFIG.PUBLIC_KEY
-          ).catch((e) => console.warn('Client autoresponder send notice:', e));
-        }
+          );
 
-        isSent = true;
+          // Send automated confirmation receipt directly to the client's inbox
+          if (EMAILJS_CONFIG.TEMPLATE_ID_CLIENT) {
+            await emailjs.send(
+              EMAILJS_CONFIG.SERVICE_ID,
+              EMAILJS_CONFIG.TEMPLATE_ID_CLIENT,
+              {
+                name: formData.name,
+                to_name: formData.name,
+                email: formData.email,
+                to_email: formData.email,
+                reply_to: 'reve.solutions4@gmail.com',
+                service: formData.service,
+                service_requested: formData.service,
+                title: formData.service,
+                message: formData.message,
+                message_copy: formData.message,
+              },
+              EMAILJS_CONFIG.PUBLIC_KEY
+            ).catch((e) => console.warn('Client autoresponder send notice:', e));
+          }
+
+          isSent = true;
+        } catch (emailjsErr) {
+          console.warn('EmailJS delivery failed, trying fallback dispatch:', emailjsErr);
+        }
       }
 
       // 2. Fallback: Web3Forms submission to reve.solutions4@gmail.com
       if (!isSent) {
+        const web3Key = import.meta.env.VITE_WEB3FORMS_ACCESS_KEY || '7ed2caf2-26ab-43c0-b7b4-89671e3a93f9';
         const response = await fetch('https://api.web3forms.com/submit', {
           method: 'POST',
           headers: {
@@ -157,7 +162,7 @@ export const ContactForm: React.FC = () => {
             Accept: 'application/json',
           },
           body: JSON.stringify({
-            access_key: '7ed2caf2-26ab-43c0-b7b4-89671e3a93f9',
+            access_key: web3Key,
             from_name: 'Rêve Solutions Contact Form',
             subject: `New Website Inquiry: ${formData.name} (${formData.service})`,
             name: formData.name,
