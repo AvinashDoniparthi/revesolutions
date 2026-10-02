@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
+import { transition } from './lib/motion';
 import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
-import { AnimatePresence, motion } from 'framer-motion';
+import { AnimatePresence, MotionConfig, motion } from 'framer-motion';
 import { Navbar } from './components/Navbar';
 import { Footer } from './components/Footer';
 import { HomePage } from './pages/HomePage';
@@ -17,7 +18,9 @@ const ScrollToTop: React.FC = () => {
   useEffect(() => {
     if (!hash) {
       window.scrollTo(0, 0);
+      return;
     }
+    document.getElementById(hash.slice(1))?.scrollIntoView({ behavior: 'smooth' });
   }, [pathname, hash]);
 
   return null;
@@ -40,7 +43,7 @@ const AnimatedRoutes: React.FC = () => {
         initial={{ opacity: 0, y: 8 }}
         animate={{ opacity: 1, y: 0 }}
         exit={{ opacity: 0, y: -8 }}
-        transition={{ duration: 0.35, ease: 'easeInOut' }}
+        transition={{ ...transition('base') }}
         className="flex-1"
       >
         <Routes location={location}>
@@ -61,17 +64,25 @@ const AnimatedRoutes: React.FC = () => {
  * `BrowserRouter` — see `src/entry-server.tsx`.
  */
 export const AppRoutes: React.FC = () => (
-  <>
+  /**
+   * `reducedMotion="user"` makes every `motion` element on the site honour the
+   * OS setting in one place: transform and layout animations are dropped for
+   * anyone who asks for reduced motion, while opacity fades still run so
+   * content does not appear without explanation. Components that animate
+   * outside Motion (the services conveyor, the CSS keyframes in index.css)
+   * gate themselves separately.
+   */
+  <MotionConfig reducedMotion="user">
     <ScrollToTop />
     <SEOHead />
-    <div className="min-h-screen bg-[#F5F5F7] text-[#1D1D1F] flex flex-col selection:bg-[#0071E3]/20 selection:text-[#0071E3]">
+    <div className="min-h-[100dvh] bg-ground text-ink flex flex-col selection:bg-brand/20 selection:text-brand">
       <Navbar />
       <main className="flex-1">
         <AnimatedRoutes />
       </main>
       <Footer />
     </div>
-  </>
+  </MotionConfig>
 );
 
 export function App() {

@@ -17,18 +17,17 @@ export const websiteServices: WebsiteService[] = [
     id: "website-development",
     title: "Website Development",
     tagline: "Professional websites designed specifically for your business.",
-    description: "We design and build clean, fast, and responsive websites tailored to your brand, audience, and commercial goals. From business storefronts to dedicated service pages, every site is crafted from the ground up for maximum visual impact and mobile performance.",
+    description: "We design and build your site as custom code, not as a page-builder template. It is laid out for the people you actually sell to, it holds together on a phone, and it gives visitors a clear route to contacting you.",
     features: [
       "Business websites",
       "Landing pages",
       "Portfolio websites",
       "Service websites",
       "Responsive design",
-      "Modern UI/UX",
       "Mobile optimization",
       "Website deployment"
     ],
-    businessBenefit: "Establishes immediate trust with potential clients, delivers flawless mobile user experience, and gives your business a modern digital presence.",
+    businessBenefit: "Visitors land on something that looks like a real business, works on the phone they are holding, and tells them how to get in touch.",
     iconName: "Globe"
   },
   {
@@ -44,14 +43,14 @@ export const websiteServices: WebsiteService[] = [
       "Adding/removing sections",
       "Routine website changes"
     ],
-    businessBenefit: "Saves hours of frustration, prevents outdated information from hurting customer conversions, and keeps your online presence aligned with your evolving business.",
+    businessBenefit: "You send us the change and it goes live, usually the same day. Nobody on your team has to learn a page builder or remember a login.",
     iconName: "FileEdit"
   },
   {
     id: "website-maintenance",
     title: "Website Maintenance",
     tagline: "Keep your website reliable, functional and performing properly.",
-    description: "A website requires continuous care to stay fast, secure, and compatible across browsers. We perform regular health checks, patch technical vulnerabilities, fix broken elements, and optimize page load speeds on a continuous monthly basis.",
+    description: "Sites drift. Links break, dependencies age, pages slow down. We run regular checks, patch what needs patching, and fix things before a customer finds them.",
     features: [
       "Bug fixing",
       "Broken page fixes",
@@ -60,14 +59,14 @@ export const websiteServices: WebsiteService[] = [
       "Compatibility fixes",
       "Routine checks"
     ],
-    businessBenefit: "Guarantees high website uptime, shields your domain from vulnerabilities, and ensures visitors never encounter broken links or slow load speeds.",
+    businessBenefit: "Problems get found and fixed on our schedule, rather than discovered by a customer on yours.",
     iconName: "Wrench"
   },
   {
     id: "website-support",
     title: "Ongoing Website Support",
     tagline: "Whenever your website needs attention, we're here.",
-    description: "When you have a question, an urgent update request, or a technical issue on your site, you have direct access to our team. We handle website troubleshooting rapidly so your business never misses a lead.",
+    description: "When something needs attention you message the people who built your site, not a ticket queue. No account manager relaying it to someone else.",
     features: [
       "Website troubleshooting",
       "Issue resolution",
@@ -75,7 +74,7 @@ export const websiteServices: WebsiteService[] = [
       "Technical assistance",
       "Ongoing improvements"
     ],
-    businessBenefit: "Provides total peace of mind with a dedicated team ready to resolve website issues immediately.",
+    businessBenefit: "You have someone to ask, and they already know how your site is put together.",
     iconName: "Headphones"
   }
 ];

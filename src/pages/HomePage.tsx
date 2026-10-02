@@ -1,7 +1,8 @@
 import React, { useCallback, useEffect, useState, useSyncExternalStore } from 'react';
+import { ease, transition, duration } from '../lib/motion';
 import { AnimatePresence, motion } from 'framer-motion';
 import { createPortal } from 'react-dom';
-import { useNavigate, Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import {
   CheckCircle2,
   Paintbrush,
@@ -12,7 +13,6 @@ import {
 import { Button } from '../components/Button';
 import { SectionHeading } from '../components/SectionHeading';
 import { ServiceCard } from '../components/ServiceCard';
-import { WebsiteConfigurator } from '../components/WebsiteConfigurator';
 import { RoundCarousel } from '../components/RoundCarousel';
 import { CoverflowCarousel } from '../components/CoverflowCarousel';
 import { ProcessStepCard } from '../components/ProcessStep';
@@ -55,7 +55,6 @@ const CONVEYOR_SIZES: Record<ViewportTier, { cardWidth: number; cardHeight: numb
 };
 
 export const HomePage: React.FC = () => {
-  const navigate = useNavigate();
 
   // Which showcase screenshot is centred, so the caption below the carousel can
   // describe it. The handler must stay referentially stable — CoverflowCarousel
@@ -103,33 +102,45 @@ export const HomePage: React.FC = () => {
   return (
     <div className="space-y-16 sm:space-y-24 pb-20 pt-24 sm:pt-28 relative">
       {/* Cohesive Ambient Blue Atmosphere Orbs */}
-      <div className="absolute top-10 left-1/2 -translate-x-1/2 w-[300px] h-[140px] xs:w-[380px] xs:h-[180px] sm:w-[600px] sm:h-[280px] md:w-[700px] md:h-[330px] lg:w-[900px] lg:h-[420px] bg-gradient-to-b from-[#0066D6]/10 via-[#0066D6]/3 to-transparent rounded-full blur-[80px] sm:blur-[120px] lg:blur-[140px] pointer-events-none -z-10" />
+      <div className="absolute top-10 left-1/2 -translate-x-1/2 w-[300px] h-[140px] xs:w-[380px] xs:h-[180px] sm:w-[600px] sm:h-[280px] md:w-[700px] md:h-[330px] lg:w-[900px] lg:h-[420px] bg-gradient-to-b from-brand/10 via-brand/5 to-transparent rounded-full blur-[80px] sm:blur-[120px] lg:blur-[140px] pointer-events-none -z-10" />
 
 
       {/* =========================================================================
           1. APPLE STORE HERO & 3D ROUND SERVICES CAROUSEL
           ========================================================================= */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="pb-6 border-b border-[#D5E4F5]">
+        <div className="pb-6 border-b border-line">
           <motion.div
             initial={{ opacity: 0, y: 12 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.45, ease: 'easeOut' }}
+            transition={{ ...transition('slow'), ease: ease.entrance }}
             className="max-w-3xl space-y-2"
           >
-            <h1 className="text-3xl sm:text-5xl lg:text-[54px] tracking-tight leading-[1.08]">
-              <span className="font-bold text-[#0C172B]">Websites.</span>{' '}
-              <span className="font-semibold text-[#475569]">Fully built and managed by real people.</span>
+            <h1 className="text-3xl sm:text-5xl lg:text-display tracking-tight leading-[1.08]">
+              <span className="font-bold text-ink">Websites.</span>{' '}
+              <span className="font-semibold text-ink-2">Fully built and managed by real people.</span>
             </h1>
 
             {/*
               The H1 alone gave crawlers no context and never named the brand.
-              This paragraph is the keyword-bearing copy for the page — it was
-              already written in companyInfo.heroSubtext but rendered nowhere.
+              This paragraph is the keyword-bearing copy for the page. Kept
+              under 20 words so the headline, the copy and the CTA all sit in
+              the first viewport together.
             */}
-            <p className="text-base sm:text-lg text-[#475569] max-w-2xl leading-relaxed font-normal pt-1">
+            <p className="text-base sm:text-lg text-ink-2 max-w-2xl leading-relaxed font-normal pt-1">
               {companyInfo.heroSubtext}
             </p>
+
+            {/* The hero had no CTA at all: the only thing to act on above the
+                fold was an autoplaying carousel. */}
+            <div className="flex flex-wrap items-center gap-3 pt-3">
+              <Button variant="primary" size="lg" showArrow to="/contact">
+                Let's Talk
+              </Button>
+              <Button variant="outline" size="lg" to="/services">
+                See what we do
+              </Button>
+            </div>
           </motion.div>
         </div>
 
@@ -145,77 +156,70 @@ export const HomePage: React.FC = () => {
       </section>
 
       {/* =========================================================================
-          2. "THE LATEST" — LARGE APPLE STORE WIDGET CARDS
+          2. "WHAT YOU GET": one wide statement over two equal cards.
+
+          This used to be a 7/5 bento whose wide cell existed to hold a project
+          preview widget. The widget showed the same four projects as the
+          Showcase section further down this page, and it sat directly under a
+          headline reading "not a template" while rendering a four-tab strip
+          that looked exactly like a template picker. With it gone the 7/5 split
+          had nothing justifying it, so the strongest claim takes the full width
+          and carries itself on type, and the two operational claims sit beneath
+          as the peers they are.
           ========================================================================= */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6">
         <SectionHeading
-          title="The latest."
-          subtitle="Take a look at what's new and crafted for your business."
+          title="What you get."
+          subtitle="Built properly once, then kept that way."
         />
 
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch">
+        <div className="space-y-6">
 
-          {/* Card 1: Full-width / 7-col Interactive Studio Mockup Card */}
-          <div className="lg:col-span-7 apple-card p-6 xs:p-8 sm:p-10 space-y-6 flex flex-col justify-between hover:border-[#A9CEF7] transition-all">
-            <div className="space-y-2.5">
-              <span className="text-[11px] font-bold uppercase tracking-wider text-[#0066D6] bg-[#E5F1FF] border border-[#BFDBFE] px-3.5 py-1 rounded-full inline-block shadow-2xs">
-                CUSTOM WEB STUDIO
-              </span>
-              <h2 className="text-2xl sm:text-3xl font-bold text-[#0C172B] tracking-tight leading-snug">
-                Handcrafted design.<br />
-                Tailored specifically for your business.
-              </h2>
-              <p className="text-sm text-[#475569] max-w-lg leading-relaxed font-normal">
-                We write clean, bespoke code to deliver ultra-fast loading speeds, pristine mobile responsiveness, and high conversion rates.
-              </p>
-            </div>
-
-            <div className="pt-2">
-              <WebsiteConfigurator />
-            </div>
+          {/* The differentiator, full width. Tinted rather than white so the
+              group is not three identical card surfaces in a row. */}
+          <div className="rounded-3xl bg-brand-tint border border-line-strong p-6 xs:p-8 sm:p-10 space-y-3">
+            <h3 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-ink tracking-tight leading-snug max-w-3xl">
+              Design built around your business, not a template.
+            </h3>
+            <p className="text-sm sm:text-base text-ink-2 max-w-2xl leading-relaxed font-normal">
+              Every site is written as custom code, so it loads quickly, holds its layout on a phone, and gives visitors a clear path to contacting you.
+            </p>
           </div>
 
-          {/* Right Column: 2 Stacked Apple Widget Cards (5-col) */}
-          <div className="lg:col-span-5 flex flex-col gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 items-stretch">
 
-            {/* Card 2: Monthly Care Apple Widget */}
-            <div className="apple-card p-6 xs:p-8 space-y-4 flex-1 flex flex-col justify-between hover:border-[#A9CEF7] transition-all">
+            {/* Card: ongoing care */}
+            <div className="apple-card p-6 xs:p-8 space-y-4 flex flex-col justify-between hover:border-line-hover transition-all">
               <div className="space-y-2.5">
-                <span className="text-[11px] font-bold uppercase tracking-wider text-[#0066D6] bg-[#E5F1FF] border border-[#BFDBFE] px-3.5 py-1 rounded-full inline-block shadow-2xs">
-                  DEDICATED CARE
-                </span>
-                <h3 className="text-2xl font-bold text-[#0C172B] tracking-tight">
-                  Unlimited monthly edits. Hand over your website.
+                <h3 className="text-2xl font-bold text-ink tracking-tight">
+                  Hand over your website. We keep it current.
                 </h3>
-                <p className="text-sm text-[#475569] leading-relaxed">
-                  Need new pictures, text changes, seasonal promos, or layout tweaks? Simply message us and our team handles it promptly.
+                <p className="text-sm text-ink-2 leading-relaxed">
+                  Need new pictures, text changes, seasonal promos, or layout tweaks? Simply message us and our team handles it.
                 </p>
               </div>
 
-              <div className="pt-4 border-t border-[#D5E4F5] flex items-center justify-between">
-                <span className="text-xs text-[#0066D6] font-semibold">One simple monthly plan</span>
-                <Button variant="primary" size="sm" onClick={() => navigate('/contact')}>
-                  Inquire Now
+              <div className="pt-4 border-t border-line flex items-center justify-between gap-3">
+                <span className="text-xs text-brand font-semibold">Build once, then we maintain it</span>
+                <Button variant="primary" size="sm" to="/contact">
+                  Let's Talk
                 </Button>
               </div>
             </div>
 
-            {/* Card 3: Performance & SEO Widget */}
-            <div className="apple-card p-6 xs:p-8 space-y-4 flex-1 flex flex-col justify-between hover:border-[#A9CEF7] transition-all">
+            {/* Card: performance and hosting */}
+            <div className="apple-card p-6 xs:p-8 space-y-4 flex flex-col justify-between hover:border-line-hover transition-all">
               <div className="space-y-2.5">
-                <span className="text-[11px] font-bold uppercase tracking-wider text-[#0066D6] bg-[#E5F1FF] border border-[#BFDBFE] px-3.5 py-1 rounded-full inline-block shadow-2xs">
-                  SPEED &amp; SECURITY
-                </span>
-                <h3 className="text-2xl font-bold text-[#0C172B] tracking-tight">
-                  100/100 PageSpeed &amp; bulletproof hosting.
+                <h3 className="text-2xl font-bold text-ink tracking-tight">
+                  Fast pages, and hosting we look after.
                 </h3>
-                <p className="text-sm text-[#475569] leading-relaxed">
-                  Fast sites rank higher on Google and convert more visitors. Daily automated backups and SSL security included.
+                <p className="text-sm text-ink-2 leading-relaxed">
+                  We build to hit 95+ on Google PageSpeed Insights, because faster sites rank better and lose fewer visitors. Daily automated backups and SSL are included.
                 </p>
               </div>
 
-              <div className="pt-4 border-t border-[#D5E4F5]">
-                <Link to="/services#website-maintenance" className="text-xs font-semibold text-[#0066D6] hover:underline flex items-center gap-1">
+              <div className="pt-4 border-t border-line">
+                <Link to="/services#website-maintenance" className="text-xs font-semibold text-brand hover:underline flex items-center gap-1">
                   <span>See security &amp; performance details</span>
                   <span aria-hidden="true">&gt;</span>
                 </Link>
@@ -228,7 +232,13 @@ export const HomePage: React.FC = () => {
       </section>
 
       {/* =========================================================================
-          3. "THE RÊVE DIFFERENCE" — 4 FEATURE WIDGET CARDS
+          3. "THE RÊVE DIFFERENCE"
+
+          Four points, deliberately not four cards. The section directly above
+          is a card grid and the one below is another, so boxing these too made
+          three consecutive card rows read as one undifferentiated wall.
+          Elevation is not communicating anything here, so a divided list does
+          the grouping instead.
           ========================================================================= */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6">
         <SectionHeading
@@ -236,48 +246,40 @@ export const HomePage: React.FC = () => {
           subtitle="Even more reasons to partner with our web studio."
         />
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-
-          <div className="apple-card p-6 xs:p-7 space-y-3 hover:border-[#A9CEF7] transition-all">
-            <div className="w-11 h-11 rounded-2xl bg-[#E5F1FF] border border-[#BFDBFE] flex items-center justify-center text-[#0066D6] shadow-xs">
-              <Paintbrush className="w-5 h-5 text-[#0066D6]" />
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12">
+          {[
+            {
+              icon: Paintbrush,
+              title: 'Code written for you',
+              body: 'No drag-and-drop page builders. Clean markup that search engines can read and browsers render quickly.',
+            },
+            {
+              icon: Users,
+              title: 'A team you can reach',
+              body: 'You work directly with the designers and developers who know your website, not a ticket queue.',
+            },
+            {
+              icon: CheckCircle2,
+              title: 'Pricing you can see coming',
+              body: 'A one-time cost to build the site, and a separate maintenance quote agreed before we start. No hourly charges, no surprise bills.',
+            },
+            {
+              icon: Clock,
+              title: 'Edits inside a day',
+              body: 'Content updates, new pages and media changes turned around within 24 hours of your request.',
+            },
+          ].map(({ icon: Icon, title, body }) => (
+            <div
+              key={title}
+              className="flex items-start gap-4 py-6 border-b border-line last:border-b-0 md:[&:nth-last-child(2)]:border-b-0"
+            >
+              <Icon className="w-5 h-5 text-brand shrink-0 mt-1" strokeWidth={1.75} />
+              <div className="space-y-1.5">
+                <h3 className="text-lg font-bold text-ink tracking-tight">{title}</h3>
+                <p className="text-sm text-ink-2 leading-relaxed font-normal">{body}</p>
+              </div>
             </div>
-            <h3 className="text-lg font-bold text-[#0C172B] tracking-tight">Handcrafted Code</h3>
-            <p className="text-xs text-[#475569] leading-relaxed">
-              No bloated drag-and-drop page builders. Pure clean code optimized for Google search and speed.
-            </p>
-          </div>
-
-          <div className="apple-card p-6 xs:p-7 space-y-3 hover:border-[#A9CEF7] transition-all">
-            <div className="w-11 h-11 rounded-2xl bg-[#E5F1FF] border border-[#BFDBFE] flex items-center justify-center text-[#0066D6] shadow-xs">
-              <Users className="w-5 h-5 text-[#0066D6]" />
-            </div>
-            <h3 className="text-lg font-bold text-[#0C172B] tracking-tight">Dedicated Team</h3>
-            <p className="text-xs text-[#475569] leading-relaxed">
-              Work directly with human web designers and developers who know your website inside and out.
-            </p>
-          </div>
-
-          <div className="apple-card p-6 xs:p-7 space-y-3 hover:border-[#A9CEF7] transition-all">
-            <div className="w-11 h-11 rounded-2xl bg-[#E5F1FF] border border-[#BFDBFE] flex items-center justify-center text-[#0066D6] shadow-xs">
-              <CheckCircle2 className="w-5 h-5 text-[#0066D6]" />
-            </div>
-            <h3 className="text-lg font-bold text-[#0C172B] tracking-tight">Predictable Fee</h3>
-            <p className="text-xs text-[#475569] leading-relaxed">
-              One transparent monthly subscription. Zero surprise bills, maintenance invoices, or hourly charges.
-            </p>
-          </div>
-
-          <div className="apple-card p-6 xs:p-7 space-y-3 hover:border-[#A9CEF7] transition-all">
-            <div className="w-11 h-11 rounded-2xl bg-[#E5F1FF] border border-[#BFDBFE] flex items-center justify-center text-[#0066D6] shadow-xs">
-              <Clock className="w-5 h-5 text-[#0066D6]" />
-            </div>
-            <h3 className="text-lg font-bold text-[#0C172B] tracking-tight">24h Fast Edits</h3>
-            <p className="text-xs text-[#475569] leading-relaxed">
-              Fast turnaround on content updates, new pages, and media updates whenever you request them.
-            </p>
-          </div>
-
+          ))}
         </div>
       </section>
 
@@ -298,7 +300,7 @@ export const HomePage: React.FC = () => {
               description={service.description}
               features={service.features}
               index={index}
-              onClick={() => navigate('/services')}
+              to="/services"
             />
           ))}
         </div>
@@ -315,7 +317,7 @@ export const HomePage: React.FC = () => {
           subtitle="A gallery of websites handcrafted and managed by our studio."
         />
 
-        <div className="w-full rounded-3xl overflow-hidden border border-[#C5DFFD] shadow-sm bg-gradient-to-b from-white to-[#F2F7FD] flex flex-col">
+        <div className="w-full rounded-3xl overflow-hidden border border-line-strong shadow-sm bg-gradient-to-b from-white to-surface-raised flex flex-col">
           <div className="relative h-[240px] sm:h-[340px] lg:h-[420px]">
             <CoverflowCarousel
               images={showcaseSlides}
@@ -325,29 +327,29 @@ export const HomePage: React.FC = () => {
               paused={lightbox !== null}
               onActiveIndexChange={handleActiveSlide}
               onImageClick={openLightbox}
-              transition={{ type: 'tween', duration: 0.6, delay: 2.4, ease: 'easeInOut' }}
+              transition={{ duration: duration.slow, delay: 2.4 }}
               showArrows={true}
-              arrowColor="#0C172B"
+              arrowColor="var(--color-ink)"
               arrowBackground="rgba(255, 255, 255, 0.95)"
               arrowSize={46}
             />
           </div>
 
-          <div className="border-t border-[#DCEAFB] bg-white/70 px-5 sm:px-8 py-5 text-center min-h-[132px] sm:min-h-[120px]">
+          <div className="border-t border-line bg-white/70 px-5 sm:px-8 py-5 text-center min-h-[132px] sm:min-h-[120px]">
             <motion.div
               key={activeSlide}
               initial={{ opacity: 0, y: 8 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.4, ease: 'easeOut' }}
+              transition={{ ...transition('base') }}
               className="max-w-2xl mx-auto space-y-2"
             >
-              <span className="inline-block text-xs font-bold uppercase tracking-wider text-[#0066D6] bg-[#E5F1FF] border border-[#BFDBFE] px-3.5 py-1 rounded-full shadow-2xs">
+              <span className="inline-block text-xs font-bold uppercase tracking-wider text-brand bg-brand-tint border border-line-strong px-3.5 py-1 rounded-full shadow-2xs">
                 {slide.project} &middot; {slide.category}
               </span>
-              <h3 className="text-lg sm:text-xl font-bold text-[#0C172B] tracking-tight">
+              <h3 className="text-lg sm:text-xl font-bold text-ink tracking-tight">
                 {slide.title}
               </h3>
-              <p className="text-sm sm:text-base text-[#475569] leading-relaxed">
+              <p className="text-sm sm:text-base text-ink-2 leading-relaxed">
                 {slide.description}
               </p>
             </motion.div>
@@ -362,12 +364,12 @@ export const HomePage: React.FC = () => {
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
-                transition={{ duration: 0.2, ease: 'easeOut' }}
+                transition={{ ...transition('fast') }}
                 onClick={closeLightbox}
                 role="dialog"
                 aria-modal="true"
-                aria-label={`${lightboxSlide.project} — ${lightboxSlide.title}`}
-                className="fixed inset-0 z-[100] flex items-center justify-center p-4 sm:p-8 bg-[#0C172B]/85 backdrop-blur-sm cursor-zoom-out"
+                aria-label={`${lightboxSlide.project}: ${lightboxSlide.title}`}
+                className="fixed inset-0 z-[100] flex items-center justify-center p-4 sm:p-8 bg-ink/85 backdrop-blur-sm cursor-zoom-out"
               >
                 <button
                   type="button"
@@ -382,24 +384,27 @@ export const HomePage: React.FC = () => {
                   initial={{ opacity: 0, scale: 0.94 }}
                   animate={{ opacity: 1, scale: 1 }}
                   exit={{ opacity: 0, scale: 0.96 }}
-                  transition={{ duration: 0.25, ease: 'easeOut' }}
+                  transition={{ ...transition('fast') }}
                   onClick={(e) => e.stopPropagation()}
                   className="w-full max-w-6xl cursor-default"
                 >
                   <img
                     src={lightboxSlide.srcUrl}
                     alt={lightboxSlide.alt}
+                    width={1024}
+                    height={576}
+                    decoding="async"
                     className="w-full max-h-[72vh] object-contain rounded-2xl bg-white shadow-2xl"
                   />
 
                   <div className="mt-5 text-center space-y-2">
-                    <span className="inline-block text-xs font-bold uppercase tracking-wider text-[#BFDBFE] bg-white/10 border border-white/20 px-3.5 py-1 rounded-full">
+                    <span className="inline-block text-xs font-bold uppercase tracking-wider text-line-strong bg-white/10 border border-white/20 px-3.5 py-1 rounded-full">
                       {lightboxSlide.project} &middot; {lightboxSlide.category}
                     </span>
                     <h3 className="text-lg sm:text-xl font-bold text-white tracking-tight">
                       {lightboxSlide.title}
                     </h3>
-                    <p className="max-w-2xl mx-auto text-sm sm:text-base text-[#CBD9EC] leading-relaxed">
+                    <p className="max-w-2xl mx-auto text-sm sm:text-base text-night-ink leading-relaxed">
                       {lightboxSlide.description}
                     </p>
                   </div>
@@ -445,23 +450,20 @@ export const HomePage: React.FC = () => {
 
 
       {/* =========================================================================
-          8. CALL TO ACTION (Apple Specialist Banner — Midnight Sapphire Luxury)
+          8. CALL TO ACTION: the one dark panel on the page, used once as a close.
           ========================================================================= */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="p-6 xs:p-8 sm:p-12 lg:p-14 rounded-3xl bg-gradient-to-br from-[#061226] via-[#0B1E40] to-[#040C1A] text-white flex flex-col md:flex-row items-center justify-between gap-8 shadow-2xl border border-[#1A4B8C] relative overflow-hidden group">
+        <div className="p-6 xs:p-8 sm:p-12 lg:p-14 rounded-3xl bg-gradient-to-br from-night via-night-2 to-night-3 text-white flex flex-col md:flex-row items-center justify-between gap-8 shadow-2xl border border-night-line relative overflow-hidden group">
           {/* Luminous Sapphire Ambient Lighting */}
-          <div className="absolute -top-24 -right-24 w-80 h-80 bg-[#0066D6]/30 rounded-full blur-[90px] pointer-events-none" />
-          <div className="absolute -bottom-20 -left-20 w-72 h-72 bg-[#004EA8]/30 rounded-full blur-[80px] pointer-events-none" />
+          <div className="absolute -top-24 -right-24 w-80 h-80 bg-brand/30 rounded-full blur-[90px] pointer-events-none" />
+          <div className="absolute -bottom-20 -left-20 w-72 h-72 bg-brand-deep/30 rounded-full blur-[80px] pointer-events-none" />
 
           <div className="space-y-2.5 text-center md:text-left max-w-xl relative z-10">
-            <span className="text-xs font-bold uppercase tracking-wider text-white bg-[#0066D6] px-3.5 py-1 rounded-full inline-block shadow-md shadow-[#0066D6]/35">
-              SPECIALIST CARE
-            </span>
             <h3 className="text-2xl sm:text-3xl lg:text-4xl font-bold tracking-tight text-white">
               Ready to hand over your website care?
             </h3>
-            <p className="text-sm sm:text-base text-[#D0E2FF] font-normal leading-relaxed">
-              Tell us about your business or current website. A specialist will provide a tailored proposal within 24 hours.
+            <p className="text-sm sm:text-base text-night-ink font-normal leading-relaxed">
+              Tell us about your business or your current website, and we will come back with a tailored proposal within 24 hours.
             </p>
           </div>
 
@@ -469,10 +471,10 @@ export const HomePage: React.FC = () => {
             variant="white"
             size="lg"
             showArrow
-            onClick={() => navigate('/contact')}
+            to="/contact"
             className="shrink-0 relative z-10"
           >
-            Get Started Today
+            Let's Talk
           </Button>
         </div>
       </section>

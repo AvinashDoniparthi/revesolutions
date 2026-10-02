@@ -33,22 +33,22 @@ export interface RouteSeo {
 
 export const routeSeo: Record<string, RouteSeo> = {
   '/': {
-    title: 'Rêve Solutions — Websites Built and Managed for You',
+    title: 'Rêve Solutions: Websites Built and Managed for You',
     description:
-      'Rêve Solutions builds custom business websites and manages them for you on one simple monthly plan — content updates, bug fixes, hosting and security all handled by real people.',
+      'Rêve Solutions builds custom business websites, then looks after them for you. Content updates, bug fixes, hosting and security handled by real people.',
   },
   '/services': {
-    title: 'Services — Website Development, Management & Maintenance | Rêve Solutions',
+    title: 'Services: Website Development, Management & Maintenance | Rêve Solutions',
     description:
-      'Website development, monthly website management, maintenance and ongoing support. Rêve Solutions builds your site with handcrafted code, then looks after it every month.',
+      'Website development, management, maintenance and ongoing support. Rêve Solutions builds your site with custom code, then looks after it for you.',
   },
   '/about': {
-    title: 'About Rêve Solutions — A Four-Person Web Studio',
+    title: 'About Rêve Solutions: A Four-Person Web Studio',
     description:
-      'Rêve Solutions is a four-person web studio. We build your website, launch it, and then manage it for you every month — so you never inherit a site nobody maintains.',
+      'Rêve Solutions is a four-person web studio. We build your website, launch it, and then look after it for you, so you never inherit a site nobody maintains.',
   },
   '/contact': {
-    title: 'Contact Rêve Solutions — Talk to a Specialist',
+    title: 'Contact Rêve Solutions: Talk to a Specialist',
     description:
       'Tell us about your business or your current website. A Rêve Solutions specialist will come back with a tailored proposal within 24 hours.',
   },
@@ -131,7 +131,7 @@ const servicesSchema = websiteServices.map((service) => ({
   areaServed: { '@type': 'Place', name: 'Worldwide' },
   hasOfferCatalog: {
     '@type': 'OfferCatalog',
-    name: `${service.title} — what is included`,
+    name: `${service.title}: what is included`,
     itemListElement: service.features.map((feature) => ({
       '@type': 'Offer',
       itemOffered: { '@type': 'Service', name: feature },
@@ -142,14 +142,14 @@ const servicesSchema = websiteServices.map((service) => ({
 /**
  * Built from copy that already exists elsewhere on the site. These target the
  * long-tail queries around the actual differentiator — a website built *and*
- * managed on a monthly plan — which is where a site this size can realistically
+ * looked after afterwards — which is where a site this size can realistically
  * rank.
  */
 export const faqs: { question: string; answer: string }[] = [
   {
-    question: 'What is included in a monthly website management plan?',
+    question: 'What is included in website management?',
     answer:
-      'Everything needed to keep your site current: content and text changes, image updates, new or edited pages, adding and removing sections, plus routine changes whenever you ask. You message us, our team handles it — usually within 24 hours.',
+      'Everything needed to keep your site current: content and text changes, image updates, new or edited pages, adding and removing sections, plus routine changes whenever you ask. You message us, our team handles it, usually within 24 hours.',
   },
   {
     question: 'What does website maintenance cover?',
@@ -159,7 +159,7 @@ export const faqs: { question: string; answer: string }[] = [
   {
     question: 'Do you build custom websites or use page builders?',
     answer:
-      'Every site is handcrafted code. We do not use bloated drag-and-drop page builders, which is what lets us deliver fast loading speeds, clean mobile responsiveness and markup that search engines can read properly.',
+      'Every site is written as custom code. We do not use drag-and-drop page builders, which is what lets us deliver fast loading speeds, mobile layouts that hold up, and markup that search engines can read properly.',
   },
   {
     question: 'How quickly are content edits made?',
@@ -169,22 +169,22 @@ export const faqs: { question: string; answer: string }[] = [
   {
     question: 'How much does it cost?',
     answer:
-      'One transparent monthly subscription covering development, hosting, management and maintenance. There are no surprise bills, separate maintenance invoices or hourly charges. Tell us about your business and we will send a tailored proposal within 24 hours.',
+      'The build is a one-time cost. Maintenance is quoted separately, based on the site and what it needs. There are no hourly charges and no surprise bills. Tell us about your business and we will send you both figures within 24 hours.',
   },
   {
     question: 'What happens after my website launches?',
     answer:
-      'Nothing changes for you — that is the point. Most web designers hand over the login credentials and disappear. We configure your domain, optimise performance, run security tests, publish the site, and then keep managing it every month.',
+      'Nothing changes for you. That is the point. Most web designers hand over the login credentials and disappear. We configure your domain, optimise performance, run security tests, publish the site, and then keep looking after it.',
   },
   {
     question: 'Do you work with businesses outside India?',
     answer:
-      'Yes. Rêve Solutions works remotely with businesses anywhere in the world. Everything from the first design conversation to monthly edits happens online.',
+      'Yes. Rêve Solutions works remotely with businesses anywhere in the world. Everything from the first design conversation to ongoing edits happens online.',
   },
   {
     question: 'Can you take over a website someone else built?',
     answer:
-      'Yes. If you already have a site and just need someone to manage, maintain and support it, we can take it over and look after it on the same monthly plan.',
+      'Yes. If you already have a site and just need someone to manage, maintain and support it, we can take it over and look after it under a maintenance arrangement.',
   },
 ];
 
@@ -265,7 +265,7 @@ export const renderHeadTags = (pathname: string): string => {
     `<meta property="og:image" content="${OG_IMAGE}" />`,
     `<meta property="og:image:width" content="${OG_IMAGE_SIZE.width}" />`,
     `<meta property="og:image:height" content="${OG_IMAGE_SIZE.height}" />`,
-    `<meta property="og:image:alt" content="${escapeAttr(BRAND + ' — ' + companyInfo.tagline)}" />`,
+    `<meta property="og:image:alt" content="${escapeAttr(BRAND + ': ' + companyInfo.tagline)}" />`,
     ``,
     `<meta name="twitter:card" content="summary_large_image" />`,
     `<meta name="twitter:title" content="${t}" />`,

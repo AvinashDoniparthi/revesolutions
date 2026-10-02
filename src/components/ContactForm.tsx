@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { CheckCircle2, AlertCircle, Loader2 } from 'lucide-react';
+import { CheckCircle2, AlertCircle } from 'lucide-react';
 import emailjs from '@emailjs/browser';
 import { Button } from './Button';
 import { EMAILJS_CONFIG } from '../lib/emailConfig';
@@ -19,7 +19,6 @@ interface FormErrors {
   name?: string;
   email?: string;
   phone?: string;
-  service?: string;
   message?: string;
 }
 
@@ -63,10 +62,6 @@ export const ContactForm: React.FC = () => {
         newErrors.phone = 'Please enter a valid 10-digit mobile number';
       }
     }
-    if (!formData.service) {
-      newErrors.service = 'Please select a service';
-    }
-
     if (!formData.message.trim()) {
       newErrors.message = 'Please provide details about your website requirements';
     } else if (formData.message.trim().length < 10) {
@@ -249,14 +244,16 @@ export const ContactForm: React.FC = () => {
       <motion.div
         initial={{ opacity: 0, scale: 0.96 }}
         animate={{ opacity: 1, scale: 1 }}
-        className="apple-card p-6 xs:p-8 sm:p-12 text-center space-y-4 shadow-xl border border-[#BFDBFE]"
+        role="status"
+        aria-live="polite"
+        className="apple-card p-6 xs:p-8 sm:p-12 text-center space-y-4 shadow-xl border border-line-strong"
       >
-        <div className="w-14 h-14 rounded-full bg-[#E5F1FF] text-[#0066D6] border border-[#BFDBFE] mx-auto flex items-center justify-center">
+        <div className="w-14 h-14 rounded-full bg-brand-tint text-brand border border-line-strong mx-auto flex items-center justify-center">
           <CheckCircle2 className="w-8 h-8" />
         </div>
-        <h3 className="text-2xl font-bold text-[#0C172B]">Inquiry Received</h3>
-        <p className="text-sm text-[#475569] max-w-md mx-auto leading-relaxed font-normal">
-          Thank you for reaching out to Rêve Solutions! A confirmation receipt has been sent to your email inbox, and a dedicated specialist will review your details and get back to you within 24 hours.
+        <h2 className="text-2xl font-bold text-ink">Inquiry received</h2>
+        <p className="text-sm text-ink-2 max-w-md mx-auto leading-relaxed font-normal">
+          A confirmation receipt is on its way to your inbox. One of us will read your details and come back to you within 24 hours.
         </p>
         <div className="pt-3">
           <Button 
@@ -272,12 +269,21 @@ export const ContactForm: React.FC = () => {
   }
 
   return (
-    <form onSubmit={handleSubmit} noValidate className="apple-card p-6 sm:p-8 md:p-10 space-y-6 shadow-xl border border-[#D8E6F7]">
+    <form
+      onSubmit={handleSubmit}
+      noValidate
+      aria-labelledby="contact-form-heading"
+      className="apple-card p-6 sm:p-8 md:p-10 space-y-6 shadow-xl border border-line"
+    >
+      <h2 id="contact-form-heading" className="text-2xl font-bold text-ink tracking-tight">
+        Tell us what you need
+      </h2>
+
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
         {/* Name */}
         <div>
-          <label htmlFor="name" className="block text-xs font-semibold text-[#0C172B] mb-1.5">
-            Full Name <span className="text-[#0066D6]">*</span>
+          <label htmlFor="name" className="block text-xs font-semibold text-ink mb-1.5">
+            Full Name <span className="text-brand">*</span>
           </label>
           <input
             type="text"
@@ -285,22 +291,24 @@ export const ContactForm: React.FC = () => {
             name="name"
             value={formData.name}
             onChange={handleChange}
-            placeholder="Jane Smith"
-            className={`w-full px-4 py-3 rounded-xl bg-[#F0F5FA] border text-sm text-[#0C172B] placeholder-[#798CA6] focus:outline-none focus:border-[#0066D6] focus:bg-white transition-all duration-200 ${
-              errors.name ? 'border-red-500' : 'border-[#D6E4F5]'
+            placeholder="Priya Raghavan"
+            aria-invalid={errors.name ? true : undefined}
+            aria-describedby={errors.name ? 'name-error' : undefined}
+            className={`w-full px-4 py-3 rounded-2xl bg-surface-sunken border text-sm text-ink placeholder-ink-3 focus:border-brand focus:bg-white transition-all duration-200 ${
+              errors.name ? 'border-danger' : 'border-line'
             }`}
           />
           {errors.name && (
-            <p className="mt-1.5 text-xs text-red-500 flex items-center gap-1">
-              <AlertCircle className="w-3.5 h-3.5" /> {errors.name}
+            <p id="name-error" className="mt-1.5 text-xs text-danger flex items-center gap-1">
+              <AlertCircle className="w-3.5 h-3.5" aria-hidden="true" /> {errors.name}
             </p>
           )}
         </div>
 
         {/* Business Name */}
         <div>
-          <label htmlFor="businessName" className="block text-xs font-semibold text-[#0C172B] mb-1.5">
-            Business Name <span className="text-[#798CA6] text-[11px] font-normal">(optional)</span>
+          <label htmlFor="businessName" className="block text-xs font-semibold text-ink mb-1.5">
+            Business Name <span className="text-ink-3 text-xs font-normal">(optional)</span>
           </label>
           <input
             type="text"
@@ -309,7 +317,7 @@ export const ContactForm: React.FC = () => {
             value={formData.businessName}
             onChange={handleChange}
             placeholder="Acme Studio"
-            className="w-full px-4 py-3 rounded-xl bg-[#F0F5FA] border border-[#D6E4F5] focus:border-[#0066D6] focus:bg-white text-sm text-[#0C172B] placeholder-[#798CA6] transition-all duration-200 focus:outline-none"
+            className="w-full px-4 py-3 rounded-2xl bg-surface-sunken border border-line focus:border-brand focus:bg-white text-sm text-ink placeholder-ink-3 transition-all duration-200"
           />
         </div>
       </div>
@@ -317,8 +325,8 @@ export const ContactForm: React.FC = () => {
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
         {/* Email */}
         <div>
-          <label htmlFor="email" className="block text-xs font-semibold text-[#0C172B] mb-1.5">
-            Email Address <span className="text-[#0066D6]">*</span>
+          <label htmlFor="email" className="block text-xs font-semibold text-ink mb-1.5">
+            Email Address <span className="text-brand">*</span>
           </label>
           <input
             type="email"
@@ -327,37 +335,49 @@ export const ContactForm: React.FC = () => {
             value={formData.email}
             onChange={handleChange}
             placeholder="jane@company.com"
-            className={`w-full px-4 py-3 rounded-xl bg-[#F0F5FA] border text-sm text-[#0C172B] placeholder-[#798CA6] focus:outline-none focus:border-[#0066D6] focus:bg-white transition-all duration-200 ${
-              errors.email ? 'border-red-500' : 'border-[#D6E4F5]'
+            aria-invalid={errors.email ? true : undefined}
+            aria-describedby={errors.email ? 'email-error' : undefined}
+            className={`w-full px-4 py-3 rounded-2xl bg-surface-sunken border text-sm text-ink placeholder-ink-3 focus:border-brand focus:bg-white transition-all duration-200 ${
+              errors.email ? 'border-danger' : 'border-line'
             }`}
           />
           {errors.email && (
-            <p className="mt-1.5 text-xs text-red-500 flex items-center gap-1">
-              <AlertCircle className="w-3.5 h-3.5" /> {errors.email}
+            <p id="email-error" className="mt-1.5 text-xs text-danger flex items-center gap-1">
+              <AlertCircle className="w-3.5 h-3.5" aria-hidden="true" /> {errors.email}
             </p>
           )}
         </div>
 
         {/* Phone */}
         <div>
-          <label htmlFor="phone" className="block text-xs font-semibold text-[#0C172B] mb-1.5">
-            Phone Number <span className="text-[#798CA6] text-[11px] font-normal">(optional)</span>
+          <label htmlFor="phone" className="block text-xs font-semibold text-ink mb-1.5">
+            Phone Number <span className="text-ink-3 text-xs font-normal">(optional)</span>
           </label>
           <div
             key={phoneShakeKey}
-            className={`phone-container flex items-center rounded-xl bg-[#F0F5FA] border transition-all duration-200 focus-within:border-[#0066D6] focus-within:bg-white ${
-              phoneShakeKey > 0 ? 'is-invalid !border-red-500' : ''
+            className={`phone-container flex items-center rounded-2xl bg-surface-sunken border transition-all duration-200 focus-within:border-brand focus-within:bg-white ${
+              phoneShakeKey > 0 ? 'is-invalid !border-danger' : ''
             } ${
-              errors.phone ? 'border-red-500' : 'border-[#D6E4F5]'
+              errors.phone ? 'border-danger' : 'border-line'
             }`}
             onAnimationEnd={() => setPhoneShakeKey(0)}
           >
-            <span className="px-3.5 py-3 bg-[#E5F1FF] text-[#0066D6] font-bold text-xs border-r border-[#D6E4F5] rounded-l-xl flex items-center shrink-0 select-none">
+            <span className="px-3.5 py-3 bg-brand-tint text-brand font-bold text-xs border-r border-line rounded-l-2xl flex items-center shrink-0 select-none">
               +91
             </span>
             <input
               type="tel"
               id="phone"
+              aria-invalid={
+                errors.phone || (formData.phone.length > 0 && !/^[0-9\s-]*$/.test(formData.phone))
+                  ? true
+                  : undefined
+              }
+              aria-describedby={
+                errors.phone || (formData.phone.length > 0 && !/^[0-9\s-]*$/.test(formData.phone))
+                  ? 'phone-error'
+                  : undefined
+              }
               name="phone"
               inputMode="numeric"
               value={formData.phone}
@@ -365,13 +385,13 @@ export const ContactForm: React.FC = () => {
               onKeyDown={handlePhoneKeyDown}
               placeholder="98765 43210"
               maxLength={10}
-              className={`w-full min-w-0 px-3.5 py-3 bg-transparent text-sm placeholder-[#798CA6] transition-all duration-200 focus:outline-none rounded-r-xl phone-input text-[#0C172B] ${
-                phoneShakeKey > 0 ? 'is-invalid !text-red-500' : ''
+              className={`w-full min-w-0 px-3.5 py-3 bg-transparent text-sm placeholder-ink-3 transition-all duration-200 rounded-r-2xl phone-input text-ink ${
+                phoneShakeKey > 0 ? 'is-invalid !text-danger' : ''
               }`}
             />
           </div>
           {errors.phone && (
-            <p className="mt-1.5 text-xs text-red-500 flex items-center gap-1">
+            <p id="phone-error" className="mt-1.5 text-xs text-danger flex items-center gap-1">
               <AlertCircle className="w-3.5 h-3.5" /> {errors.phone}
             </p>
           )}
@@ -380,8 +400,8 @@ export const ContactForm: React.FC = () => {
 
       {/* Current Website */}
       <div>
-        <label htmlFor="currentWebsite" className="block text-xs font-semibold text-[#0C172B] mb-1.5">
-          Current Website <span className="text-[#798CA6] text-[11px] font-normal">(optional, if you have one)</span>
+        <label htmlFor="currentWebsite" className="block text-xs font-semibold text-ink mb-1.5">
+          Current Website <span className="text-ink-3 text-xs font-normal">(optional, if you have one)</span>
         </label>
         <input
           type="text"
@@ -390,24 +410,24 @@ export const ContactForm: React.FC = () => {
           value={formData.currentWebsite}
           onChange={handleChange}
           placeholder="https://example.com"
-          className="w-full px-4 py-3 rounded-xl bg-[#F0F5FA] border border-[#D6E4F5] focus:border-[#0066D6] focus:bg-white text-sm text-[#0C172B] placeholder-[#798CA6] transition-all duration-200 focus:outline-none"
+          className="w-full px-4 py-3 rounded-2xl bg-surface-sunken border border-line focus:border-brand focus:bg-white text-sm text-ink placeholder-ink-3 transition-all duration-200"
         />
       </div>
 
       {/* Service Required */}
       <div>
-        <label htmlFor="service" className="block text-xs font-semibold text-[#0C172B] mb-1.5">
-          Service Required <span className="text-[#0066D6]">*</span>
+        <label htmlFor="service" className="block text-xs font-semibold text-ink mb-1.5">
+          Service Required <span className="text-brand">*</span>
         </label>
         <select
           id="service"
           name="service"
           value={formData.service}
           onChange={handleChange}
-          className="w-full px-4 py-3 rounded-xl bg-[#F0F5FA] border border-[#D6E4F5] focus:border-[#0066D6] focus:bg-white text-sm text-[#0C172B] transition-all duration-200 cursor-pointer font-medium focus:outline-none"
+          className="w-full px-4 py-3 rounded-2xl bg-surface-sunken border border-line focus:border-brand focus:bg-white text-sm text-ink transition-all duration-200 cursor-pointer font-medium"
         >
           <option value="Website Development">Website Development (New Site)</option>
-          <option value="Website Management">Website Management (Monthly Updates)</option>
+          <option value="Website Management">Website Management (Ongoing Updates)</option>
           <option value="Website Maintenance">Website Maintenance (Speed & Security)</option>
           <option value="Website Support">Ongoing Website Support</option>
           <option value="Other">Full End-to-End Website Partnership</option>
@@ -416,8 +436,8 @@ export const ContactForm: React.FC = () => {
 
       {/* Message */}
       <div>
-        <label htmlFor="message" className="block text-xs font-semibold text-[#0C172B] mb-1.5">
-          How can we help with your website? <span className="text-[#0066D6]">*</span>
+        <label htmlFor="message" className="block text-xs font-semibold text-ink mb-1.5">
+          How can we help with your website? <span className="text-brand">*</span>
         </label>
         <textarea
           id="message"
@@ -426,26 +446,31 @@ export const ContactForm: React.FC = () => {
           value={formData.message}
           onChange={handleChange}
           placeholder="Tell us about your business, website goals, or what you'd like us to manage..."
-          className={`w-full px-4 py-3 rounded-xl bg-[#F0F5FA] border text-sm text-[#0C172B] placeholder-[#798CA6] focus:outline-none focus:border-[#0066D6] focus:bg-white transition-all duration-200 resize-y ${
-            errors.message ? 'border-red-500' : 'border-[#D6E4F5]'
+          aria-invalid={errors.message ? true : undefined}
+          aria-describedby={errors.message ? 'message-error' : undefined}
+          className={`w-full px-4 py-3 rounded-2xl bg-surface-sunken border text-sm text-ink placeholder-ink-3 focus:border-brand focus:bg-white transition-all duration-200 resize-y ${
+            errors.message ? 'border-danger' : 'border-line'
           }`}
         />
         {errors.message && (
-          <p className="mt-1.5 text-xs text-red-500 flex items-center gap-1">
-            <AlertCircle className="w-3.5 h-3.5" /> {errors.message}
+          <p id="message-error" className="mt-1.5 text-xs text-danger flex items-center gap-1">
+            <AlertCircle className="w-3.5 h-3.5" aria-hidden="true" /> {errors.message}
           </p>
         )}
       </div>
 
       {submitError && (
-        <div className="p-3 rounded-xl bg-red-50 border border-red-200 text-xs text-red-600 flex items-center justify-between gap-2">
+        <div
+          role="alert"
+          className="p-3 rounded-2xl bg-danger-tint border border-danger-line text-xs text-danger flex items-center justify-between gap-2"
+        >
           <div className="flex items-center gap-2">
-            <AlertCircle className="w-4 h-4 text-red-500 shrink-0" />
+            <AlertCircle className="w-4 h-4 text-danger shrink-0" aria-hidden="true" />
             <span>{submitError}</span>
           </div>
           <a
             href="mailto:reve.solutions4@gmail.com"
-            className="underline font-semibold hover:text-red-700 shrink-0"
+            className="underline font-semibold hover:text-ink shrink-0"
           >
             Email Directly
           </a>
@@ -454,29 +479,16 @@ export const ContactForm: React.FC = () => {
 
       {/* Submit Button */}
       <div className="pt-2">
-        <button
+        <Button
           type="submit"
-          disabled={isSubmitting}
-          className="animated-button w-full"
+          size="lg"
+          fullWidth
+          showArrow
+          loading={isSubmitting}
+          loadingLabel="Sending..."
         >
-          {isSubmitting ? (
-            <span className="flex items-center justify-center gap-2 z-10">
-              <Loader2 className="w-4 h-4 animate-spin" />
-              <span>Connecting with specialist...</span>
-            </span>
-          ) : (
-            <>
-              <svg viewBox="0 0 24 24" className="arr-2" xmlns="http://www.w3.org/2000/svg">
-                <path d="M16.1716 10.9999L10.8076 5.63589L12.2218 4.22168L20 11.9999L12.2218 19.778L10.8076 18.3638L16.1716 12.9999H4V10.9999H16.1716Z" />
-              </svg>
-              <span className="text">Send Inquiry to Specialist</span>
-              <span className="circle" />
-              <svg viewBox="0 0 24 24" className="arr-1" xmlns="http://www.w3.org/2000/svg">
-                <path d="M16.1716 10.9999L10.8076 5.63589L12.2218 4.22168L20 11.9999L12.2218 19.778L10.8076 18.3638L16.1716 12.9999H4V10.9999H16.1716Z" />
-              </svg>
-            </>
-          )}
-        </button>
+          Send Inquiry
+        </Button>
       </div>
     </form>
   );

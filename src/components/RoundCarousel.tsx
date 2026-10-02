@@ -2,6 +2,7 @@
 // Smooth, slow, neat rectangular loop with flat-facing cards, wide gaps & cohesive Ice-Blue styling
 
 import React, { useEffect, useRef, useState } from "react";
+import { useReducedMotion } from "framer-motion";
 import {
   Laptop,
   HeartHandshake,
@@ -29,9 +30,9 @@ export interface RectangularCarouselProps {
 }
 
 const DEFAULT_SERVICES: RectangularServiceItem[] = [
-  { name: "Custom Design", icon: Laptop, tagline: "Bespoke handcrafted code" },
-  { name: "Monthly Care", icon: HeartHandshake, tagline: "Unlimited monthly edits" },
-  { name: "Speed & SEO", icon: Zap, tagline: "100/100 Core Vitals score" },
+  { name: "Custom Design", icon: Laptop, tagline: "Built as custom code" },
+  { name: "Ongoing Care", icon: HeartHandshake, tagline: "Managed after launch" },
+  { name: "Speed & SEO", icon: Zap, tagline: "Tuned for Core Web Vitals" },
   { name: "Security & Hosting", icon: ShieldCheck, tagline: "Daily backups & SSL" },
   { name: "Content Edits", icon: FileEdit, tagline: "Fast turnaround updates" },
   { name: "Search Optimization", icon: Search, tagline: "Google search indexing" },
@@ -49,6 +50,7 @@ export function RoundCarousel({
 }: RectangularCarouselProps) {
   const items = services.length > 0 ? services : DEFAULT_SERVICES;
   const count = items.length;
+  const prefersReducedMotion = useReducedMotion();
 
   const containerRef = useRef<HTMLDivElement>(null);
   const cardRefs = useRef<(HTMLDivElement | null)[]>([]);
@@ -127,15 +129,29 @@ export function RoundCarousel({
       rafRef.current = requestAnimationFrame(draw);
     };
 
+    /**
+     * The belt is decorative, so under `prefers-reduced-motion` it is laid out
+     * once and then left alone. Skipping the rAF loop entirely, rather than
+     * slowing it, is what the setting actually asks for.
+     */
+    if (prefersReducedMotion) {
+      updatePositions();
+      return;
+    }
+
     rafRef.current = requestAnimationFrame(draw);
     return () => {
       if (rafRef.current) cancelAnimationFrame(rafRef.current);
     };
-  }, [cardPitch, totalLength, halfSpan, depthZ, pixelsPerSec, count, items]);
+  }, [cardPitch, totalLength, halfSpan, depthZ, pixelsPerSec, count, items, prefersReducedMotion]);
 
   return (
+    /* Decorative only: the belt is `pointerEvents: none` and every service it
+       names is listed properly in the Services section below, so its six card
+       headings were being announced as content for no reason. */
     <div
       ref={containerRef}
+      aria-hidden="true"
       style={{
         ...style,
         width: "100%",
@@ -177,20 +193,20 @@ export function RoundCarousel({
                 willChange: "transform, opacity",
                 transformStyle: "preserve-3d",
               }}
-              className="bg-gradient-to-b from-white via-white to-[#F2F7FD] border border-[#CADDF4] shadow-[0_16px_40px_rgba(12,44,98,0.08),_0_2px_8px_rgba(12,44,98,0.03)] backdrop-blur-md flex flex-col items-center justify-center p-5 gap-3 text-center"
+              className="bg-gradient-to-b from-white via-white to-surface-raised border border-line shadow-[0_16px_40px_rgba(12,44,98,0.08),_0_2px_8px_rgba(12,44,98,0.03)] backdrop-blur-md flex flex-col items-center justify-center p-5 gap-3 text-center"
             >
               {/* Service Icon Container */}
-              <div className="w-12 h-12 rounded-2xl bg-[#E5F1FF] border border-[#BFDBFE] flex items-center justify-center text-[#0066D6] shadow-xs">
-                <Icon className="w-6 h-6 text-[#0066D6]" />
+              <div className="w-12 h-12 rounded-2xl bg-brand-tint border border-line-strong flex items-center justify-center text-brand shadow-xs">
+                <Icon className="w-6 h-6 text-brand" />
               </div>
 
               {/* Service Typography */}
               <div className="space-y-1">
-                <span className="text-sm sm:text-base font-bold text-[#0C172B] block tracking-tight leading-tight">
+                <span className="text-sm sm:text-base font-bold text-ink block tracking-tight leading-tight">
                   {srv.name}
                 </span>
                 {srv.tagline && (
-                  <span className="text-xs text-[#475569] font-medium block">
+                  <span className="text-xs text-ink-2 font-medium block">
                     {srv.tagline}
                   </span>
                 )}

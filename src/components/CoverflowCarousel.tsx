@@ -3,13 +3,6 @@
 
 import * as React from "react"
 import { useCallback, useEffect, useMemo, useRef } from "react"
-const RenderTarget = {
-    current: () => "preview",
-    canvas: "canvas",
-    export: "export",
-    thumbnail: "thumbnail",
-    preview: "preview",
-}
 import {
     motion,
     useMotionValue,
@@ -33,7 +26,6 @@ import {
 // -----------------------------------------------------------------------------
 
 export type CoverflowImage = {
-    src?: any
     srcUrl?: string
     alt?: string
 }
@@ -57,7 +49,13 @@ export type CoverflowProps = {
     paused?: boolean
     onActiveIndexChange?: (index: number) => void
     onImageClick?: (index: number) => void
-    transition?: any
+    /**
+     * Only `duration` and `delay` are honoured. Slide movement is driven by a
+     * hand-rolled rAF integrator that steps linearly, so there is no easing
+     * curve to set and no spring to configure; `duration` is the travel time
+     * between slides and `delay` is the dwell on each one, both in seconds.
+     */
+    transition?: { duration?: number; delay?: number }
     style?: React.CSSProperties
 }
 
@@ -65,45 +63,8 @@ export type CoverflowProps = {
 // Constants
 // -----------------------------------------------------------------------------
 
-const DEFAULT_IMAGES: CoverflowImage[] = [
-    {
-        srcUrl: "/showcase/kts-properties.png",
-        alt: "KTS Properties — Handcrafted Real Estate Platform",
-    },
-    {
-        srcUrl: "/showcase/tracezero-landing.png",
-        alt: "TraceZero — Digital Exposure & OSINT Platform",
-    },
-    {
-        srcUrl: "/showcase/tracezero-report.png",
-        alt: "TraceZero — Threat Intelligence & Exposure Assessment",
-    },
-    {
-        srcUrl: "/showcase/smartscan-command.png",
-        alt: "Smart Scan — AI-Driven Spectrum Intelligence Command Center",
-    },
-    {
-        srcUrl: "/showcase/smartscan-telemetry.png",
-        alt: "Smart Scan — Real-Time RF Spectrum Operations Dashboard",
-    },
-    {
-        srcUrl: "/showcase/aevum-dashboard.png",
-        alt: "Aevum Health — Personal Health Intelligence & Medical Records Hub",
-    },
-    {
-        srcUrl: "/showcase/aevum-trends.png",
-        alt: "Aevum Clinical — Biometric Timeline & Diagnostic Trends Platform",
-    },
-]
-
-const GRADIENT_FALLBACKS = [
-    "linear-gradient(150deg, #FFFFFF 0%, #F1F7FE 100%)",
-    "linear-gradient(150deg, #FFFFFF 0%, #EEF5FD 100%)",
-    "linear-gradient(150deg, #FFFFFF 0%, #F4F8FE 100%)",
-    "linear-gradient(150deg, #FFFFFF 0%, #EFF6FD 100%)",
-    "linear-gradient(150deg, #FFFFFF 0%, #F2F8FE 100%)",
-    "linear-gradient(150deg, #FFFFFF 0%, #EDF4FC 100%)",
-]
+const CARD_SURFACE =
+    "linear-gradient(150deg, var(--color-surface) 0%, var(--color-surface-raised) 100%)"
 
 const RENDER_RANGE = 6 // max slats each side
 
@@ -111,22 +72,8 @@ const RENDER_RANGE = 6 // max slats each side
 // Helpers
 // -----------------------------------------------------------------------------
 
-function resolveImageSrc(input: any): string {
-    if (!input) return ""
-    if (typeof input === "string") return input
-    if (typeof input === "object" && input.src) return input.src
-    return ""
-}
-
-function resolveImageSrcSet(input: any): string | undefined {
-    if (input && typeof input === "object" && input.srcSet) return input.srcSet
-    return undefined
-}
-
 function resolveItemSrc(item: CoverflowImage | undefined): string {
-    const override = item?.srcUrl && item.srcUrl.trim()
-    if (override) return override
-    return resolveImageSrc(item?.src)
+    return item?.srcUrl?.trim() || ""
 }
 
 type Sizing = {
@@ -186,7 +133,6 @@ function Card({
     onSelect: ((index: number) => void) | undefined
 }) {
     const src = resolveItemSrc(item)
-    const srcSet = resolveImageSrcSet(item?.src)
 
     const x = useTransform(pos, (p: number) =>
         xForRel(relOf(index, p, count), sizing, gap)
@@ -251,7 +197,6 @@ function Card({
                     <div style={{ position: "relative", width: "100%", height: "100%" }}>
                         <img
                             src={src}
-                            srcSet={srcSet}
                             alt={item?.alt || ""}
                             loading="lazy"
                             decoding="async"
@@ -269,52 +214,7 @@ function Card({
                             }}
                         />
                     </div>
-                ) : (
-                    <div
-                        style={{
-                            width: "100%",
-                            height: "100%",
-                            display: "flex",
-                            flexDirection: "column",
-                            alignItems: "center",
-                            justifyContent: "center",
-                            gap: "8px",
-                            padding: "16px",
-                            textAlign: "center",
-                            background: "linear-gradient(150deg, #FFFFFF 0%, #F3F8FE 100%)",
-                            border: "1.5px dashed #CBDFF8",
-                            borderRadius: "inherit",
-                            boxSizing: "border-box",
-                        }}
-                    >
-                        <div
-                            style={{
-                                width: "38px",
-                                height: "38px",
-                                borderRadius: "12px",
-                                background: "#E5F1FF",
-                                border: "1px solid #BFDBFE",
-                                display: "flex",
-                                alignItems: "center",
-                                justifyContent: "center",
-                                color: "#0066D6",
-                                boxShadow: "0 2px 6px rgba(0, 102, 214, 0.08)",
-                            }}
-                        >
-                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                                <rect width="18" height="18" x="3" y="3" rx="2" ry="2"/>
-                                <line x1="3" x2="21" y1="9" y2="9"/>
-                                <line x1="9" x2="9" y1="21" y2="9"/>
-                            </svg>
-                        </div>
-                        <span style={{ fontSize: "11px", fontWeight: 700, color: "#0C172B", letterSpacing: "-0.01em" }}>
-                            Upcoming Showcase
-                        </span>
-                        <span style={{ fontSize: "9px", fontFamily: "monospace", color: "#0066D6", background: "#E5F1FF", padding: "2px 8px", borderRadius: "9999px", border: "1px solid #BFDBFE", fontWeight: 600 }}>
-                            Slot Reserved
-                        </span>
-                    </div>
-                )}
+                ) : null}
             </motion.div>
         </motion.div>
     )
@@ -359,7 +259,7 @@ function ArrowButton({
                 width: size,
                 height: size,
                 borderRadius: "50%",
-                border: "1px solid #BFDBFE",
+                border: "1px solid var(--color-line-strong)",
                 background,
                 color,
                 display: "flex",
@@ -398,7 +298,6 @@ function ArrowButton({
 // -----------------------------------------------------------------------------
 
 const COMPONENT_DEFAULTS = {
-    images: DEFAULT_IMAGES,
     activeWidth: 600,
     activeHeight: 400,
     restWidth: 200,
@@ -406,8 +305,8 @@ const COMPONENT_DEFAULTS = {
     gap: 30,
     radius: 2,
     showArrows: true,
-    arrowColor: "#000000",
-    arrowBackground: "#FFFFFF",
+    arrowColor: "var(--color-ink)",
+    arrowBackground: "var(--color-surface)",
     arrowSize: 56,
     arrowPosition: 95,
     autoplay: false,
@@ -417,10 +316,8 @@ const COMPONENT_DEFAULTS = {
     onActiveIndexChange: undefined as ((index: number) => void) | undefined,
     onImageClick: undefined as ((index: number) => void) | undefined,
     transition: {
-        type: "tween",
         duration: 0.3,
         delay: 1,
-        ease: "easeInOut",
     },
 }
 
@@ -453,17 +350,10 @@ export function CoverflowCarousel(props: CoverflowProps) {
         style,
     } = mergedProps
 
-    const renderTarget = RenderTarget.current()
-    const isStatic =
-        renderTarget === RenderTarget.export ||
-        renderTarget === RenderTarget.thumbnail
     const prefersReducedMotion = useReducedMotion()
 
     const images = useMemo(
-        () =>
-            Array.isArray(rawImages) && rawImages.length > 0
-                ? rawImages
-                : DEFAULT_IMAGES,
+        () => (Array.isArray(rawImages) ? rawImages : []),
         [rawImages]
     )
     const count = Math.max(1, images.length)
@@ -600,7 +490,9 @@ export function CoverflowCarousel(props: CoverflowProps) {
     }, [pos, count, onActiveIndexChange])
 
     useEffect(() => {
-        const on = !isStatic && autoplay && count > 1
+        // Reduced motion previously only made the slide *snap*; the gallery still
+        // advanced on its own, so content kept changing under the reader. Stop it.
+        const on = autoplay && count > 1 && !prefersReducedMotion
         autoplayingRef.current = on
         if (on) {
             dirRef.current = autoplayDirection === "leftToRight" ? -1 : 1
@@ -610,9 +502,12 @@ export function CoverflowCarousel(props: CoverflowProps) {
         return () => {
             autoplayingRef.current = false
         }
-    }, [isStatic, autoplay, autoplayDirection, count, ensureRunning])
+    }, [autoplay, autoplayDirection, count, ensureRunning, prefersReducedMotion])
 
-    const canPause = !isStatic && autoplay && count > 1
+    const canPause = autoplay && count > 1 && !prefersReducedMotion
+
+    const [userPaused, setUserPaused] = React.useState(false)
+    const stopped = paused || userPaused
 
     const suspendAutoplay = useCallback(() => {
         if (!canPause) return
@@ -631,21 +526,19 @@ export function CoverflowCarousel(props: CoverflowProps) {
     const onHoverBoundary = useCallback(
         (entering: boolean) => {
             isHoveredRef.current = entering
-            if (!pauseOnHover || paused) return
+            if (!pauseOnHover || stopped) return
             if (entering) suspendAutoplay()
             else resumeAutoplay()
         },
-        [pauseOnHover, paused, suspendAutoplay, resumeAutoplay]
+        [pauseOnHover, stopped, suspendAutoplay, resumeAutoplay]
     )
 
     useEffect(() => {
-        if (paused) suspendAutoplay()
+        if (stopped) suspendAutoplay()
         else if (!(pauseOnHover && isHoveredRef.current)) resumeAutoplay()
-    }, [paused, pauseOnHover, suspendAutoplay, resumeAutoplay])
-    useEffect(() => {
-        if (isStatic || autoplay) return
-        const onKey = (e: KeyboardEvent) => {
-            if (!isHoveredRef.current) return
+    }, [stopped, pauseOnHover, suspendAutoplay, resumeAutoplay])
+    const onKeyDown = useCallback(
+        (e: React.KeyboardEvent) => {
             if (e.key === "ArrowLeft") {
                 e.preventDefault()
                 goPrev()
@@ -653,10 +546,9 @@ export function CoverflowCarousel(props: CoverflowProps) {
                 e.preventDefault()
                 goNext()
             }
-        }
-        window.addEventListener("keydown", onKey)
-        return () => window.removeEventListener("keydown", onKey)
-    }, [isStatic, autoplay, goPrev, goNext])
+        },
+        [goPrev, goNext]
+    )
 
     const containerStyle: React.CSSProperties = {
         ...style,
@@ -670,8 +562,7 @@ export function CoverflowCarousel(props: CoverflowProps) {
         minHeight: 180,
         overflow: "hidden",
         userSelect: "none",
-        touchAction: isStatic ? undefined : "pan-y",
-        outline: "none",
+        touchAction: "pan-y",
     }
 
     const handleCardSelect = useCallback(
@@ -695,8 +586,8 @@ export function CoverflowCarousel(props: CoverflowProps) {
             sizing={sizing}
             gap={gap}
             radius={radius}
-            gradient={GRADIENT_FALLBACKS[i % GRADIENT_FALLBACKS.length]}
-            onSelect={isStatic ? undefined : handleCardSelect}
+            gradient={CARD_SURFACE}
+            onSelect={handleCardSelect}
         />
     ))
 
@@ -704,7 +595,7 @@ export function CoverflowCarousel(props: CoverflowProps) {
         <>
             <ArrowButton
                 side="left"
-                onClick={isStatic ? () => {} : goPrev}
+                onClick={goPrev}
                 color={arrowColor}
                 background={arrowBackground}
                 size={arrowSize}
@@ -712,7 +603,7 @@ export function CoverflowCarousel(props: CoverflowProps) {
             />
             <ArrowButton
                 side="right"
-                onClick={isStatic ? () => {} : goNext}
+                onClick={goNext}
                 color={arrowColor}
                 background={arrowBackground}
                 size={arrowSize}
@@ -724,6 +615,7 @@ export function CoverflowCarousel(props: CoverflowProps) {
     return (
         <div
             tabIndex={0}
+            onKeyDown={onKeyDown}
             onMouseEnter={() => onHoverBoundary(true)}
             onMouseLeave={() => onHoverBoundary(false)}
             onFocus={() => onHoverBoundary(true)}
@@ -742,6 +634,33 @@ export function CoverflowCarousel(props: CoverflowProps) {
                 {cards}
             </div>
             {arrows}
+            {canPause && (
+                <button
+                    type="button"
+                    onClick={() => setUserPaused((v) => !v)}
+                    aria-label={userPaused ? "Resume slideshow" : "Pause slideshow"}
+                    style={{
+                        position: "absolute",
+                        right: 10,
+                        bottom: 10,
+                        zIndex: 20,
+                        width: 32,
+                        height: 32,
+                        borderRadius: "9999px",
+                        border: "1px solid var(--color-line-strong)",
+                        background: "rgba(255, 255, 255, 0.95)",
+                        color: "var(--color-ink)",
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "center",
+                        cursor: "pointer",
+                    }}
+                >
+                    <svg width="12" height="12" viewBox="0 0 12 12" fill="currentColor" aria-hidden="true">
+                        {userPaused ? <path d="M3 1.5v9l7-4.5z" /> : <path d="M2.5 1.5h2.5v9H2.5zM7 1.5h2.5v9H7z" />}
+                    </svg>
+                </button>
+            )}
         </div>
     )
 }

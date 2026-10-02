@@ -4,6 +4,7 @@ import { renderToString } from 'react-dom/server';
 // re-exports everything from `react-router`, StaticRouter included.
 import { StaticRouter } from 'react-router-dom';
 import { AppRoutes } from './App';
+import '@fontsource-variable/geist';
 import './index.css';
 
 export { INDEXABLE_ROUTES, SITE_URL, renderHeadTags } from './lib/seo';

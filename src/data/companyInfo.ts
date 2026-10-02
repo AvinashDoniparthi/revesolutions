@@ -1,12 +1,9 @@
 export interface CompanyInfo {
   name: string;
   tagline: string;
-  supportingTagline: string;
-  heroHeadline: string;
   heroSubtext: string;
   aboutHeadline: string;
   aboutSubtext: string;
-  contactHeadline: string;
   contactSubtext: string;
   footerDescription: string;
   contactPlaceholders: {
@@ -26,17 +23,14 @@ export interface CompanyInfo {
 export const companyInfo: CompanyInfo = {
   name: "RÊVE SOLUTIONS",
   tagline: "Websites. Fully built and managed by real people.",
-  supportingTagline: "We build your website. We manage it. You focus on your business.",
-  heroHeadline: "Your website. Fully built and managed by real people.",
   /**
    * Rendered as the paragraph under the homepage H1. Leads with the brand name
    * on purpose: it is the only place body copy states who we are, which is what
    * a search engine needs to associate the name with this site.
    */
-  heroSubtext: "Rêve Solutions builds, manages, and maintains custom websites for your business on a simple monthly plan—so you never have to worry about updates, bugs, or hosting again.",
+  heroSubtext: "Rêve Solutions builds your business website once, then looks after it for you: updates, fixes, hosting and security.",
   aboutHeadline: "Four people. One dedicated design studio.",
   aboutSubtext: "Rêve Solutions was created around a simple idea: businesses shouldn't have to worry about keeping their website running.",
-  contactHeadline: "Let's work together.",
   contactSubtext: "Have a website project in mind, or need someone to manage the one you already have? Tell us what you need.",
   footerDescription: "Custom websites built, launched, and continuously managed for growing businesses.",
   contactPlaceholders: {
@@ -54,5 +48,6 @@ export const companyInfo: CompanyInfo = {
     github: "",
     whatsapp: "https://wa.me/919092845715?text=Hi%20R%C3%AAve%20Solutions%2C%20I%20would%20like%20to%20inquire%20about%20your%20website%20services."
   },
-  copyrightYear: 2026
+  /** Derived, not pinned: a hardcoded year goes stale on 1 January. */
+  copyrightYear: new Date().getFullYear()
 };

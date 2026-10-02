@@ -1,14 +1,11 @@
 export interface TeamMember {
   id: string;
-  placeholderId: string;
   initials: string;
   name: string;
   role: string;
   bio: string;
-  imagePlaceholder: string;
   image?: string;
   imagePosition?: string;
-  linkedinUrl?: string;
 }
 
 /**
@@ -17,50 +14,38 @@ export interface TeamMember {
 export const teamMembers: TeamMember[] = [
   {
     id: "darshan-sureshkumar",
-    placeholderId: "01",
     initials: "DS",
     name: "Darshan Sureshkumar",
-    role: "Client Success & Platform Manager",
-    bio: "Leads client relationships, onboarding, and platform management to ensure seamless website delivery and continuous monthly support.",
-    imagePlaceholder: "Darshan Sureshkumar",
+    role: "Client Success",
+    bio: "Runs onboarding and is the person clients talk to month to month. Keeps track of what every site on the plan still needs.",
     image: "/images/team/darshan.jpeg",
-    imagePosition: "object-[center_12%]",
-    linkedinUrl: "https://linkedin.com"
+    imagePosition: "object-[center_12%]"
   },
   {
     id: "avinash-d",
-    placeholderId: "02",
     initials: "AD",
     name: "Avinash D",
-    role: "Lead Web Developer & Site Architect",
-    bio: "Spearheads web architecture, full-stack implementation, and performance engineering to build robust, high-speed digital solutions.",
-    imagePlaceholder: "Avinash D",
+    role: "Back End & Infrastructure",
+    bio: "Builds the back end and decides how each site is put together. Handles deployment, hosting and the work that keeps pages fast.",
     image: "/images/team/avinash.jpeg",
-    imagePosition: "object-[center_15%]",
-    linkedinUrl: "https://linkedin.com"
+    imagePosition: "object-[center_15%]"
   },
   {
     id: "kishan-senthil",
-    placeholderId: "03",
     initials: "KS",
     name: "Kishan Senthil",
-    role: "Lead Web Developer & Product Engineer",
-    bio: "Specializes in modern product engineering, interactive user interfaces, and clean, responsive code tailored for client business growth.",
-    imagePlaceholder: "Kishan Senthil",
+    role: "Front End & Interface",
+    bio: "Builds the parts of a site people actually touch: layout, interaction, and making it hold up on a phone.",
     image: "/images/team/kishan.jpeg",
-    imagePosition: "object-[center_18%]",
-    linkedinUrl: "https://linkedin.com"
+    imagePosition: "object-[center_18%]"
   },
   {
     id: "akshith-saravanakumar",
-    placeholderId: "04",
     initials: "AS",
     name: "Akshith Saravanakumar",
-    role: "Head of Strategy & Business Development",
-    bio: "Drives business development, growth strategy, and client partnerships, aligning custom web solutions with long-term commercial goals.",
-    imagePlaceholder: "Akshith Saravanakumar",
+    role: "Strategy & New Business",
+    bio: "Works with new clients on scope and pricing before a project starts, and on what a site should do for the business once it is live.",
     image: "/images/team/akshith.jpeg",
-    imagePosition: "object-[center_20%]",
-    linkedinUrl: "https://linkedin.com"
+    imagePosition: "object-[center_20%]"
   }
 ];

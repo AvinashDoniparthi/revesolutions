@@ -10,121 +10,95 @@ export const Footer: React.FC = () => {
   };
 
   return (
-    <footer className="bg-[#EEF3F9] border-t border-[#D5E4F5] pt-12 pb-10 text-[#475569] text-xs">
+    <footer className="bg-ground border-t border-line pt-12 pb-10 text-ink-2 text-xs">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
 
         {/* Footnote / Disclaimer section like Apple */}
-        <div className="pb-6 border-b border-[#D5E4F5] text-[11px] text-[#798CA6] space-y-2 leading-relaxed">
-          <p>1. Continuous website care includes monthly content edits, security patches, backups, and proactive uptime monitoring under our transparent monthly service agreement.</p>
-          <p>2. Performance guarantee: Handcrafted clean code targets 95+ Google PageSpeed Insights on production deployments.</p>
+        <div className="pb-6 border-b border-line text-xs text-ink-3 space-y-2 leading-relaxed">
+          <p>Continuous website care covers content edits, security patches, backups and uptime monitoring under a maintenance agreement, quoted separately from the build.</p>
+          <p>Sites are built to target 95+ on Google PageSpeed Insights for production deployments.</p>
         </div>
 
         {/* Apple Breadcrumb line */}
-        <div className="flex items-center gap-2 text-[12px] text-[#798CA6]">
-          <Link to="/" className="font-semibold text-[#0C172B] hover:text-[#0066D6] transition-colors">Rêve Solutions</Link>
-          <span>&gt;</span>
-          <span>Web Studio &amp; Management</span>
+        <div className="flex items-center gap-2 text-xs text-ink-3">
+          <Link to="/" className="font-semibold text-ink hover:text-brand transition-colors">Rêve Solutions</Link>
         </div>
 
         {/* Directory columns */}
-        <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-8 pb-8 border-b border-[#D5E4F5]">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-8 pb-8 border-b border-line">
 
           {/* Col 1: Explore */}
           <div className="space-y-3">
-            <h4 className="text-[11px] font-bold uppercase tracking-wider text-[#0C172B]">
+            <h2 className="text-xs font-bold uppercase tracking-wider text-ink">
               Explore Services
-            </h4>
-            <ul className="space-y-2 text-[12px]">
+            </h2>
+            <ul className="space-y-2 text-xs">
               <li>
-                <Link to="/services#website-development" className="hover:text-[#0066D6] transition-colors">Website Development</Link>
+                <Link to="/services#website-development" className="hover:text-brand transition-colors">Website Development</Link>
               </li>
               <li>
-                <Link to="/services#website-management" className="hover:text-[#0066D6] transition-colors">Website Management</Link>
+                <Link to="/services#website-management" className="hover:text-brand transition-colors">Website Management</Link>
               </li>
               <li>
-                <Link to="/services#website-maintenance" className="hover:text-[#0066D6] transition-colors">Speed &amp; Security</Link>
+                <Link to="/services#website-maintenance" className="hover:text-brand transition-colors">Speed &amp; Security</Link>
               </li>
               <li>
-                <Link to="/services#website-support" className="hover:text-[#0066D6] transition-colors">Ongoing Support</Link>
+                <Link to="/services#website-support" className="hover:text-brand transition-colors">Ongoing Support</Link>
               </li>
             </ul>
           </div>
 
           {/* Col 2: Studio Care */}
           <div className="space-y-3">
-            <h4 className="text-[11px] font-bold uppercase tracking-wider text-[#0C172B]">
+            <h2 className="text-xs font-bold uppercase tracking-wider text-ink">
               Studio Care
-            </h4>
-            <ul className="space-y-2 text-[12px]">
+            </h2>
+            <ul className="space-y-2 text-xs">
               <li>
-                <Link to="/services" className="hover:text-[#0066D6] transition-colors">Monthly Plans</Link>
+                <Link to="/services" className="hover:text-brand transition-colors">Maintenance</Link>
               </li>
               <li>
-                <Link to="/services" className="hover:text-[#0066D6] transition-colors">Unlimited Edits</Link>
+                <Link to="/services" className="hover:text-brand transition-colors">Content Updates</Link>
               </li>
               <li>
-                <Link to="/services" className="hover:text-[#0066D6] transition-colors">Hosting &amp; Backups</Link>
+                <Link to="/services" className="hover:text-brand transition-colors">Hosting &amp; Backups</Link>
               </li>
               <li>
-                <Link to="/services" className="hover:text-[#0066D6] transition-colors">Search Optimization</Link>
+                <Link to="/services" className="hover:text-brand transition-colors">Search Optimization</Link>
               </li>
             </ul>
           </div>
 
           {/* Col 3: Company */}
           <div className="space-y-3">
-            <h4 className="text-[11px] font-bold uppercase tracking-wider text-[#0C172B]">
+            <h2 className="text-xs font-bold uppercase tracking-wider text-ink">
               About Rêve
-            </h4>
-            <ul className="space-y-2 text-[12px]">
+            </h2>
+            <ul className="space-y-2 text-xs">
               <li>
-                <Link to="/about" className="hover:text-[#0066D6] transition-colors">Our Story</Link>
+                <Link to="/about" className="hover:text-brand transition-colors">Our Story</Link>
               </li>
               <li>
-                <Link to="/about" className="hover:text-[#0066D6] transition-colors">The Specialist Team</Link>
+                <Link to="/about" className="hover:text-brand transition-colors">The Team</Link>
               </li>
               <li>
-                <Link to="/contact" className="hover:text-[#0066D6] transition-colors">Contact Specialist</Link>
-              </li>
-              <li>
-                <Link to="/contact" className="hover:text-[#0066D6] transition-colors">Request a Proposal</Link>
+                <Link to="/contact" className="hover:text-brand transition-colors">Contact</Link>
               </li>
             </ul>
           </div>
 
-          {/* Col 4: Studio Values */}
+          {/* Col 4: Connect */}
           <div className="space-y-3">
-            <h4 className="text-[11px] font-bold uppercase tracking-wider text-[#0C172B]">
-              Values
-            </h4>
-            <ul className="space-y-2 text-[12px]">
-              <li>
-                <span className="text-[#798CA6]">100% Human Managed</span>
-              </li>
-              <li>
-                <span className="text-[#798CA6]">Predictable Monthly Fee</span>
-              </li>
-              <li>
-                <span className="text-[#798CA6]">Zero Technical Debt</span>
-              </li>
-              <li>
-                <span className="text-[#798CA6]">24h Fast Turnaround</span>
-              </li>
-            </ul>
-          </div>
-
-          {/* Col 5: Connect */}
-          <div className="space-y-3 col-span-2 md:col-span-1">
-            <h4 className="text-[11px] font-bold uppercase tracking-wider text-[#0C172B]">
+            <h2 className="text-xs font-bold uppercase tracking-wider text-ink">
               Connect
-            </h4>
+            </h2>
             <div className="flex items-center gap-2">
               <a
                 href={companyInfo.socialLinks.whatsapp}
                 target="_blank"
                 rel="noreferrer"
                 aria-label="WhatsApp"
-                className="w-8 h-8 rounded-full bg-white shadow-xs border border-[#BFDBFE] flex items-center justify-center text-[#16A34A] hover:bg-[#25D366] hover:text-white transition-all"
+                className="w-8 h-8 rounded-full bg-white shadow-xs border border-line-strong flex items-center justify-center text-whatsapp-ink hover:bg-whatsapp hover:text-ink transition-all"
               >
                 <WhatsAppIcon className="w-4 h-4" />
               </a>
@@ -133,7 +107,7 @@ export const Footer: React.FC = () => {
                 target="_blank"
                 rel="noreferrer"
                 aria-label="LinkedIn"
-                className="w-8 h-8 rounded-full bg-white shadow-xs border border-[#BFDBFE] flex items-center justify-center text-[#0C172B] hover:bg-[#0066D6] hover:text-white transition-all"
+                className="w-8 h-8 rounded-full bg-white shadow-xs border border-line-strong flex items-center justify-center text-ink hover:bg-brand hover:text-white transition-all"
               >
                 <LinkedInIcon className="w-3.5 h-3.5" />
               </a>
@@ -142,7 +116,7 @@ export const Footer: React.FC = () => {
                 target="_blank"
                 rel="noreferrer"
                 aria-label="Instagram"
-                className="w-8 h-8 rounded-full bg-white shadow-xs border border-[#BFDBFE] flex items-center justify-center text-[#0C172B] hover:bg-[#0066D6] hover:text-white transition-all"
+                className="w-8 h-8 rounded-full bg-white shadow-xs border border-line-strong flex items-center justify-center text-ink hover:bg-brand hover:text-white transition-all"
               >
                 <InstagramIcon className="w-3.5 h-3.5" />
               </a>
@@ -152,7 +126,7 @@ export const Footer: React.FC = () => {
                   target="_blank"
                   rel="noreferrer"
                   aria-label="GitHub"
-                  className="w-8 h-8 rounded-full bg-white shadow-xs border border-[#BFDBFE] flex items-center justify-center text-[#0C172B] hover:bg-[#0066D6] hover:text-white transition-all"
+                  className="w-8 h-8 rounded-full bg-white shadow-xs border border-line-strong flex items-center justify-center text-ink hover:bg-brand hover:text-white transition-all"
                 >
                   <GitHubIcon className="w-3.5 h-3.5" />
                 </a>
@@ -163,16 +137,16 @@ export const Footer: React.FC = () => {
         </div>
 
         {/* Bottom Bar */}
-        <div className="flex flex-col sm:flex-row items-center justify-between gap-4 text-[11px] text-[#798CA6]">
-          <p>© {companyInfo.copyrightYear} Rêve Solutions. All rights reserved. Websites handcrafted and maintained by real people.</p>
+        <div className="flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-ink-3">
+          <p>© {companyInfo.copyrightYear} Rêve Solutions. All rights reserved.</p>
           <div className="flex items-center gap-4">
             <button
               onClick={scrollToTop}
-              className="apple-pill-btn px-3.5 py-1.5 bg-white shadow-xs border border-[#BFDBFE] text-[#0C172B] hover:bg-[#E5F1FF] hover:text-[#0066D6] flex items-center gap-1.5 cursor-pointer font-semibold transition-colors"
+              className="btn-press rounded-full px-3.5 py-1.5 bg-white shadow-xs border border-line-strong text-ink hover:bg-brand-tint hover:text-brand inline-flex items-center gap-1.5 cursor-pointer font-semibold transition-[transform,background-color,color] duration-200 ease-out hover:scale-[1.02] active:scale-[0.98]"
               aria-label="Back to top"
             >
               <span>Back to Top</span>
-              <ArrowUp className="w-3 h-3 text-[#0066D6]" />
+              <ArrowUp className="w-3 h-3 text-brand" />
             </button>
           </div>
         </div>
