@@ -164,8 +164,8 @@ function Card({
     })
     const boxShadow = useTransform(pos, (p: number) =>
         Math.abs(relOf(index, p, count)) < 0.5
-            ? "0 24px 70px rgba(0, 102, 214, 0.22), 0 8px 24px rgba(0,0,0,0.2), inset 0 0 0 1.5px rgba(0, 102, 214, 0.35)"
-            : "0 14px 40px rgba(0,0,0,0.12), inset 0 0 0 1px rgba(0, 102, 214, 0.12)"
+            ? "0 24px 70px rgba(128, 99, 47, 0.22), 0 8px 24px rgba(20,18,14,0.2), inset 0 0 0 1.5px rgba(186, 159, 113, 0.55)"
+            : "0 14px 40px rgba(20,18,14,0.12), inset 0 0 0 1px rgba(186, 159, 113, 0.2)"
     )
 
     return (
@@ -268,7 +268,7 @@ function ArrowButton({
                 cursor: "pointer",
                 padding: 0,
                 zIndex: 2000,
-                boxShadow: "0 6px 18px rgba(0, 102, 214, 0.15), 0 2px 6px rgba(0,0,0,0.06)",
+                boxShadow: "0 6px 18px rgba(128, 99, 47, 0.15), 0 2px 6px rgba(20,18,14,0.06)",
                 WebkitTapHighlightColor: "transparent",
             }}
         >
@@ -648,7 +648,7 @@ export function CoverflowCarousel(props: CoverflowProps) {
                         height: 32,
                         borderRadius: "9999px",
                         border: "1px solid var(--color-line-strong)",
-                        background: "rgba(255, 255, 255, 0.95)",
+                        background: "rgba(255, 253, 249, 0.95)",
                         color: "var(--color-ink)",
                         display: "flex",
                         alignItems: "center",

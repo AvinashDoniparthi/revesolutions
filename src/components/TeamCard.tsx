@@ -31,7 +31,7 @@ export const TeamCard: React.FC<TeamCardProps> = ({ member, index }) => {
               className={`w-full h-full object-cover transition-transform duration-500 group-hover:scale-105 ${member.imagePosition || 'object-top'}`}
             />
           ) : (
-            <div className="w-14 h-14 rounded-2xl bg-white shadow-xs border border-line-strong flex items-center justify-center text-brand font-bold text-lg tracking-tight transition-transform group-hover:scale-105">
+            <div className="w-14 h-14 rounded-2xl bg-surface shadow-xs border border-line-strong flex items-center justify-center text-brand font-bold text-lg tracking-tight transition-transform group-hover:scale-105">
               {member.initials}
             </div>
           )}

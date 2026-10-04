@@ -66,7 +66,7 @@ export const Navbar: React.FC = () => {
         
         {/* Left: Brand Logo & Subtitle */}
         <Link to="/" className="flex items-center gap-3 group">
-          <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-2xl overflow-hidden bg-black border border-night-line/40 flex items-center justify-center shadow-sm transition-transform group-hover:scale-105 shrink-0 group-hover:border-brand/60">
+          <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-2xl overflow-hidden bg-black border border-night-line/40 flex items-center justify-center shadow-sm transition-transform group-hover:scale-105 shrink-0 group-hover:border-gold/70">
             <img 
               src="/images/reve-logo.jpg" 
               alt="Rêve Solutions" 
@@ -115,9 +115,9 @@ export const Navbar: React.FC = () => {
             className="uiverse-talk-btn group inline-flex items-center justify-center gap-2.5 px-5 py-2 text-sm font-semibold shadow-xs"
           >
             <span className="relative z-10 transition-colors duration-300">Let's Talk</span>
-            <span className="relative z-10 flex items-center justify-center w-5.5 h-5.5 rounded-full border border-[#0066D6]/20 bg-[#E8F2FE] group-hover:border-transparent group-hover:bg-white transition-all duration-700 p-1 shrink-0">
+            <span className="relative z-10 flex items-center justify-center w-5.5 h-5.5 rounded-full border border-brand/20 bg-brand-tint group-hover:border-transparent group-hover:bg-gold transition-all duration-700 p-1 shrink-0">
               <svg
-                className="w-3 h-3 rotate-45 group-hover:rotate-90 transition-transform duration-700 ease-out fill-[#0C172B] group-hover:fill-[#0066D6]"
+                className="w-3 h-3 rotate-45 group-hover:rotate-90 transition-transform duration-700 ease-out fill-ink group-hover:fill-ink"
                 viewBox="0 0 16 19"
                 xmlns="http://www.w3.org/2000/svg"
               >
@@ -180,9 +180,9 @@ export const Navbar: React.FC = () => {
                 className="uiverse-talk-btn group flex items-center justify-center gap-2.5 w-full px-4 py-3 font-semibold text-base shadow-xs"
               >
                 <span className="relative z-10 transition-colors duration-300">Let's Talk</span>
-                <span className="relative z-10 flex items-center justify-center w-6 h-6 rounded-full border border-[#0066D6]/20 bg-[#E8F2FE] group-hover:border-transparent group-hover:bg-white transition-all duration-700 p-1 shrink-0">
+                <span className="relative z-10 flex items-center justify-center w-6 h-6 rounded-full border border-brand/20 bg-brand-tint group-hover:border-transparent group-hover:bg-gold transition-all duration-700 p-1 shrink-0">
                   <svg
-                    className="w-3.5 h-3.5 rotate-45 group-hover:rotate-90 transition-transform duration-700 ease-out fill-[#0C172B] group-hover:fill-[#0066D6]"
+                    className="w-3.5 h-3.5 rotate-45 group-hover:rotate-90 transition-transform duration-700 ease-out fill-ink group-hover:fill-ink"
                     viewBox="0 0 16 19"
                     xmlns="http://www.w3.org/2000/svg"
                   >

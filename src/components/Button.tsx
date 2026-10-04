@@ -35,9 +35,9 @@ const sizes: Record<Size, string> = {
 };
 
 const variants: Record<Variant, string> = {
-  primary: 'bg-brand hover:bg-brand-hover text-white shadow-md shadow-brand/20',
-  outline: 'bg-white hover:bg-surface-sunken text-ink border border-line shadow-xs',
-  white: 'bg-white hover:bg-surface-raised text-brand shadow-xl border border-line-strong',
+  primary: 'bg-ink hover:bg-brand text-surface shadow-md shadow-brand/25',
+  outline: 'bg-surface hover:bg-surface-sunken text-ink border border-line shadow-xs',
+  white: 'bg-surface hover:bg-surface-raised text-brand shadow-xl border border-line-strong',
 };
 
 interface CommonProps {

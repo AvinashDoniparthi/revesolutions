@@ -102,7 +102,7 @@ export const HomePage: React.FC = () => {
   return (
     <div className="space-y-16 sm:space-y-24 pb-20 pt-24 sm:pt-28 relative">
       {/* Cohesive Ambient Blue Atmosphere Orbs */}
-      <div className="absolute top-10 left-1/2 -translate-x-1/2 w-[300px] h-[140px] xs:w-[380px] xs:h-[180px] sm:w-[600px] sm:h-[280px] md:w-[700px] md:h-[330px] lg:w-[900px] lg:h-[420px] bg-gradient-to-b from-brand/10 via-brand/5 to-transparent rounded-full blur-[80px] sm:blur-[120px] lg:blur-[140px] pointer-events-none -z-10" />
+      <div className="absolute top-10 left-1/2 -translate-x-1/2 w-[300px] h-[140px] xs:w-[380px] xs:h-[180px] sm:w-[600px] sm:h-[280px] md:w-[700px] md:h-[330px] lg:w-[900px] lg:h-[420px] bg-gradient-to-b from-gold/25 via-gold/10 to-transparent rounded-full blur-[80px] sm:blur-[120px] lg:blur-[140px] pointer-events-none -z-10" />
 
 
       {/* =========================================================================
@@ -317,7 +317,7 @@ export const HomePage: React.FC = () => {
           subtitle="A gallery of websites handcrafted and managed by our studio."
         />
 
-        <div className="w-full rounded-3xl overflow-hidden border border-line-strong shadow-sm bg-gradient-to-b from-white to-surface-raised flex flex-col">
+        <div className="w-full rounded-3xl overflow-hidden border border-line-strong shadow-sm bg-gradient-to-b from-surface to-surface-raised flex flex-col">
           <div className="relative h-[240px] sm:h-[340px] lg:h-[420px]">
             <CoverflowCarousel
               images={showcaseSlides}
@@ -330,12 +330,12 @@ export const HomePage: React.FC = () => {
               transition={{ duration: duration.slow, delay: 2.4 }}
               showArrows={true}
               arrowColor="var(--color-ink)"
-              arrowBackground="rgba(255, 255, 255, 0.95)"
+              arrowBackground="rgba(255, 253, 249, 0.95)"
               arrowSize={46}
             />
           </div>
 
-          <div className="border-t border-line bg-white/70 px-5 sm:px-8 py-5 text-center min-h-[132px] sm:min-h-[120px]">
+          <div className="border-t border-line bg-surface/70 px-5 sm:px-8 py-5 text-center min-h-[132px] sm:min-h-[120px]">
             <motion.div
               key={activeSlide}
               initial={{ opacity: 0, y: 8 }}
@@ -398,7 +398,7 @@ export const HomePage: React.FC = () => {
                   />
 
                   <div className="mt-5 text-center space-y-2">
-                    <span className="inline-block text-xs font-bold uppercase tracking-wider text-line-strong bg-white/10 border border-white/20 px-3.5 py-1 rounded-full">
+                    <span className="inline-block text-xs font-bold uppercase tracking-wider text-gold-soft bg-white/10 border border-white/20 px-3.5 py-1 rounded-full">
                       {lightboxSlide.project} &middot; {lightboxSlide.category}
                     </span>
                     <h3 className="text-lg sm:text-xl font-bold text-white tracking-tight">
@@ -455,8 +455,8 @@ export const HomePage: React.FC = () => {
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="p-6 xs:p-8 sm:p-12 lg:p-14 rounded-3xl bg-gradient-to-br from-night via-night-2 to-night-3 text-white flex flex-col md:flex-row items-center justify-between gap-8 shadow-2xl border border-night-line relative overflow-hidden group">
           {/* Luminous Sapphire Ambient Lighting */}
-          <div className="absolute -top-24 -right-24 w-80 h-80 bg-brand/30 rounded-full blur-[90px] pointer-events-none" />
-          <div className="absolute -bottom-20 -left-20 w-72 h-72 bg-brand-deep/30 rounded-full blur-[80px] pointer-events-none" />
+          <div className="absolute -top-24 -right-24 w-80 h-80 bg-gold/25 rounded-full blur-[90px] pointer-events-none" />
+          <div className="absolute -bottom-20 -left-20 w-72 h-72 bg-brand/25 rounded-full blur-[80px] pointer-events-none" />
 
           <div className="space-y-2.5 text-center md:text-left max-w-xl relative z-10">
             <h3 className="text-2xl sm:text-3xl lg:text-4xl font-bold tracking-tight text-white">

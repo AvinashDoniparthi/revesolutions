@@ -98,7 +98,7 @@ export const Footer: React.FC = () => {
                 target="_blank"
                 rel="noreferrer"
                 aria-label="WhatsApp"
-                className="w-8 h-8 rounded-full bg-white shadow-xs border border-line-strong flex items-center justify-center text-whatsapp-ink hover:bg-whatsapp hover:text-ink transition-all"
+                className="w-8 h-8 rounded-full bg-surface shadow-xs border border-line-strong flex items-center justify-center text-whatsapp-ink hover:bg-whatsapp hover:text-ink transition-all"
               >
                 <WhatsAppIcon className="w-4 h-4" />
               </a>
@@ -107,7 +107,7 @@ export const Footer: React.FC = () => {
                 target="_blank"
                 rel="noreferrer"
                 aria-label="LinkedIn"
-                className="w-8 h-8 rounded-full bg-white shadow-xs border border-line-strong flex items-center justify-center text-ink hover:bg-brand hover:text-white transition-all"
+                className="w-8 h-8 rounded-full bg-surface shadow-xs border border-line-strong flex items-center justify-center text-ink hover:bg-brand hover:text-white transition-all"
               >
                 <LinkedInIcon className="w-3.5 h-3.5" />
               </a>
@@ -116,7 +116,7 @@ export const Footer: React.FC = () => {
                 target="_blank"
                 rel="noreferrer"
                 aria-label="Instagram"
-                className="w-8 h-8 rounded-full bg-white shadow-xs border border-line-strong flex items-center justify-center text-ink hover:bg-brand hover:text-white transition-all"
+                className="w-8 h-8 rounded-full bg-surface shadow-xs border border-line-strong flex items-center justify-center text-ink hover:bg-brand hover:text-white transition-all"
               >
                 <InstagramIcon className="w-3.5 h-3.5" />
               </a>
@@ -126,7 +126,7 @@ export const Footer: React.FC = () => {
                   target="_blank"
                   rel="noreferrer"
                   aria-label="GitHub"
-                  className="w-8 h-8 rounded-full bg-white shadow-xs border border-line-strong flex items-center justify-center text-ink hover:bg-brand hover:text-white transition-all"
+                  className="w-8 h-8 rounded-full bg-surface shadow-xs border border-line-strong flex items-center justify-center text-ink hover:bg-brand hover:text-white transition-all"
                 >
                   <GitHubIcon className="w-3.5 h-3.5" />
                 </a>
@@ -142,7 +142,7 @@ export const Footer: React.FC = () => {
           <div className="flex items-center gap-4">
             <button
               onClick={scrollToTop}
-              className="btn-press rounded-full px-3.5 py-1.5 bg-white shadow-xs border border-line-strong text-ink hover:bg-brand-tint hover:text-brand inline-flex items-center gap-1.5 cursor-pointer font-semibold transition-[transform,background-color,color] duration-200 ease-out hover:scale-[1.02] active:scale-[0.98]"
+              className="btn-press rounded-full px-3.5 py-1.5 bg-surface shadow-xs border border-line-strong text-ink hover:bg-brand-tint hover:text-brand inline-flex items-center gap-1.5 cursor-pointer font-semibold transition-[transform,background-color,color] duration-200 ease-out hover:scale-[1.02] active:scale-[0.98]"
               aria-label="Back to top"
             >
               <span>Back to Top</span>

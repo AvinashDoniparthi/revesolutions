@@ -193,7 +193,7 @@ export function RoundCarousel({
                 willChange: "transform, opacity",
                 transformStyle: "preserve-3d",
               }}
-              className="bg-gradient-to-b from-white via-white to-surface-raised border border-line shadow-[0_16px_40px_rgba(12,44,98,0.08),_0_2px_8px_rgba(12,44,98,0.03)] backdrop-blur-md flex flex-col items-center justify-center p-5 gap-3 text-center"
+              className="bg-gradient-to-b from-surface via-surface to-surface-raised border border-line shadow-[0_16px_40px_rgba(40,30,14,0.08),_0_2px_8px_rgba(40,30,14,0.03)] backdrop-blur-md flex flex-col items-center justify-center p-5 gap-3 text-center"
             >
               {/* Service Icon Container */}
               <div className="w-12 h-12 rounded-2xl bg-brand-tint border border-line-strong flex items-center justify-center text-brand shadow-xs">

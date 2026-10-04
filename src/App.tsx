@@ -10,6 +10,7 @@ import { AboutPage } from './pages/AboutPage';
 import { ContactPage } from './pages/ContactPage';
 import { NotFoundPage } from './pages/NotFoundPage';
 import { SEOHead } from './components/SEOHead';
+import { ExperimentalRoutes } from './experimental/ExperimentalApp';
 
 // Scroll to top helper component
 const ScrollToTop: React.FC = () => {
@@ -59,11 +60,19 @@ const AnimatedRoutes: React.FC = () => {
 };
 
 /**
+ * EXPERIMENT SWITCH. `true` serves the scroll-driven redesign in
+ * src/experimental; `false` serves the classic site below, untouched.
+ */
+const USE_EXPERIMENT = true;
+
+/**
  * Everything below the router provider. Split out from `App` so the build-time
  * prerender can wrap it in `StaticRouter` while the browser wraps it in
  * `BrowserRouter` — see `src/entry-server.tsx`.
  */
-export const AppRoutes: React.FC = () => (
+export const AppRoutes: React.FC = () => (USE_EXPERIMENT ? <ExperimentalRoutes /> : <ClassicRoutes />);
+
+const ClassicRoutes: React.FC = () => (
   /**
    * `reducedMotion="user"` makes every `motion` element on the site honour the
    * OS setting in one place: transform and layout animations are dropped for

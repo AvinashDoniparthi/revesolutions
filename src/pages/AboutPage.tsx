@@ -44,7 +44,7 @@ export const AboutPage: React.FC = () => {
         </div>
 
         {/* Cohesive Ambient Blue Atmosphere */}
-        <div className="absolute top-10 left-1/2 -translate-x-1/2 w-[300px] h-[140px] xs:w-[380px] xs:h-[180px] sm:w-[600px] sm:h-[280px] md:w-[700px] md:h-[330px] lg:w-[900px] lg:h-[420px] bg-gradient-to-b from-brand/10 via-brand/5 to-transparent rounded-full blur-[80px] sm:blur-[120px] lg:blur-[140px] pointer-events-none -z-10" />
+        <div className="absolute top-10 left-1/2 -translate-x-1/2 w-[300px] h-[140px] xs:w-[380px] xs:h-[180px] sm:w-[600px] sm:h-[280px] md:w-[700px] md:h-[330px] lg:w-[900px] lg:h-[420px] bg-gradient-to-b from-gold/25 via-gold/10 to-transparent rounded-full blur-[80px] sm:blur-[120px] lg:blur-[140px] pointer-events-none -z-10" />
 
         {/* Hero Section */}
         <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-4 relative z-10">
@@ -142,8 +142,8 @@ export const AboutPage: React.FC = () => {
           ========================================================================= */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="p-6 xs:p-8 sm:p-12 lg:p-14 rounded-3xl bg-gradient-to-br from-night via-night-2 to-night-3 text-white text-center space-y-5 shadow-2xl border border-night-line relative overflow-hidden">
-          <div className="absolute top-0 right-0 w-80 h-80 bg-brand/30 rounded-full blur-[90px] pointer-events-none" />
-          <div className="absolute bottom-0 left-0 w-80 h-80 bg-brand-deep/30 rounded-full blur-[90px] pointer-events-none" />
+          <div className="absolute top-0 right-0 w-80 h-80 bg-gold/25 rounded-full blur-[90px] pointer-events-none" />
+          <div className="absolute bottom-0 left-0 w-80 h-80 bg-brand/25 rounded-full blur-[90px] pointer-events-none" />
 
           <h3 className="text-2xl sm:text-3xl lg:text-4xl font-bold tracking-tight text-white relative z-10">
             Ready to hand over your website care?

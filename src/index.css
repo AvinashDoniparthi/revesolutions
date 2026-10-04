@@ -14,9 +14,11 @@
            `prefers-color-scheme` block. If a dark mode is ever wanted, add a
            second set of values for these same names; every component already
            reads through them.
-   COLOR:  one accent for the whole site, `--color-brand` (#0066D6). The only
-           other hue allowed anywhere is WhatsApp green, and only on the
-           WhatsApp affordances themselves, where it is a real brand mark.
+   COLOR:  the logo palette: warm black, taupe and gold on an ivory ground.
+           Gold is the one accent (`--color-brand` for text and fills,
+           `--color-gold` for decoration). The only other hue allowed anywhere
+           is WhatsApp green, and only on the WhatsApp affordances themselves,
+           where it is a real brand mark.
    SHAPE:  cards 24px, panels and inputs nested inside a card 16px
            (`rounded-2xl`), everything interactive is a full pill.
    ========================================================================= */
@@ -34,39 +36,45 @@
   --text-display--line-height: 1.08;
   --text-display--letter-spacing: -0.03em;
 
-  /* Surfaces. `ground` is the page, `surface` is a card, `raised` is the card
-     gradient's far stop, `sunken` is an input well. */
-  --color-ground: #EEF3F9;
-  --color-surface: #FFFFFF;
-  --color-surface-raised: #F5F9FF;
-  --color-surface-sunken: #F0F5FA;
+  /* Surfaces. Warm ivory rather than white, taken from the paper tone the
+     logo's gold reads best against. `ground` is the page, `surface` is a card,
+     `raised` is the card gradient's far stop, `sunken` is an input well. */
+  --color-ground: #F7F3EC;
+  --color-surface: #FFFDF9;
+  --color-surface-raised: #FBF7F0;
+  --color-surface-sunken: #F2ECE1;
 
-  /* Ink. `ink-3` is the muted tier. It was #798CA6, which measured 3.08:1 on
-     the page ground and failed WCAG AA; this value clears 4.5:1 on ground,
-     card and input fill alike. */
-  --color-ink: #0C172B;
-  --color-ink-2: #475569;
-  --color-ink-3: #5A6C85;
+  /* Ink. Warm near-black from the logo (#050504, lifted a touch so it does not
+     crush on screens) and two taupe tiers derived from the palette's #7D7363.
+     All three clear WCAG AA on ground, card and input fill. */
+  --color-ink: #14120E;
+  --color-ink-2: #544C3F;
+  --color-ink-3: #6B6253;
 
-  /* Accent. */
-  --color-brand: #0066D6;
-  --color-brand-hover: #0054B3;
-  --color-brand-deep: #004EA8;
-  --color-brand-tint: #E5F1FF;
+  /* Accent. The logo gold (#BA9F71) measures 2.3:1 on ivory, so it cannot carry
+     text. `brand` is the same hue taken deeper (antique gold, 5.1:1 on ground,
+     5.6:1 under white text); `gold` is the true logo gold, kept for glows,
+     rules, fills behind dark text, and accents on the dark panels. */
+  --color-brand: #80632F;
+  --color-brand-hover: #6E5426;
+  --color-brand-deep: #5E4820;
+  --color-brand-tint: #F5EEE2;
+  --color-gold: #BA9F71;
+  --color-gold-soft: #D9C69F;
+  --color-taupe: #7D7363;
 
-  /* Lines. Three tiers replacing the fifteen near-identical blues that had
-     accumulated: the resting border, an emphasis border, and the hover state. */
-  --color-line: #D8E6F7;
-  --color-line-strong: #BFDBFE;
-  --color-line-hover: #A9CEF7;
+  /* Lines. The resting border, an emphasis border, and the hover state. */
+  --color-line: #E9E0D0;
+  --color-line-strong: #DDCDAF;
+  --color-line-hover: #C9B288;
 
   /* The one dark surface on the site: the closing CTA panel on Home, Services
-     and About. */
-  --color-night: #061226;
-  --color-night-2: #0B1E40;
-  --color-night-3: #040C1A;
-  --color-night-line: #1A4B8C;
-  --color-night-ink: #D0E2FF;
+     and About. This is the logo's own black, so the panel reads as the mark. */
+  --color-night: #0E0C09;
+  --color-night-2: #1A1611;
+  --color-night-3: #050504;
+  --color-night-line: #3B3225;
+  --color-night-ink: #E6D9BF;
 
   /* Status. `danger` was #EF4444, which measured 3.43:1 against the input fill
      that error text sits on. */
@@ -94,8 +102,8 @@
 
   /* Elevation. One shadow tint for the whole site, keyed to the ink hue rather
      than to black, so shadows read as shade and not as grime. */
-  --shadow-card: 0 4px 20px rgba(12, 38, 80, 0.04), 0 1px 3px rgba(12, 38, 80, 0.02);
-  --shadow-card-hover: 0 16px 36px rgba(0, 102, 214, 0.10), 0 2px 8px rgba(0, 102, 214, 0.04);
+  --shadow-card: 0 4px 20px rgba(40, 30, 14, 0.05), 0 1px 3px rgba(40, 30, 14, 0.03);
+  --shadow-card-hover: 0 18px 40px rgba(128, 99, 47, 0.13), 0 2px 8px rgba(128, 99, 47, 0.06);
 }
 
 @layer base {
@@ -157,7 +165,7 @@
   box-shadow: var(--shadow-card-hover);
 }
 
-/* Refined blue-tinted custom scrollbar. */
+/* Refined gold-tinted custom scrollbar. */
 ::-webkit-scrollbar {
   width: 6px;
   height: 6px;
@@ -193,9 +201,9 @@
   position: relative;
   width: 135px;
   height: 155px;
-  background: linear-gradient(150deg, rgba(255, 255, 255, 0.95) 0%, rgba(229, 241, 255, 0.75) 100%);
+  background: linear-gradient(150deg, rgba(255, 253, 249, 0.96) 0%, rgba(244, 235, 218, 0.78) 100%);
   border: 1.5px solid var(--color-line-strong);
-  box-shadow: 0 20px 30px rgba(0, 102, 214, 0.12), 0 4px 12px rgba(12, 38, 80, 0.04);
+  box-shadow: 0 20px 30px rgba(128, 99, 47, 0.12), 0 4px 12px rgba(40, 30, 14, 0.04);
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -217,7 +225,7 @@
   transform: rotate(0deg) translateY(-8px) scale(1.06);
   margin: 0 16px;
   border-color: var(--color-brand);
-  box-shadow: 0 24px 45px rgba(0, 102, 214, 0.25);
+  box-shadow: 0 24px 45px rgba(128, 99, 47, 0.25);
   z-index: 10;
 }
 
@@ -367,19 +375,19 @@
   position: relative;
   overflow: hidden;
   isolation: isolate;
-  background: #FFFFFF;
-  border: 1px solid #D5E4F5;
+  background: var(--color-surface);
+  border: 1px solid var(--color-line);
   border-radius: 24px;
   min-height: 230px;
   cursor: pointer;
-  box-shadow: 0 4px 20px rgba(12, 38, 80, 0.04), 0 1px 3px rgba(12, 38, 80, 0.02);
+  box-shadow: var(--shadow-card);
   transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.35s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.35s ease;
 }
 
 .uiverse-process-card:hover {
   transform: translateY(-4px) scale(1.01);
-  border-color: #0066D6;
-  box-shadow: 0 20px 45px rgba(0, 102, 214, 0.22), 0 4px 12px rgba(0, 102, 214, 0.1);
+  border-color: var(--color-gold);
+  box-shadow: 0 20px 45px rgba(40, 30, 14, 0.22), 0 4px 12px rgba(128, 99, 47, 0.12);
 }
 
 /* Corner expansion shapes: completely hidden (0 size & 0 opacity) by default */
@@ -390,7 +398,10 @@
   width: 0%;
   height: 0%;
   opacity: 0;
-  background: linear-gradient(135deg, #0058BF 0%, #0077F6 100%);
+  /* The logo's black with a gold sheen in the far corner. */
+  background:
+    radial-gradient(120% 90% at 100% 0%, rgba(186, 159, 113, 0.28) 0%, transparent 55%),
+    linear-gradient(135deg, var(--color-night-3) 0%, var(--color-night-2) 100%);
   z-index: 1;
   transition: all 0.55s cubic-bezier(0.22, 1, 0.36, 1);
   pointer-events: none;
@@ -416,17 +427,17 @@
   border-radius: 24px;
 }
 
-/* Animated Uiverse Talk Pill Button with Royal Blue Expanding Ripple */
+/* Animated Uiverse Talk Pill Button with a logo-black expanding ripple */
 .uiverse-talk-btn {
   position: relative;
   z-index: 10;
   overflow: hidden;
   isolation: isolate;
-  background-color: #FFFFFF;
-  color: #0C172B;
-  border: 1px solid #C4DAF5;
+  background-color: var(--color-surface);
+  color: var(--color-ink);
+  border: 1px solid var(--color-line-strong);
   border-radius: 9999px;
-  box-shadow: 0 2px 6px rgba(0, 102, 214, 0.08);
+  box-shadow: 0 2px 6px rgba(128, 99, 47, 0.10);
   transition: color 0.4s cubic-bezier(0.16, 1, 0.3, 1), transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
@@ -439,7 +450,7 @@
   height: 100%;
   aspect-ratio: 1 / 1;
   border-radius: 9999px;
-  background-color: var(--color-brand);
+  background-color: var(--color-ink);
   z-index: -10;
   transition: all 1.1s cubic-bezier(0.22, 1, 0.36, 1);
 }
@@ -450,7 +461,7 @@
 }
 
 .uiverse-talk-btn:hover {
-  color: #FFFFFF;
+  color: var(--color-surface);
   border-color: transparent;
   transform: scale(1.02);
 }
@@ -459,3 +470,235 @@
   transform: scale(0.98);
 }
 
+
+/* =========================================================================
+   EXPERIMENT: scroll-driven editorial layer (src/experimental).
+
+   Everything below serves the experimental shell only. The classic pages do
+   not use any of these classes, so flipping `USE_EXPERIMENT` in App.tsx back
+   to false restores the previous site exactly.
+   ========================================================================= */
+@theme {
+  --font-serif: 'Instrument Serif', 'Times New Roman', serif;
+  --font-mono: 'Geist Mono Variable', ui-monospace, monospace;
+  --ease-silk: cubic-bezier(0.32, 0.72, 0, 1);
+  --ease-out-expo: cubic-bezier(0.19, 1, 0.22, 1);
+}
+
+/* Headings take ink from the base layer; inside a dark chapter they should
+   take the chapter's own colour instead. Kept in `base` so any utility class
+   on a heading still wins. */
+@layer base {
+  [data-nav='dark'] :is(h1, h2, h3, h4, h5, h6) {
+    color: inherit;
+  }
+}
+
+/* Lenis owns the scroll position; native smooth scrolling would fight it. */
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+/* index.html sets `scroll-smooth` on <html> for the classic site; with Lenis
+   running, native smoothing would interpolate every frame Lenis writes. */
+html.lenis,
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
+/* Film grain, painted into the dark chapters only. It used to be one fixed,
+   full-screen overlay; measured with 4x CPU throttling, blending that layer
+   over every scrolled frame doubled the number of dropped frames. As a
+   static texture inside each section it rasterises once and scrolls free. */
+.x-grain::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.05;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+}
+
+/* Scroll-scrubbed elements get their own compositor layer up front, so a
+   transform or opacity change each frame is a composite, never a repaint. */
+.x-hero-type, .x-hero-glow, .x-hero-grid, .x-hero-foot,
+.x-reel-frame, .x-reel-slide-1, .x-reel-slide-2, .x-reel-img-0, .x-reel-img-1,
+.x-rail-track, .x-rail-num, .x-rail-cursor,
+.x-work-inner, .x-work-secondary,
+.x-proc-num, .x-proc-fill, .x-marquee-wrap,
+.x-foot-word span, .x-ph-inner, .x-cta-slab, .x-member-photo, .x-svc-num {
+  will-change: transform;
+}
+.x-work-shade, .x-step {
+  will-change: opacity, transform;
+}
+
+/* Gold text treatment, echoing the metallic "SOLUTIONS" line of the logo. */
+.x-gold-text {
+  background: linear-gradient(100deg, #9C8257 0%, #E3CFA4 38%, #BA9F71 62%, #8A7048 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* The logo's horizon line: a hairline that brightens to a point at its centre. */
+.x-horizon {
+  height: 1px;
+  background: linear-gradient(90deg, transparent 0%, rgba(186, 159, 113, 0.35) 22%, #F3E2BC 50%, rgba(186, 159, 113, 0.35) 78%, transparent 100%);
+  box-shadow: 0 0 18px 1px rgba(243, 226, 188, 0.35);
+}
+
+/* -------------------------------------------------------------------------
+   Intro choreography, in CSS rather than JS so the prerendered page animates
+   in without waiting for hydration, and still ends fully visible if the
+   bundle never runs. `--intro` is the hold for the curtain on a cold load;
+   once the curtain has gone, `html.x-ready` drops it so in-app navigation to
+   Home reveals immediately.
+   ------------------------------------------------------------------------- */
+:root {
+  --intro: 1.55s;
+}
+html.x-ready {
+  --intro: 0.05s;
+}
+
+.x-curtain {
+  position: fixed;
+  inset: 0;
+  z-index: 80;
+  background: var(--color-night-3);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 18px;
+  animation: x-curtain-up 1s var(--ease-out-expo) 1.25s forwards;
+  pointer-events: none;
+}
+html.x-ready .x-curtain {
+  display: none;
+}
+.x-curtain-word {
+  display: flex;
+  overflow: hidden;
+  font-weight: 600;
+  letter-spacing: 0.32em;
+  font-size: clamp(1.75rem, 5vw, 3rem);
+  color: #F5F1E8;
+  padding-left: 0.32em;
+}
+.x-curtain-word span {
+  display: inline-block;
+  transform: translateY(110%);
+  animation: x-rise 0.9s var(--ease-out-expo) forwards;
+}
+.x-curtain .x-horizon {
+  width: min(320px, 60vw);
+  transform: scaleX(0);
+  animation: x-draw 1s var(--ease-out-expo) 0.35s forwards;
+}
+
+.x-line-mask {
+  display: block;
+  overflow: hidden;
+  padding-bottom: 0.08em;
+  margin-bottom: -0.08em;
+}
+.x-line-mask > span {
+  display: block;
+  transform: translateY(105%);
+  animation: x-rise 1.2s var(--ease-out-expo) calc(var(--intro) + var(--d, 0s)) forwards;
+}
+.x-fade-in {
+  opacity: 0;
+  transform: translateY(14px);
+  animation: x-fade-up 1.1s var(--ease-out-expo) calc(var(--intro) + var(--d, 0s)) forwards;
+}
+.x-draw {
+  transform: scaleX(0);
+  animation: x-draw 1.8s var(--ease-out-expo) calc(var(--intro) + var(--d, 0s)) forwards;
+}
+
+@keyframes x-rise {
+  to { transform: translateY(0); }
+}
+@keyframes x-fade-up {
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes x-draw {
+  to { transform: scaleX(1); }
+}
+@keyframes x-curtain-up {
+  to { transform: translateY(-100%); }
+}
+
+/* Scroll cue: a short gold bead travelling down a hairline. */
+.x-scroll-cue {
+  position: relative;
+  width: 1px;
+  height: 56px;
+  background: rgba(245, 241, 232, 0.16);
+  overflow: hidden;
+}
+.x-scroll-cue::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 1px;
+  height: 40%;
+  background: var(--color-gold);
+  /* Travels on transform; animating `top` here re-laid out the hero on every
+     frame for as long as it was on screen. */
+  transform: translateY(-100%);
+  animation: x-cue 2.2s var(--ease-silk) infinite;
+}
+@keyframes x-cue {
+  to { transform: translateY(275%); }
+}
+
+/* Marquee rows. */
+.x-marquee {
+  display: flex;
+  width: max-content;
+  animation: x-marquee var(--speed, 40s) linear infinite;
+}
+@keyframes x-marquee {
+  to { transform: translateX(-50%); }
+}
+
+/* Link underline that draws in from the left on hover. */
+.x-underline {
+  background-image: linear-gradient(currentColor, currentColor);
+  background-size: 0% 1px;
+  background-repeat: no-repeat;
+  background-position: 0 100%;
+  transition: background-size 0.6s var(--ease-out-expo);
+}
+.x-underline:hover,
+.x-underline:focus-visible {
+  background-size: 100% 1px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .x-curtain {
+    display: none;
+  }
+  .x-line-mask > span,
+  .x-fade-in,
+  .x-draw {
+    animation: none;
+    transform: none;
+    opacity: 1;
+  }
+  .x-scroll-cue::after,
+  .x-marquee {
+    animation: none;
+  }
+}
