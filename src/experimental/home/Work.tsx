@@ -2,6 +2,7 @@ import React, { useRef } from 'react';
 import { showcaseSlides, type ShowcaseSlide } from '../../data/showcase';
 import { gsap, MQ, useGSAP } from '../motion';
 import { Eyebrow, MaskLines } from '../primitives';
+import { shot } from '../images';
 
 interface Project {
   name: string;
@@ -124,7 +125,7 @@ export const Work: React.FC = () => {
                           <div className="overflow-hidden rounded-[calc(1.1rem-0.25rem)]">
                             <img
                     decoding="async"
-                              src={primary.srcUrl}
+                              src={shot(primary.srcUrl)}
                               alt={primary.alt}
                               width={1024}
                               height={556}
@@ -137,7 +138,7 @@ export const Work: React.FC = () => {
                           <div className="x-work-secondary hidden md:block absolute -bottom-[20%] right-[10%] w-[44%] rounded-[0.9rem] p-1 bg-night-2 ring-1 ring-gold/25 shadow-[0_30px_60px_-20px_rgba(0,0,0,0.9)]">
                             <img
                     decoding="async"
-                              src={secondary.srcUrl}
+                              src={shot(secondary.srcUrl)}
                               alt={secondary.alt}
                               width={1024}
                               height={556}

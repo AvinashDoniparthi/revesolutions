@@ -131,7 +131,7 @@ export const WhatYouGet: React.FC = () => {
                   </svg>
                   <div className="absolute inset-0 flex flex-col items-center justify-center">
                     <span className="text-3xl font-medium tracking-tight">95+</span>
-                    <span className="font-mono text-[9px] uppercase tracking-[0.2em] text-surface/45">target</span>
+                    <span className="font-mono text-[10px] uppercase tracking-[0.2em] text-surface/45">target</span>
                   </div>
                 </div>
                 <ul className="space-y-2.5 text-sm text-surface/75">
@@ -147,7 +147,7 @@ export const WhatYouGet: React.FC = () => {
               <div className="relative mt-auto pt-6 border-t border-white/10">
                 <Link
                   to="/services#website-maintenance"
-                  className="x-underline inline-flex items-center gap-2 text-sm text-gold-soft pb-0.5"
+                  className="x-underline inline-flex items-center gap-2 text-sm text-gold-soft py-2.5 sm:py-0 sm:pb-0.5"
                 >
                   See security &amp; performance details
                   <span aria-hidden="true">→</span>

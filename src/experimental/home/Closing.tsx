@@ -3,6 +3,7 @@ import { teamMembers } from '../../data/team';
 import { websiteServices } from '../../data/services';
 import { gsap, MQ, useGSAP } from '../motion';
 import { Pill } from '../primitives';
+import { teamSm } from '../images';
 
 /**
  * Chapter eight. A slow marquee of the four services as a breath between
@@ -81,7 +82,7 @@ export const Closing: React.FC = () => {
                     className="x-face inline-block w-[0.82em] h-[0.82em] rounded-full overflow-hidden ring-[3px] ring-ground bg-surface-sunken"
                   >
                     {m.image && (
-                      <img decoding="async" src={m.image} alt="" width={96} height={96} loading="lazy" className={`w-full h-full object-cover ${m.imagePosition ?? ''}`} />
+                      <img decoding="async" src={teamSm(m.image)} alt="" width={96} height={96} loading="lazy" className={`w-full h-full object-cover ${m.imagePosition ?? ''}`} />
                     )}
                   </span>
                 ))}

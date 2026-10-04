@@ -4,6 +4,7 @@ import { teamMembers } from '../data/team';
 import { gsap, MQ, useGSAP } from './motion';
 import { Eyebrow, MaskLines, Reveal, ScrubWords } from './primitives';
 import { CtaPanel, PageHero } from './shared';
+import { teamMd } from './images';
 
 const COMMITMENTS = [
   'One clear price to build it, and a separate quote to look after it.',
@@ -113,7 +114,7 @@ const Team: React.FC = () => {
                   {m.image ? (
                     <img
                     decoding="async"
-                      src={m.image}
+                      src={teamMd(m.image)}
                       alt={m.name}
                       loading="lazy"
                       className={`x-member-photo absolute inset-0 w-full h-[112%] -top-[6%] object-cover ${m.imagePosition ?? ''} grayscale-[85%] contrast-[1.05] transition-[filter,transform] duration-[1.2s] ease-[cubic-bezier(0.19,1,0.22,1)] group-hover:grayscale-0 group-hover:scale-[1.04]`}
@@ -123,7 +124,7 @@ const Team: React.FC = () => {
                   )}
                   <div className="absolute inset-0 bg-gradient-to-t from-night-3/90 via-night-3/10 to-transparent" aria-hidden="true" />
                   <div className="absolute inset-x-0 bottom-0 p-6 text-surface">
-                    <p className="font-mono text-[10px] uppercase tracking-[0.22em] text-gold-soft">{m.role}</p>
+                    <p className="font-mono text-[11px] uppercase tracking-[0.2em] text-gold-soft">{m.role}</p>
                     <h3 className="mt-2 text-2xl tracking-[-0.03em] font-medium text-surface">{m.name}</h3>
                     <div className="grid grid-rows-[0fr] group-hover:grid-rows-[1fr] group-focus-within:grid-rows-[1fr] transition-[grid-template-rows] duration-700 ease-[cubic-bezier(0.32,0.72,0,1)]">
                       <p className="overflow-hidden text-sm text-surface/70 leading-relaxed">

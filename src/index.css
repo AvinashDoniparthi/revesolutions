@@ -526,17 +526,39 @@ html.lenis,
 }
 
 /* Scroll-scrubbed elements get their own compositor layer up front, so a
-   transform or opacity change each frame is a composite, never a repaint. */
-.x-hero-type, .x-hero-glow, .x-hero-grid, .x-hero-foot,
-.x-reel-frame, .x-reel-slide-1, .x-reel-slide-2, .x-reel-img-0, .x-reel-img-1,
-.x-rail-track, .x-rail-num, .x-rail-cursor,
-.x-work-inner, .x-work-secondary,
-.x-proc-num, .x-proc-fill, .x-marquee-wrap,
-.x-foot-word span, .x-ph-inner, .x-cta-slab, .x-member-photo, .x-svc-num {
-  will-change: transform;
+   transform or opacity change each frame is a composite, never a repaint.
+   Only what actually animates at that size is promoted: on a phone the
+   pinned scenes are off, and iOS Safari is strict about layer memory, so a
+   tall static layer there costs memory for nothing. */
+@media (prefers-reduced-motion: no-preference) {
+  .x-hero-type, .x-hero-glow, .x-hero-grid, .x-hero-foot,
+  .x-marquee-wrap, .x-foot-word span, .x-ph-inner, .x-cta-slab, .x-svc-num {
+    will-change: transform;
+  }
 }
-.x-work-shade, .x-step {
-  will-change: opacity, transform;
+@media (min-width: 768px) and (prefers-reduced-motion: no-preference) {
+  .x-reel-frame, .x-reel-slide-1, .x-reel-slide-2, .x-reel-img-0, .x-reel-img-1,
+  .x-rail-track, .x-rail-num, .x-rail-cursor,
+  .x-work-inner, .x-work-secondary,
+  .x-proc-num, .x-proc-fill, .x-member-photo {
+    will-change: transform;
+  }
+  .x-work-shade, .x-step {
+    will-change: opacity, transform;
+  }
+}
+
+/* Touch polish. The redesign opens and closes on black, so overscroll at
+   either end (iOS rubber-banding, Android stretch) shows black rather than
+   an ivory flash; `:has` keeps the classic site's ivory untouched. */
+html:has(.x-site),
+html:has(.x-site) body {
+  background-color: var(--color-night-3);
+}
+.x-site {
+  -webkit-tap-highlight-color: transparent;
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
 }
 
 /* Gold text treatment, echoing the metallic "SOLUTIONS" line of the logo. */

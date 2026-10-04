@@ -77,7 +77,7 @@ export const XFooter: React.FC = () => {
             </p>
             <a
               href={`mailto:${companyInfo.contactPlaceholders.email}`}
-              className="x-underline inline-block text-lg sm:text-xl text-surface pb-1"
+              className="x-underline inline-block text-lg sm:text-xl text-surface py-2.5 sm:py-0 sm:pb-1"
             >
               {companyInfo.contactPlaceholders.email}
             </a>
@@ -101,10 +101,10 @@ export const XFooter: React.FC = () => {
             {COLUMNS.map((col) => (
               <div key={col.title} className="space-y-5">
                 <h2 className="font-mono text-[11px] uppercase tracking-[0.22em] text-gold-soft/80">{col.title}</h2>
-                <ul className="space-y-3 text-[15px]">
+                <ul className="sm:space-y-3 text-[15px]">
                   {col.links.map((link) => (
                     <li key={link.label}>
-                      <Link to={link.to} className="x-underline text-surface/75 hover:text-surface transition-colors duration-300">
+                      <Link to={link.to} className="x-underline inline-block py-2.5 sm:py-0 text-surface/75 hover:text-surface transition-colors duration-300">
                         {link.label}
                       </Link>
                     </li>
@@ -140,11 +140,11 @@ export const XFooter: React.FC = () => {
       <div className="relative border-t border-white/[0.07]">
         <div className="max-w-[96rem] mx-auto px-5 sm:px-8 lg:px-12 py-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-surface/50">
           <p>© {companyInfo.copyrightYear} Rêve Solutions. All rights reserved.</p>
-          <p className="font-mono uppercase tracking-[0.24em] text-[10px] text-gold-soft/70">Dream. Build. Deliver.</p>
+          <p className="font-mono uppercase tracking-[0.24em] text-[11px] text-gold-soft/70">Dream. Build. Deliver.</p>
           <button
             type="button"
             onClick={() => scrollToTarget(0)}
-            className="group inline-flex items-center gap-2 text-surface/70 hover:text-surface transition-colors"
+            className="group inline-flex items-center gap-2 min-h-11 text-surface/70 hover:text-surface transition-colors"
           >
             Back to top
             <span className="w-7 h-7 rounded-full ring-1 ring-white/15 flex items-center justify-center transition-transform duration-500 group-hover:-translate-y-0.5">

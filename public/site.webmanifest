@@ -4,8 +4,8 @@
   "description": "Custom websites built, launched, and continuously managed for growing businesses.",
   "start_url": "/",
   "display": "standalone",
-  "background_color": "#F7F3EC",
-  "theme_color": "#F7F3EC",
+  "background_color": "#050504",
+  "theme_color": "#050504",
   "icons": [
     { "src": "/favicon.svg", "sizes": "any", "type": "image/svg+xml" },
     { "src": "/images/reve-logo.jpg", "sizes": "1024x1024", "type": "image/jpeg" }

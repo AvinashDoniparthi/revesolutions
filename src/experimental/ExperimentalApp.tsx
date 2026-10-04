@@ -60,7 +60,7 @@ export const ExperimentalRoutes: React.FC = () => (
       <div className="x-horizon" />
     </div>
 
-    <div className="min-h-[100dvh] bg-ground text-ink flex flex-col selection:bg-gold/35 selection:text-ink [overflow-x:clip]">
+    <div className="x-site min-h-[100svh] bg-ground text-ink flex flex-col selection:bg-gold/35 selection:text-ink [overflow-x:clip]">
       <XNavbar />
       <main className="flex-1">
         <Pages />

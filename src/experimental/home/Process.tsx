@@ -100,7 +100,7 @@ export const Process: React.FC = () => {
           <ol className="relative flex-1 grid gap-14 motion-safe:md:gap-0 motion-safe:md:min-h-[22rem] motion-safe:md:[&>*]:[grid-area:1/1]">
             {STEPS.map((step, i) => (
               <li key={step.title} className="x-step space-y-6 md:self-center">
-                <span className="md:hidden font-serif italic text-6xl x-gold-text">{String(i + 1).padStart(2, '0')}</span>
+                <span className="md:hidden block font-serif italic text-6xl leading-none x-gold-text">{String(i + 1).padStart(2, '0')}</span>
                 <span className="inline-flex rounded-full px-3.5 py-1.5 font-mono text-[11px] uppercase tracking-[0.18em] text-gold-soft ring-1 ring-gold/30 bg-gold/[0.06]">
                   {step.tag}
                 </span>

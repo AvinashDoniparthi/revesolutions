@@ -31,7 +31,7 @@ export const Hero: React.FC = () => {
     <section
       ref={ref}
       data-nav="dark"
-      className="x-grain relative min-h-[100dvh] bg-night-3 text-surface overflow-hidden flex flex-col"
+      className="x-grain relative min-h-[100svh] bg-night-3 text-surface overflow-hidden flex flex-col"
     >
       {/* Ambient light pooled under the horizon line. */}
       <div

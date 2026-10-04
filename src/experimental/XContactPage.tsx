@@ -106,7 +106,7 @@ export const XContactPage: React.FC = () => (
 
         <Reveal className="lg:col-span-7 lg:-mt-48 relative z-10">
           <div data-reveal className="rounded-[2.25rem] p-2 bg-ink/[0.04] ring-1 ring-ink/[0.07] shadow-[0_50px_100px_-40px_rgba(40,30,14,0.35)]">
-            <div className="rounded-[calc(2.25rem-0.5rem)] overflow-hidden [&_.apple-card]:rounded-none [&_.apple-card]:border-0 [&_.apple-card]:shadow-none [&_.apple-card:hover]:transform-none">
+            <div className="rounded-[calc(2.25rem-0.5rem)] overflow-hidden max-sm:[&_input]:text-base max-sm:[&_select]:text-base max-sm:[&_textarea]:text-base [&_.apple-card]:rounded-none [&_.apple-card]:border-0 [&_.apple-card]:shadow-none [&_.apple-card:hover]:transform-none">
               <ContactForm />
             </div>
           </div>

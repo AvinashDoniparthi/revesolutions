@@ -92,7 +92,7 @@ export const XNavbar: React.FC = () => {
               : 'mt-0 max-w-[96rem] w-full px-5 sm:px-8 lg:px-12 py-5 ring-0'
           }`}
         >
-          <Link to="/" className="flex items-center gap-3 group" aria-label="Rêve Solutions home">
+          <Link to="/" className="flex items-center gap-3 group min-h-11" aria-label="Rêve Solutions home">
             <span className="leading-none">
               <span className={`block text-[15px] font-semibold tracking-[0.2em] transition-colors duration-500 ${dark ? 'text-surface' : 'text-ink'}`}>
                 R<span className="x-gold-text">Ê</span>VE
