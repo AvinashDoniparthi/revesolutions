@@ -6,8 +6,8 @@ import { Eyebrow, Pill, Reveal, ScrubWords } from '../primitives';
 const HANDOVER = ['New pictures', 'Text changes', 'Seasonal promos', 'Layout tweaks'];
 
 /**
- * Chapter three, the first ivory chapter. It rises over the black with a
- * rounded lip so the change of light reads as a page turning, not a seam.
+ * Chapter three, the first ivory chapter. Sits flush against the black
+ * hero above it with a flat seam.
  */
 export const WhatYouGet: React.FC = () => {
   const ref = useRef<HTMLElement>(null);
@@ -44,7 +44,7 @@ export const WhatYouGet: React.FC = () => {
     <section
       ref={ref}
       data-nav="light"
-      className="relative z-10 -mt-10 rounded-t-[2.5rem] bg-ground py-28 md:py-44"
+      className="relative z-10 bg-ground py-28 md:py-44"
     >
       <div className="max-w-[96rem] mx-auto px-5 sm:px-8 lg:px-12">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10">

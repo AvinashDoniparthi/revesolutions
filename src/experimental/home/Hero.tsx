@@ -48,10 +48,7 @@ export const Hero: React.FC = () => {
       </div>
 
       <div className="relative flex-1 flex flex-col max-w-[96rem] w-full mx-auto px-5 sm:px-8 lg:px-12 pt-32 sm:pt-36 pb-10">
-        <div className="flex items-center justify-between font-mono text-[11px] uppercase tracking-[0.24em] text-surface/50">
-          <span className="x-fade-in" style={{ '--d': '0.1s' } as React.CSSProperties}>
-            Web studio
-          </span>
+        <div className="flex items-center justify-end font-mono text-[11px] uppercase tracking-[0.24em] text-surface/50">
           <span className="x-fade-in text-gold-soft/80" style={{ '--d': '0.2s' } as React.CSSProperties}>
             Dream. Build. Deliver.
           </span>
@@ -79,12 +76,8 @@ export const Hero: React.FC = () => {
         <div className="x-hero-foot space-y-8">
           <div className="x-horizon x-draw origin-center" style={{ '--d': '0.25s' } as React.CSSProperties} />
           <div className="grid grid-cols-1 md:grid-cols-12 gap-8 items-end">
-            <div className="hidden md:flex md:col-span-2 items-end gap-4 x-fade-in" style={{ '--d': '0.6s' } as React.CSSProperties}>
-              <span className="x-scroll-cue" aria-hidden="true" />
-              <span className="font-mono text-[10px] uppercase tracking-[0.24em] text-surface/40">Scroll</span>
-            </div>
             <p
-              className="md:col-span-5 text-base sm:text-lg leading-relaxed text-surface/65 max-w-md x-fade-in"
+              className="md:col-span-7 text-base sm:text-lg leading-relaxed text-surface/65 max-w-md x-fade-in"
               style={{ '--d': '0.45s' } as React.CSSProperties}
             >
               {companyInfo.heroSubtext}

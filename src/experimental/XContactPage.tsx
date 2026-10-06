@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import { companyInfo } from '../data/companyInfo';
 import { ContactForm } from '../components/ContactForm';
 import { LinkedInIcon, InstagramIcon, WhatsAppIcon } from '../components/SocialIcons';
 import { Eyebrow, Reveal } from './primitives';
 import { PageHero } from './shared';
+import { gsap, MQ, useGSAP } from './motion';
 
 const CHANNELS = [
   {
@@ -18,12 +19,6 @@ const CHANNELS = [
     href: `tel:${companyInfo.contactPlaceholders.phone.replace(/\s+/g, '')}`,
     external: false,
   },
-  {
-    label: 'WhatsApp',
-    value: 'Chat on WhatsApp',
-    href: companyInfo.contactPlaceholders.whatsapp,
-    external: true,
-  },
 ];
 
 const SOCIALS = [
@@ -32,10 +27,98 @@ const SOCIALS = [
   { label: 'Instagram', href: companyInfo.socialLinks.instagram, Icon: InstagramIcon },
 ];
 
+/**
+ * A tilted stack of glass cards that deals itself out on scroll, then plays
+ * like a real fan of cards: hovering one lifts it clear of the stack while
+ * its neighbours slide aside to make room, instead of the whole row
+ * untilting together. Touch devices get the CSS fallback in index.css
+ * (`@media (hover: hover)`), which just spaces the cards out flat.
+ */
+const SocialFan: React.FC<{ items: typeof SOCIALS }> = ({ items }) => {
+  const ref = useRef<HTMLDivElement>(null);
+  const rest = (i: number) => (i - (items.length - 1) / 2) * 10;
+
+  useGSAP(
+    () => {
+      const root = ref.current;
+      if (!root) return;
+      const mm = gsap.matchMedia();
+
+      mm.add(MQ.motion, () => {
+        gsap.fromTo(
+          '.x-social-glass',
+          { opacity: 0, y: 34, scale: 0.8 },
+          {
+            opacity: 1,
+            y: 0,
+            scale: 1,
+            duration: 0.8,
+            ease: 'back.out(1.7)',
+            stagger: 0.1,
+            scrollTrigger: { trigger: root, start: 'top 88%', once: true },
+          },
+        );
+      });
+
+      mm.add('(hover: hover) and (prefers-reduced-motion: no-preference)', () => {
+        const cards = Array.from(root.querySelectorAll<HTMLElement>('.x-social-glass'));
+        const cleanups: (() => void)[] = [];
+
+        const settle = () => {
+          cards.forEach((card, j) => {
+            gsap.to(card, { x: 0, y: 0, rotate: rest(j), scale: 1, zIndex: j, duration: 0.7, ease: 'elastic.out(1, 0.65)' });
+          });
+        };
+
+        cards.forEach((card, i) => {
+          const onEnter = () => {
+            cards.forEach((other, j) => {
+              if (j === i) {
+                gsap.to(other, { rotate: 0, y: -16, scale: 1.12, zIndex: items.length, duration: 0.5, ease: 'power3.out' });
+              } else {
+                const dir = j < i ? -1 : 1;
+                gsap.to(other, { x: dir * 14, rotate: rest(j), scale: 0.94, zIndex: 0, duration: 0.5, ease: 'power3.out' });
+              }
+            });
+          };
+          card.addEventListener('pointerenter', onEnter);
+          cleanups.push(() => card.removeEventListener('pointerenter', onEnter));
+        });
+
+        root.addEventListener('pointerleave', settle);
+        cleanups.push(() => root.removeEventListener('pointerleave', settle));
+
+        return () => cleanups.forEach((fn) => fn());
+      });
+
+      return () => mm.revert();
+    },
+    { scope: ref },
+  );
+
+  return (
+    <div ref={ref} className="x-social-fan pl-6">
+      {items.map(({ label, href, Icon }, i) => (
+        <a
+          key={label}
+          href={href}
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label={label}
+          data-label={label}
+          style={{ '--r': rest(i) } as React.CSSProperties}
+          className="x-social-glass"
+        >
+          <Icon />
+        </a>
+      ))}
+    </div>
+  );
+};
+
 export const XContactPage: React.FC = () => (
   <>
     <PageHero
-      eyebrow="Contact"
       lines={['Talk to us.', <span key="l2" className="font-serif italic font-normal x-gold-text pr-[0.05em]">Let’s build something great together.</span>]}
       body={companyInfo.contactSubtext}
     />
@@ -80,22 +163,7 @@ export const XContactPage: React.FC = () => (
 
           <div data-reveal className="space-y-5">
             <span className="block font-mono text-[11px] uppercase tracking-[0.22em] text-ink-3">Find us elsewhere</span>
-            <div className="flex flex-wrap gap-2.5">
-              {SOCIALS.map(({ label, href, Icon }) => (
-                <a
-                  key={label}
-                  href={href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="group inline-flex items-center gap-2.5 rounded-full pl-2 pr-5 py-2 ring-1 ring-ink/12 bg-surface text-ink transition-all duration-500 ease-[cubic-bezier(0.32,0.72,0,1)] hover:bg-ink hover:text-surface hover:ring-ink"
-                >
-                  <span className="w-8 h-8 rounded-full bg-ink/5 group-hover:bg-gold group-hover:text-night-3 flex items-center justify-center transition-colors duration-500">
-                    <Icon className="w-4 h-4" />
-                  </span>
-                  <span className="text-sm">{label}</span>
-                </a>
-              ))}
-            </div>
+            <SocialFan items={SOCIALS} />
           </div>
 
           <div data-reveal className="flex items-start gap-4 pt-8 border-t border-line">
@@ -104,7 +172,7 @@ export const XContactPage: React.FC = () => (
           </div>
         </Reveal>
 
-        <Reveal className="lg:col-span-7 lg:-mt-48 relative z-10">
+        <Reveal className="lg:col-span-7 relative z-10">
           <div data-reveal className="rounded-[2.25rem] p-2 bg-ink/[0.04] ring-1 ring-ink/[0.07] shadow-[0_50px_100px_-40px_rgba(40,30,14,0.35)]">
             <div className="rounded-[calc(2.25rem-0.5rem)] overflow-hidden max-sm:[&_input]:text-base max-sm:[&_select]:text-base max-sm:[&_textarea]:text-base [&_.apple-card]:rounded-none [&_.apple-card]:border-0 [&_.apple-card]:shadow-none [&_.apple-card:hover]:transform-none">
               <ContactForm />

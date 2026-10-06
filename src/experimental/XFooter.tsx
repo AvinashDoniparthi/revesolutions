@@ -139,7 +139,13 @@ export const XFooter: React.FC = () => {
 
       <div className="relative border-t border-white/[0.07]">
         <div className="max-w-[96rem] mx-auto px-5 sm:px-8 lg:px-12 py-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-surface/50">
-          <p>© {companyInfo.copyrightYear} Rêve Solutions. All rights reserved.</p>
+          <div className="flex flex-wrap items-center justify-center gap-x-3 gap-y-1">
+            <p>© {companyInfo.copyrightYear} Rêve Solutions. All rights reserved.</p>
+            <span className="text-surface/25" aria-hidden="true">·</span>
+            <Link to="/terms" className="x-underline hover:text-surface transition-colors">
+              Terms &amp; Conditions
+            </Link>
+          </div>
           <p className="font-mono uppercase tracking-[0.24em] text-[11px] text-gold-soft/70">Dream. Build. Deliver.</p>
           <button
             type="button"

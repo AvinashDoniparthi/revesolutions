@@ -52,6 +52,11 @@ export const routeSeo: Record<string, RouteSeo> = {
     description:
       'Tell us about your business or your current website. A Rêve Solutions specialist will come back with a tailored proposal within 24 hours.',
   },
+  '/terms': {
+    title: 'Terms & Conditions | Rêve Solutions',
+    description:
+      'The terms that govern working with Rêve Solutions, including quotations, payments, revisions, ownership, and ongoing website management. Quotations are valid for 29 days.',
+  },
   '/404': {
     title: 'Page Not Found | Rêve Solutions',
     description: 'The page you are looking for does not exist.',
@@ -223,6 +228,8 @@ export const getJsonLd = (pathname: string): object => {
     graph.push(breadcrumb('/about', 'About'));
   } else if (pathname === '/contact') {
     graph.push(breadcrumb('/contact', 'Contact'));
+  } else if (pathname === '/terms') {
+    graph.push(breadcrumb('/terms', 'Terms & Conditions'));
   }
 
   return { '@context': 'https://schema.org', '@graph': graph };

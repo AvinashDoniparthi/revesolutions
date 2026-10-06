@@ -1,6 +1,6 @@
 import React, { useRef } from 'react';
 import { gsap, MQ, useGSAP } from './motion';
-import { Eyebrow, Pill } from './primitives';
+import { Pill } from './primitives';
 
 const d = (s: string) => ({ '--d': s }) as React.CSSProperties;
 
@@ -10,11 +10,10 @@ const d = (s: string) => ({ '--d': s }) as React.CSSProperties;
  * the horizon line draws, and the block drifts up as the reader scrolls away.
  */
 export const PageHero: React.FC<{
-  eyebrow: string;
   lines: React.ReactNode[];
   body: React.ReactNode;
   aside?: React.ReactNode;
-}> = ({ eyebrow, lines, body, aside }) => {
+}> = ({ lines, body, aside }) => {
   const ref = useRef<HTMLElement>(null);
 
   useGSAP(
@@ -34,16 +33,13 @@ export const PageHero: React.FC<{
   );
 
   return (
-    <section ref={ref} data-nav="dark" className="x-grain relative bg-night-3 text-surface overflow-hidden">
+    <section ref={ref} data-nav="dark" className="x-grain relative min-h-[100svh] bg-night-3 text-surface overflow-hidden">
       <div
         className="absolute left-1/2 bottom-0 -translate-x-1/2 translate-y-1/2 w-[120vw] h-[60vh] pointer-events-none bg-[radial-gradient(closest-side,rgba(186,159,113,0.2),transparent)]"
         aria-hidden="true"
       />
       <div className="x-ph-inner relative max-w-[96rem] mx-auto px-5 sm:px-8 lg:px-12 pt-40 sm:pt-48 pb-24 sm:pb-32">
-        <div className="x-fade-in" style={d('0.05s')}>
-          <Eyebrow tone="light">{eyebrow}</Eyebrow>
-        </div>
-        <h1 className="mt-10 font-medium tracking-[-0.045em] leading-[0.96] text-[clamp(2.75rem,7vw,7.5rem)]">
+        <h1 className="font-medium tracking-[-0.045em] leading-[0.96] text-[clamp(2.75rem,7vw,7.5rem)]">
           {lines.map((line, i) => (
             <span key={i} className="x-line-mask">
               <span style={d(`${i * 0.09}s`)}>{line}</span>

@@ -1,6 +1,5 @@
 import React from 'react';
 import { Hero } from './home/Hero';
-import { Showreel } from './home/Showreel';
 import { WhatYouGet } from './home/WhatYouGet';
 import { ServicesRail } from './home/ServicesRail';
 import { Work } from './home/Work';
@@ -16,7 +15,6 @@ import { Closing } from './home/Closing';
 export const XHomePage: React.FC = () => (
   <>
     <Hero />
-    <Showreel />
     <WhatYouGet />
     <ServicesRail />
     <Work />

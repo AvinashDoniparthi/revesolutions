@@ -1,6 +1,6 @@
 import React, { useRef } from 'react';
 import { companyInfo } from '../data/companyInfo';
-import { teamMembers } from '../data/team';
+import { mentor, teamMembers } from '../data/team';
 import { gsap, MQ, useGSAP } from './motion';
 import { Eyebrow, MaskLines, Reveal, ScrubWords } from './primitives';
 import { CtaPanel, PageHero } from './shared';
@@ -117,7 +117,7 @@ const Team: React.FC = () => {
                       src={teamMd(m.image)}
                       alt={m.name}
                       loading="lazy"
-                      className={`x-member-photo absolute inset-0 w-full h-[112%] -top-[6%] object-cover ${m.imagePosition ?? ''} grayscale-[85%] contrast-[1.05] transition-[filter,transform] duration-[1.2s] ease-[cubic-bezier(0.19,1,0.22,1)] group-hover:grayscale-0 group-hover:scale-[1.04]`}
+                      className={`x-member-photo absolute inset-0 w-full h-[112%] -top-[6%] object-cover ${m.imagePosition ?? ''} transition-transform duration-[1.2s] ease-[cubic-bezier(0.19,1,0.22,1)] group-hover:scale-[1.04]`}
                     />
                   ) : (
                     <span className="absolute inset-0 flex items-center justify-center font-serif italic text-6xl text-gold">{m.initials}</span>
@@ -144,15 +144,84 @@ const Team: React.FC = () => {
   );
 };
 
+/**
+ * Full-width section under the team grid, built on the same grid-cols-12 /
+ * eyebrow-plus-heading grammar as `Story` above. Unlike the team photos, the
+ * mentor's portrait stays in full colour rather than the grayscale /
+ * colour-on-hover treatment used in `Team`.
+ */
+const MentorSection: React.FC = () => {
+  const ref = useRef<HTMLElement>(null);
+
+  useGSAP(
+    () => {
+      const mm = gsap.matchMedia();
+      mm.add(MQ.desktopMotion, () => {
+        gsap.fromTo(
+          '.x-mentor-photo',
+          { yPercent: 6 },
+          { yPercent: -6, ease: 'none', scrollTrigger: { trigger: ref.current, start: 'top bottom', end: 'bottom top', scrub: true } },
+        );
+      });
+      return () => mm.revert();
+    },
+    { scope: ref },
+  );
+
+  return (
+    <section ref={ref} data-nav="light" className="bg-ground pb-28 md:pb-44">
+      <div className="max-w-[96rem] mx-auto px-5 sm:px-8 lg:px-12">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-end pt-16 border-t border-line">
+          <div className="lg:col-span-3 pt-3">
+            <Eyebrow>Our mentor</Eyebrow>
+          </div>
+          <div className="lg:col-span-9">
+            <MaskLines
+              as="h2"
+              className="text-[clamp(2.1rem,4.6vw,4.5rem)] leading-[1.02] tracking-[-0.04em] font-medium text-ink"
+              lines={[mentor.name]}
+            />
+            <p className="mt-4 font-mono text-[11px] uppercase tracking-[0.2em] text-brand">{mentor.role}</p>
+          </div>
+        </div>
+
+        <div className="mt-16 md:mt-24 grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-8 items-stretch">
+          <div className="lg:col-span-3">
+            <div className="group w-40 sm:w-48 lg:w-full aspect-[3/4] rounded-[2rem] p-1.5 bg-ink/[0.03] ring-1 ring-ink/[0.06]">
+              <div className="relative w-full h-full overflow-hidden rounded-[calc(2rem-0.375rem)] bg-night-3">
+                <img
+                  decoding="async"
+                  src={teamMd(mentor.image)}
+                  alt={mentor.name}
+                  loading="lazy"
+                  className="x-mentor-photo absolute inset-0 w-full h-[112%] -top-[6%] object-cover object-top transition-transform duration-[1.2s] ease-[cubic-bezier(0.19,1,0.22,1)] group-hover:scale-[1.04]"
+                />
+              </div>
+            </div>
+          </div>
+
+          <Reveal className="lg:col-span-9 space-y-6 text-lg text-ink-2 leading-relaxed max-w-2xl">
+            {mentor.bio.map((p, i) => (
+              <p key={i} data-reveal>
+                {p}
+              </p>
+            ))}
+          </Reveal>
+        </div>
+      </div>
+    </section>
+  );
+};
+
 export const XAboutPage: React.FC = () => (
   <>
     <PageHero
-      eyebrow="About Rêve Solutions"
       lines={['Four people.', <span key="l2" className="font-serif italic font-normal x-gold-text pr-[0.05em]">One dedicated design studio.</span>]}
       body={companyInfo.aboutSubtext}
     />
     <Story />
     <Team />
+    <MentorSection />
     <CtaPanel
       title={
         <>

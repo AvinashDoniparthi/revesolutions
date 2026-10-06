@@ -12,6 +12,7 @@ import { XHomePage } from './XHomePage';
 import { XServicesPage } from './XServicesPage';
 import { XAboutPage } from './XAboutPage';
 import { XContactPage } from './XContactPage';
+import { XTermsPage } from './XTermsPage';
 import { IntroFlag, RouteScroll, SmoothScroll } from './SmoothScroll';
 
 /**
@@ -34,6 +35,7 @@ const Pages: React.FC = () => {
           <Route path="/services" element={<XServicesPage />} />
           <Route path="/about" element={<XAboutPage />} />
           <Route path="/contact" element={<XContactPage />} />
+          <Route path="/terms" element={<XTermsPage />} />
           <Route path="*" element={<NotFoundPage />} />
         </Routes>
       </motion.div>

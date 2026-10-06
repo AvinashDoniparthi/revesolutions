@@ -139,7 +139,6 @@ const Faq: React.FC = () => (
 export const XServicesPage: React.FC = () => (
   <>
     <PageHero
-      eyebrow="Services"
       lines={[
         'Everything your website needs,',
         <span key="l2" className="font-serif italic font-normal x-gold-text pr-[0.05em]">from the first design to ongoing care.</span>,
