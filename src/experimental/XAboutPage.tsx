@@ -171,18 +171,20 @@ const MentorSection: React.FC = () => {
   return (
     <section ref={ref} data-nav="light" className="bg-ground pb-28 md:pb-44">
       <div className="max-w-[96rem] mx-auto px-5 sm:px-8 lg:px-12">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-end pt-16 border-t border-line">
-          <div className="lg:col-span-3 pt-3">
-            <Eyebrow>Our mentor</Eyebrow>
-          </div>
-          <div className="lg:col-span-9">
-            <MaskLines
-              as="h2"
-              className="text-[clamp(2.1rem,4.6vw,4.5rem)] leading-[1.02] tracking-[-0.04em] font-medium text-ink"
-              lines={[mentor.name]}
-            />
-            <p className="mt-4 font-mono text-[11px] uppercase tracking-[0.2em] text-brand">{mentor.role}</p>
-          </div>
+        <div className="pt-16 border-t border-line">
+          <MaskLines
+            as="h2"
+            className="ml-[-0.05em] text-[clamp(2.5rem,5.6vw,5.75rem)] leading-[0.98] tracking-[-0.045em] font-medium text-ink"
+            lines={['Our Mentor']}
+          />
+          <Reveal className="mt-5 space-y-3">
+            <p data-reveal className="font-serif italic font-normal text-2xl sm:text-3xl tracking-[-0.01em] text-brand">
+              {mentor.name}
+            </p>
+            <p data-reveal className="font-mono text-[11px] uppercase tracking-[0.2em] text-brand">
+              {mentor.role}
+            </p>
+          </Reveal>
         </div>
 
         <div className="mt-16 md:mt-24 grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-8 items-stretch">
